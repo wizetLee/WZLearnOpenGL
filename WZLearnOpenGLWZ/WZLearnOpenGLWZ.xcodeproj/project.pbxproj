@@ -207,6 +207,7 @@
 				TargetAttributes = {
 					840189531F46C5EE00945F1A = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 7MUPB6659U;
 						ProvisioningStyle = Automatic;
 					};
 					8401896C1F46C5EE00945F1A = {
@@ -422,10 +423,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGLWZ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGLWZ;
+				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -433,10 +437,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGLWZ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGLWZ;
+				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -505,6 +512,7 @@
 				840189831F46C5EE00945F1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		840189841F46C5EE00945F1A /* Build configuration list for PBXNativeTarget "WZLearnOpenGLWZTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +521,7 @@
 				840189861F46C5EE00945F1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		840189871F46C5EE00945F1A /* Build configuration list for PBXNativeTarget "WZLearnOpenGLWZUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +530,7 @@
 				840189891F46C5EE00945F1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
