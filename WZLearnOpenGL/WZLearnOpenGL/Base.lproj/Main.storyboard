@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,26 +20,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IN9-tZ-dAX">
-                                <rect key="frame" x="16" y="64" width="343" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="1tz-pO-nTb"/>
-                                </constraints>
-                                <state key="normal" title="AViewController"/>
-                                <connections>
-                                    <segue destination="sfg-NC-KKf" kind="popoverPresentation" popoverAnchorView="IN9-tZ-dAX" id="Foq-8M-1M8">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="IN9-tZ-dAX" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="D7h-dS-Qq2"/>
-                            <constraint firstItem="IN9-tZ-dAX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="PHZ-KO-h2W"/>
-                            <constraint firstItem="IN9-tZ-dAX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xik-3o-LTc"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="学习OpenGL:-D" id="KHt-ib-zzD"/>
                 </viewController>
@@ -64,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rY7-BE-u4L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="-27"/>
+            <point key="canvasLocation" x="847" y="-41"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ROB-F9-NxC">

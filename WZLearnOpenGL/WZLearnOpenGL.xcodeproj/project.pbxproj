@@ -16,6 +16,8 @@
 		845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845FB8721F4C245100672938 /* LaunchScreen.storyboard */; };
 		845FB87F1F4C245100672938 /* WZLearnOpenGLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB87E1F4C245100672938 /* WZLearnOpenGLTests.m */; };
 		845FB88A1F4C245100672938 /* WZLearnOpenGLUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */; };
+		84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BACD981F5E58CE00A82E02 /* BViewController.m */; };
+		84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84BACD9B1F5E76F900A82E02 /* leaves.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,9 @@
 		845FB8851F4C245100672938 /* WZLearnOpenGLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WZLearnOpenGLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WZLearnOpenGLUITests.m; sourceTree = "<group>"; };
 		845FB88B1F4C245100672938 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84BACD971F5E58CE00A82E02 /* BViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BViewController.h; sourceTree = "<group>"; };
+		84BACD981F5E58CE00A82E02 /* BViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BViewController.m; sourceTree = "<group>"; };
+		84BACD9B1F5E76F900A82E02 /* leaves.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = leaves.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +109,15 @@
 		845FB8631F4C245100672938 /* WZLearnOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				84BACD9A1F5E76F100A82E02 /* 素材 */,
 				845FB8671F4C245100672938 /* AppDelegate.h */,
 				845FB8681F4C245100672938 /* AppDelegate.m */,
 				845FB86A1F4C245100672938 /* ViewController.h */,
 				845FB86B1F4C245100672938 /* ViewController.m */,
 				843F6DE41F4FF7DB00F9FBA4 /* AViewController.h */,
 				843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */,
+				84BACD971F5E58CE00A82E02 /* BViewController.h */,
+				84BACD981F5E58CE00A82E02 /* BViewController.m */,
 				845FB86D1F4C245100672938 /* Main.storyboard */,
 				845FB8701F4C245100672938 /* Assets.xcassets */,
 				845FB8721F4C245100672938 /* LaunchScreen.storyboard */,
@@ -143,6 +151,14 @@
 				845FB88B1F4C245100672938 /* Info.plist */,
 			);
 			path = WZLearnOpenGLUITests;
+			sourceTree = "<group>";
+		};
+		84BACD9A1F5E76F100A82E02 /* 素材 */ = {
+			isa = PBXGroup;
+			children = (
+				84BACD9B1F5E76F900A82E02 /* leaves.gif */,
+			);
+			path = "素材";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +272,7 @@
 			files = (
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
+				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +301,7 @@
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
 				845FB86C1F4C245100672938 /* ViewController.m in Sources */,
 				845FB8691F4C245100672938 /* AppDelegate.m in Sources */,
+				84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */,
 				845FB8661F4C245100672938 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
