@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B611F5F8F24004F9CA8 /* CViewController.m */; };
+		84071B641F5F989F004F9CA8 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 84071B631F5F989F004F9CA8 /* grid.png */; };
+		84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B661F5FAA2E004F9CA8 /* DViewController.m */; };
 		843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
 		845FB8691F4C245100672938 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8681F4C245100672938 /* AppDelegate.m */; };
@@ -38,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84071B601F5F8F24004F9CA8 /* CViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CViewController.h; sourceTree = "<group>"; };
+		84071B611F5F8F24004F9CA8 /* CViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CViewController.m; sourceTree = "<group>"; };
+		84071B631F5F989F004F9CA8 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
+		84071B651F5FAA2E004F9CA8 /* DViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DViewController.h; sourceTree = "<group>"; };
+		84071B661F5FAA2E004F9CA8 /* DViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DViewController.m; sourceTree = "<group>"; };
 		843F6DE41F4FF7DB00F9FBA4 /* AViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
 		843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 		845FB8611F4C245100672938 /* WZLearnOpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WZLearnOpenGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +126,10 @@
 				843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */,
 				84BACD971F5E58CE00A82E02 /* BViewController.h */,
 				84BACD981F5E58CE00A82E02 /* BViewController.m */,
+				84071B601F5F8F24004F9CA8 /* CViewController.h */,
+				84071B611F5F8F24004F9CA8 /* CViewController.m */,
+				84071B651F5FAA2E004F9CA8 /* DViewController.h */,
+				84071B661F5FAA2E004F9CA8 /* DViewController.m */,
 				845FB86D1F4C245100672938 /* Main.storyboard */,
 				845FB8701F4C245100672938 /* Assets.xcassets */,
 				845FB8721F4C245100672938 /* LaunchScreen.storyboard */,
@@ -157,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				84BACD9B1F5E76F900A82E02 /* leaves.gif */,
+				84071B631F5F989F004F9CA8 /* grid.png */,
 			);
 			path = "素材";
 			sourceTree = "<group>";
@@ -271,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
+				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
@@ -300,8 +314,10 @@
 			files = (
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
 				845FB86C1F4C245100672938 /* ViewController.m in Sources */,
+				84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */,
 				845FB8691F4C245100672938 /* AppDelegate.m in Sources */,
 				84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */,
+				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
 				845FB8661F4C245100672938 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +470,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -466,6 +483,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -20,9 +20,13 @@
 - (void)viewDidLoad {
     self.automaticallyAdjustsScrollViewInsets = false;
     [super viewDidLoad];
-    _dataArr = @[@{@"title" : @"AViewController"},
-                 @{@"title" : @"BViewController"},
-                 @{@"title" : @""},
+    _dataArr = @[@{@"title" : @"AViewController", @"attachment" : @"三角形"},
+                 @{@"title" : @"BViewController", @"attachment" : @"纹理"},
+                 @{@"title" : @"CViewController", @"attachment" : @"平铺模式"},
+                 @{@"title" : @"DViewController", @"attachment" : @"纹理混合"},
+                 @{@"title" : @"BViewController", @"attachment" : @"纹理"},
+                 @{@"title" : @"BViewController", @"attachment" : @"纹理"},
+                 @{@"title" : @"BViewController", @"attachment" : @"纹理"},
                  ];
     [self createViews];
 }
@@ -42,7 +46,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
-    cell.textLabel.text = _dataArr[indexPath.row][@"title"];
+    cell.textLabel.text = [((NSString *)_dataArr[indexPath.row][@"title"]) stringByAppendingString:_dataArr[indexPath.row][@"attachment"]];
     return cell;
 }
 

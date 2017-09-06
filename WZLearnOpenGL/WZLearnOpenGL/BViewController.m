@@ -31,11 +31,13 @@ typedef struct {
 } SceneVertex;
 
 static const SceneVertex vertices[] = {
+    
+#pragma mark - 可自由切换3个数据
     //s   t   r               u  v
-//    {{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}}, // lower left corner
-    {{ 0.5f, -0.5f, 0.0f}, {1.0f, 0.0f}}, // lower right corner
-    {{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}}, // upper left corner
-    {{0.5f,  0.5f, 0.0f},  {0.0f, 1.0f}},
+//    {{-0.5, -0.5, 0.0}, {0.0, 0.0}}, // lower left corner
+    {{ 0.5, -0.5, 0.0}, {1.0, 0.0}}, // lower right corner
+    {{-0.5,  0.5, 0.0}, {0.0f, 1.0}}, // upper left corner
+    {{0.5,  0.5, 0.0},  {1.0, 1.0}},
 };
 
 
@@ -104,15 +106,16 @@ static const SceneVertex vertices[] = {
                           , sizeof(SceneVertex)
                           , NULL + offsetof(SceneVertex, textureCoords));
     
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    
     /*
      #define GL_POINTS                                        0x0000
      #define GL_LINES                                         0x0001
      #define GL_LINE_LOOP                                     0x0002
      #define GL_LINE_STRIP                                    0x0003
      #define GL_TRIANGLES                                     0x0004
-     #define GL_TRIANGLE_STRIP                                0x0005
-     #define GL_TRIANGLE_FAN
+     #define GL_TRIANGLE_STRIP                                0x0005  条状
+     #define GL_TRIANGLE_FAN                    成扇形散开
      */
 }
 
