@@ -87,14 +87,14 @@ class FViewController: GLKViewController {
 //                , ptr)
 //        }
      
+        // MARK: - 偏移量有问题~~~
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue)
             , 2
             , GLenum(GL_FLOAT)
             , GLboolean(GL_FALSE)
             , GLsizei(MemoryLayout.size(ofValue: vertices[0]))
-            , nil)//偏移量没写好
-        
+            , nil)//偏移量没写好UnsafePointer(bitPattern: 1)
         
 //        withUnsafePointer(to: &vertices[0].textureCoords) { (ptr)  in
 //            glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue)
@@ -118,7 +118,6 @@ class FViewController: GLKViewController {
             , GLboolean(GL_FALSE)
             , GLsizei(MemoryLayout.size(ofValue: vertices[0]))
             , nil)
-     
         baseEffect.prepareToDraw()
         glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(vertices.count))
     }
