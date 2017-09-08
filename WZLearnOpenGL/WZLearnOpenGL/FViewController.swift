@@ -30,7 +30,7 @@ class FViewController: GLKViewController {
     let baseEffect : GLKBaseEffect = GLKBaseEffect()
     var glKView : GLKView? = nil
     var bufferID : GLuint = 0
-    var target : Int = 16; //为什么是16呢... 这个位置我是推出来的 😓
+    var target : Int = 16;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +56,7 @@ class FViewController: GLKViewController {
         
         let info2 : GLKTextureInfo = try! GLKTextureLoader.texture(with: (UIImage.init(named: "beetle.png")?.cgImage)! , options: nil);
         let info1 : GLKTextureInfo = try! GLKTextureLoader.texture(with: (UIImage.init(named: "leaves2.gif")?.cgImage)! , options: nil);
-        
-     
+       
         baseEffect.texture2d0.target = GLKTextureTarget(rawValue: info1.target)!
         baseEffect.texture2d0.name = info1.name
         baseEffect.texture2d1.target = GLKTextureTarget(rawValue: info2.target)!
@@ -67,7 +66,6 @@ class FViewController: GLKViewController {
 
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        
        
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
        
@@ -78,15 +76,8 @@ class FViewController: GLKViewController {
             , GLboolean(GL_FALSE)
             , GLsizei(MemoryLayout.size(ofValue: vertices[0]))  //GLsizei(MemoryLayout.size(ofValue: vertices[0]))
             , nil)
-        
-  
-        
-//        withUnsafePointer(to: &vertices[0].textureCoords) { (ptr)  in
-//            glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue), 4, UInt32(GL_FLOAT), UInt8(GL_FALSE), GLsizei(MemoryLayout.size(ofValue: vertices[0]))
-//                , ptr)
-//        }
-        
-        // MARK: - 偏移量有问题~~~
+ 
+        // MARK: - 偏移量这种计算方式不太妙啊
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue)
             , 2
@@ -94,23 +85,9 @@ class FViewController: GLKViewController {
             , GLboolean(GL_FALSE)
             , GLsizei(MemoryLayout.size(ofValue: vertices[0]))
             , UnsafePointer(bitPattern: target))//偏移量没写好UnsafePointer(bitPattern: 1)
-        
-//        withUnsafePointer(to: &vertices[0].textureCoords) { (ptr)  in
-//            glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue)
-//                , 2
-//                , GLenum(GL_FLOAT)
-//                , GLboolean(GL_FALSE), GLsizei(MemoryLayout.size(ofValue: vertices[0]))
-//                , ptr)
-//        }
+ 
 
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord1.rawValue))
-//        withUnsafePointer(to:nil) { (ptr)  in
-//            glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord1.rawValue)
-//                , 2
-//                , GLenum(GL_FLOAT)
-//                , GLboolean(GL_FALSE), GLsizei(MemoryLayout.size(ofValue: vertices[0]))
-//                , ptr)
-//        }
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord1.rawValue)
             , 2
             , GLenum(GL_FLOAT)
@@ -121,7 +98,6 @@ class FViewController: GLKViewController {
         baseEffect.prepareToDraw()
         glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(vertices.count))
     }
-
     
     func saySomething() {
         print("说了什么！❓")
