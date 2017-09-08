@@ -29,7 +29,7 @@
                  @{@"title" : @"DViewController", @"attachment" : @"纹理混合"},
                  @{@"title" : @"EViewController", @"attachment" : @"多重纹理"},
                  @{@"title" : @"FViewController", @"attachment" : @"纹理"},
-                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
+//                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
                  ];
     [self createViews];
     
