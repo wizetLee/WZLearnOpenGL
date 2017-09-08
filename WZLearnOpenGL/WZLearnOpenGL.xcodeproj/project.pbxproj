@@ -10,6 +10,11 @@
 		84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B611F5F8F24004F9CA8 /* CViewController.m */; };
 		84071B641F5F989F004F9CA8 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 84071B631F5F989F004F9CA8 /* grid.png */; };
 		84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B661F5FAA2E004F9CA8 /* DViewController.m */; };
+		84379B8C1F62215400D1F6EF /* EViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84379B8B1F62215400D1F6EF /* EViewController.m */; };
+		84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B8E1F6223AB00D1F6EF /* FViewController.swift */; };
+		84379B931F62309100D1F6EF /* GViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B921F62309100D1F6EF /* GViewController.swift */; };
+		84379B971F62426600D1F6EF /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 84379B951F62426600D1F6EF /* Shader.fsh */; };
+		84379B981F62426600D1F6EF /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 84379B961F62426600D1F6EF /* Shader.vsh */; };
 		843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
 		845FB8691F4C245100672938 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8681F4C245100672938 /* AppDelegate.m */; };
@@ -21,6 +26,8 @@
 		845FB88A1F4C245100672938 /* WZLearnOpenGLUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */; };
 		84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BACD981F5E58CE00A82E02 /* BViewController.m */; };
 		84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84BACD9B1F5E76F900A82E02 /* leaves.gif */; };
+		84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F7B86F1F60EFC600B31DCB /* leaves2.gif */; };
+		84F7B8711F60F45B00B31DCB /* beetle.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F7B86E1F60EFC600B31DCB /* beetle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +53,13 @@
 		84071B631F5F989F004F9CA8 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
 		84071B651F5FAA2E004F9CA8 /* DViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DViewController.h; sourceTree = "<group>"; };
 		84071B661F5FAA2E004F9CA8 /* DViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DViewController.m; sourceTree = "<group>"; };
+		84379B8A1F62215400D1F6EF /* EViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EViewController.h; sourceTree = "<group>"; };
+		84379B8B1F62215400D1F6EF /* EViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EViewController.m; sourceTree = "<group>"; };
+		84379B8D1F6223AB00D1F6EF /* WZLearnOpenGL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WZLearnOpenGL-Bridging-Header.h"; sourceTree = "<group>"; };
+		84379B8E1F6223AB00D1F6EF /* FViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FViewController.swift; sourceTree = "<group>"; };
+		84379B921F62309100D1F6EF /* GViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GViewController.swift; sourceTree = "<group>"; };
+		84379B951F62426600D1F6EF /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		84379B961F62426600D1F6EF /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		843F6DE41F4FF7DB00F9FBA4 /* AViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
 		843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 		845FB8611F4C245100672938 /* WZLearnOpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WZLearnOpenGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +81,8 @@
 		84BACD971F5E58CE00A82E02 /* BViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BViewController.h; sourceTree = "<group>"; };
 		84BACD981F5E58CE00A82E02 /* BViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BViewController.m; sourceTree = "<group>"; };
 		84BACD9B1F5E76F900A82E02 /* leaves.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = leaves.gif; sourceTree = "<group>"; };
+		84F7B86E1F60EFC600B31DCB /* beetle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beetle.png; sourceTree = "<group>"; };
+		84F7B86F1F60EFC600B31DCB /* leaves2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = leaves2.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +110,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84379B941F62426600D1F6EF /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				84379B951F62426600D1F6EF /* Shader.fsh */,
+				84379B961F62426600D1F6EF /* Shader.vsh */,
+			);
+			name = Shaders;
+			path = "../../../../../Downloads/OpenGL ES/ExamplesForXcode6.1/ch03_EXAMPLES/OpenGLES_Ch3_6/OpenGLES_Ch3_6/Shaders";
+			sourceTree = "<group>";
+		};
 		845FB8581F4C245100672938 = {
 			isa = PBXGroup;
 			children = (
@@ -130,11 +156,17 @@
 				84071B611F5F8F24004F9CA8 /* CViewController.m */,
 				84071B651F5FAA2E004F9CA8 /* DViewController.h */,
 				84071B661F5FAA2E004F9CA8 /* DViewController.m */,
+				84379B8A1F62215400D1F6EF /* EViewController.h */,
+				84379B8B1F62215400D1F6EF /* EViewController.m */,
+				84379B8E1F6223AB00D1F6EF /* FViewController.swift */,
+				84379B921F62309100D1F6EF /* GViewController.swift */,
+				84379B941F62426600D1F6EF /* Shaders */,
 				845FB86D1F4C245100672938 /* Main.storyboard */,
 				845FB8701F4C245100672938 /* Assets.xcassets */,
 				845FB8721F4C245100672938 /* LaunchScreen.storyboard */,
 				845FB8751F4C245100672938 /* Info.plist */,
 				845FB8641F4C245100672938 /* Supporting Files */,
+				84379B8D1F6223AB00D1F6EF /* WZLearnOpenGL-Bridging-Header.h */,
 			);
 			path = WZLearnOpenGL;
 			sourceTree = "<group>";
@@ -168,6 +200,8 @@
 		84BACD9A1F5E76F100A82E02 /* 素材 */ = {
 			isa = PBXGroup;
 			children = (
+				84F7B86E1F60EFC600B31DCB /* beetle.png */,
+				84F7B86F1F60EFC600B31DCB /* leaves2.gif */,
 				84BACD9B1F5E76F900A82E02 /* leaves.gif */,
 				84071B631F5F989F004F9CA8 /* grid.png */,
 			);
@@ -242,6 +276,7 @@
 					845FB8601F4C245100672938 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 7MUPB6659U;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					845FB8791F4C245100672938 = {
@@ -283,8 +318,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84379B971F62426600D1F6EF /* Shader.fsh in Resources */,
+				84F7B8711F60F45B00B31DCB /* beetle.png in Resources */,
+				84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */,
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
 				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
+				84379B981F62426600D1F6EF /* Shader.vsh in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
@@ -312,12 +351,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84379B8C1F62215400D1F6EF /* EViewController.m in Sources */,
+				84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */,
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
 				845FB86C1F4C245100672938 /* ViewController.m in Sources */,
 				84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */,
 				845FB8691F4C245100672938 /* AppDelegate.m in Sources */,
 				84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */,
 				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
+				84379B931F62309100D1F6EF /* GViewController.swift in Sources */,
 				845FB8661F4C245100672938 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,11 +507,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WZLearnOpenGL/WZLearnOpenGL-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -478,11 +525,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WZLearnOpenGL/WZLearnOpenGL-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -490,6 +541,7 @@
 		845FB8921F4C245100672938 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGLTests/Info.plist;
@@ -503,6 +555,7 @@
 		845FB8931F4C245100672938 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGLTests/Info.plist;
@@ -516,6 +569,7 @@
 		845FB8951F4C245100672938 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGLUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -528,6 +582,7 @@
 		845FB8961F4C245100672938 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGLUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

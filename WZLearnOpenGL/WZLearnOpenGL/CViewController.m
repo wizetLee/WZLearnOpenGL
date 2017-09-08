@@ -134,7 +134,6 @@ static GLKVector3 movementVectors[3] = {
                     , GL_TEXTURE_MAG_FILTER
                     , GL_NEAREST);//GL_NEAREST
     
-    
     //获取最新的数据
     glBindBuffer(GL_ARRAY_BUFFER, bufferID);
     glBufferData(GL_ARRAY_BUFFER

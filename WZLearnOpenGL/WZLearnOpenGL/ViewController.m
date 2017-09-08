@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 
+#pragma mark - 就是加入这个文件
+#import "WZLearnOpenGL-Swift.h"
+
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * table;
@@ -24,11 +27,12 @@
                  @{@"title" : @"BViewController", @"attachment" : @"纹理"},
                  @{@"title" : @"CViewController", @"attachment" : @"平铺模式"},
                  @{@"title" : @"DViewController", @"attachment" : @"纹理混合"},
-                 @{@"title" : @"BViewController", @"attachment" : @"纹理"},
-                 @{@"title" : @"BViewController", @"attachment" : @"纹理"},
-                 @{@"title" : @"BViewController", @"attachment" : @"纹理"},
+                 @{@"title" : @"EViewController", @"attachment" : @"多重纹理"},
+                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
+                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
                  ];
     [self createViews];
+    
 }
 
 - (void)createViews {
@@ -51,15 +55,30 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *VC = nil;
     NSString *classStr = _dataArr[indexPath.row][@"title"];
-    Class class = NSClassFromString(classStr);
-    if (class) {
-        UIViewController *VC = [class new];
-        if ([VC isKindOfClass:[UIViewController class]]) {
-            [self.navigationController pushViewController:[class new] animated:true];
+   
+#pragma mark - 暂时找不到方法  swift类名转为Class类型 直接转的都是0x0 _ nil
+    if ([classStr isEqualToString:@"FViewController"]) {
+        VC = FViewController.alloc.init;
+        [(FViewController *)VC saySomething];
+    } else//暂时找不到方法  swift类名转为Class类型 直接转的都是0x0 _ nil
+    if ([classStr isEqualToString:@"GViewController"]) {
+        VC = GViewController.alloc.init;
+        
+    }  else {
+        Class class = NSClassFromString(classStr);
+        if (class) {
+            VC = [class new];
         }
     }
+    
+    if ([VC isKindOfClass:[UIViewController class]]) {
+        [self.navigationController pushViewController:VC animated:true];
+    }
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {
