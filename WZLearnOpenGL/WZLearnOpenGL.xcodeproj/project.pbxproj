@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4007CD081F64D439002C6E5A /* HViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4007CD061F64D439002C6E5A /* HViewController.m */; };
+		4007CD091F64D439002C6E5A /* HViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4007CD071F64D439002C6E5A /* HViewController.xib */; };
 		84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B611F5F8F24004F9CA8 /* CViewController.m */; };
 		84071B641F5F989F004F9CA8 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 84071B631F5F989F004F9CA8 /* grid.png */; };
 		84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B661F5FAA2E004F9CA8 /* DViewController.m */; };
 		84379B8C1F62215400D1F6EF /* EViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84379B8B1F62215400D1F6EF /* EViewController.m */; };
 		84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B8E1F6223AB00D1F6EF /* FViewController.swift */; };
 		84379B931F62309100D1F6EF /* GViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B921F62309100D1F6EF /* GViewController.swift */; };
-		84379B971F62426600D1F6EF /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 84379B951F62426600D1F6EF /* Shader.fsh */; };
-		84379B981F62426600D1F6EF /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 84379B961F62426600D1F6EF /* Shader.vsh */; };
 		843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
 		845FB8691F4C245100672938 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8681F4C245100672938 /* AppDelegate.m */; };
@@ -48,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4007CD051F64D439002C6E5A /* HViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HViewController.h; sourceTree = "<group>"; };
+		4007CD061F64D439002C6E5A /* HViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HViewController.m; sourceTree = "<group>"; };
+		4007CD071F64D439002C6E5A /* HViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HViewController.xib; sourceTree = "<group>"; };
 		84071B601F5F8F24004F9CA8 /* CViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CViewController.h; sourceTree = "<group>"; };
 		84071B611F5F8F24004F9CA8 /* CViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CViewController.m; sourceTree = "<group>"; };
 		84071B631F5F989F004F9CA8 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
@@ -58,8 +61,6 @@
 		84379B8D1F6223AB00D1F6EF /* WZLearnOpenGL-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WZLearnOpenGL-Bridging-Header.h"; sourceTree = "<group>"; };
 		84379B8E1F6223AB00D1F6EF /* FViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FViewController.swift; sourceTree = "<group>"; };
 		84379B921F62309100D1F6EF /* GViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GViewController.swift; sourceTree = "<group>"; };
-		84379B951F62426600D1F6EF /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
-		84379B961F62426600D1F6EF /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		843F6DE41F4FF7DB00F9FBA4 /* AViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
 		843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 		845FB8611F4C245100672938 /* WZLearnOpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WZLearnOpenGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,16 +111,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84379B941F62426600D1F6EF /* Shaders */ = {
-			isa = PBXGroup;
-			children = (
-				84379B951F62426600D1F6EF /* Shader.fsh */,
-				84379B961F62426600D1F6EF /* Shader.vsh */,
-			);
-			name = Shaders;
-			path = "../../../../../Downloads/OpenGL ES/ExamplesForXcode6.1/ch03_EXAMPLES/OpenGLES_Ch3_6/OpenGLES_Ch3_6/Shaders";
-			sourceTree = "<group>";
-		};
 		845FB8581F4C245100672938 = {
 			isa = PBXGroup;
 			children = (
@@ -160,7 +151,9 @@
 				84379B8B1F62215400D1F6EF /* EViewController.m */,
 				84379B8E1F6223AB00D1F6EF /* FViewController.swift */,
 				84379B921F62309100D1F6EF /* GViewController.swift */,
-				84379B941F62426600D1F6EF /* Shaders */,
+				4007CD051F64D439002C6E5A /* HViewController.h */,
+				4007CD061F64D439002C6E5A /* HViewController.m */,
+				4007CD071F64D439002C6E5A /* HViewController.xib */,
 				845FB86D1F4C245100672938 /* Main.storyboard */,
 				845FB8701F4C245100672938 /* Assets.xcassets */,
 				845FB8721F4C245100672938 /* LaunchScreen.storyboard */,
@@ -318,12 +311,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84379B971F62426600D1F6EF /* Shader.fsh in Resources */,
 				84F7B8711F60F45B00B31DCB /* beetle.png in Resources */,
 				84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */,
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
+				4007CD091F64D439002C6E5A /* HViewController.xib in Resources */,
 				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
-				84379B981F62426600D1F6EF /* Shader.vsh in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
@@ -358,6 +350,7 @@
 				84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */,
 				845FB8691F4C245100672938 /* AppDelegate.m in Sources */,
 				84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */,
+				4007CD081F64D439002C6E5A /* HViewController.m in Sources */,
 				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
 				84379B931F62309100D1F6EF /* GViewController.swift in Sources */,
 				845FB8661F4C245100672938 /* main.m in Sources */,
