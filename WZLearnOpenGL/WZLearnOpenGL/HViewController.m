@@ -19,6 +19,18 @@ typedef struct {
     SceneVertex vertices[3];
 } SceneTriangle;
 
+static SceneTriangle SceneTriangleMake(const SceneVertex vertexA,
+                                       const SceneVertex vertexB,
+                                       const SceneVertex vertexC) {
+    SceneTriangle   result;
+    
+    result.vertices[0] = vertexA;
+    result.vertices[1] = vertexB;
+    result.vertices[2] = vertexC;
+    
+    return result;
+}
+
 
 #define NORMLA_FACES (8)
 
@@ -90,9 +102,9 @@ GLKVector3 SceneVector3Nromalize(GLKVector3 vector) {
 {
     GLKBaseEffect *baseEffect;
     GLuint bufferID;
+    GLuint bufferID2;
     GLKView *glkView;
     GLKBaseEffect * extraEffect;
-    
     
     SceneTriangle triangles[8];
 }
@@ -122,6 +134,25 @@ GLKVector3 SceneVector3Nromalize(GLKVector3 vector) {
     extraEffect = [[GLKBaseEffect alloc] init];
     extraEffect.useConstantColor = GL_TRUE;
     extraEffect.constantColor = GLKVector4Make(0, 1, 0, 1);
+    
+    triangles[0] = SceneTriangleMake(vertexA, vertexB, vertexD);
+    triangles[1] = SceneTriangleMake(vertexB, vertexC, vertexF);
+    triangles[2] = SceneTriangleMake(vertexD, vertexB, vertexE);
+    triangles[3] = SceneTriangleMake(vertexE, vertexB, vertexF);
+    triangles[4] = SceneTriangleMake(vertexD, vertexE, vertexH);
+    triangles[5] = SceneTriangleMake(vertexE, vertexF, vertexH);
+    triangles[6] = SceneTriangleMake(vertexG, vertexD, vertexH);
+    triangles[7] = SceneTriangleMake(vertexH, vertexF, vertexI);
+    
+    glGenBuffers(1, &bufferID);
+    glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangles), triangles, GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &bufferID2);
+    glBindBuffer(GL_ARRAY_BUFFER, bufferID2);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangles), triangles, GL_STATIC_DRAW);
+
+    
 }
 
 
