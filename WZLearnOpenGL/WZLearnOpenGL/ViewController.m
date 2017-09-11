@@ -28,7 +28,7 @@
                  @{@"title" : @"CViewController", @"attachment" : @"平铺模式"},
                  @{@"title" : @"DViewController", @"attachment" : @"纹理混合"},
                  @{@"title" : @"EViewController", @"attachment" : @"多重纹理"},
-                 @{@"title" : @"FViewController", @"attachment" : @"swift多重纹理"},
+                 @{@"title" : @"FViewController", @"attachment" : @"Swift多重纹理"},
 //                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
                  ];
     [self createViews];
@@ -77,8 +77,6 @@
         [self.navigationController pushViewController:VC animated:true];
     }
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {
