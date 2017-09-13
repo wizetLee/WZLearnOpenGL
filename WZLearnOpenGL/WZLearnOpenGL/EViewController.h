@@ -10,4 +10,6 @@
 
 @interface EViewController : GLKViewController
 
++ (UIColor *)colorWithHexString:(NSString *)str;
+
 @end

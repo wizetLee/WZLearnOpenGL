@@ -153,6 +153,23 @@ GLKVector3 SceneVector3Nromalize(GLKVector3 vector) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangles), triangles, GL_STATIC_DRAW);
 
     
+    //获取uniform变量列表
+    //glGetUniformLocation(GLuint program/*程序名*/, const GLchar *name/*uniform修饰的变量名*/)
+    //如果返回值是-1 则说明
+    
+    GLint timeLoc;//着色器中的 uniform 变量 time 的索引
+    GLfloat timeValue = 0.0;//程序运行时间
+    GLuint program =  glCreateProgram();
+    timeLoc = glGetUniformLocation(program, "time");
+    glUniform1f(timeLoc, timeValue);//设置 location 对应的 uniform变量的值
+//    glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) //读入对应矩阵维度的数值并构成矩阵    transpose：决定是否以该矩阵的转置矩阵的顺序读取
+    
+    GLuint shaderA = glCreateShader(GL_VERTEX_SHADER);
+    
+//    glShaderSource(shaderA, <#GLsizei count#>, <#const GLchar *const *string#>, <#const GLint *length#>);
+    glCompileShader(shaderA);
+    glGetShaderiv(shaderA, GL_COMPILE_STATUS, <#GLint *params#>)
+    
 }
 
 
@@ -172,6 +189,10 @@ GLKVector3 SceneVector3Nromalize(GLKVector3 vector) {
      double a, b;
      if( abs(a-b) < FLT_EPSILON)
      */
+    
+   
+    
+    
 }
 
 /*

@@ -16,6 +16,8 @@
 		84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B8E1F6223AB00D1F6EF /* FViewController.swift */; };
 		84379B931F62309100D1F6EF /* GViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B921F62309100D1F6EF /* GViewController.swift */; };
 		843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */; };
+		8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */; };
+		8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8457464D1F67EBD500E8BBD2 /* custom.fsh */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
 		845FB8691F4C245100672938 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8681F4C245100672938 /* AppDelegate.m */; };
 		845FB86C1F4C245100672938 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB86B1F4C245100672938 /* ViewController.m */; };
@@ -63,6 +65,10 @@
 		84379B921F62309100D1F6EF /* GViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GViewController.swift; sourceTree = "<group>"; };
 		843F6DE41F4FF7DB00F9FBA4 /* AViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
 		843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
+		845746401F678DC800E8BBD2 /* custom.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = custom.vsh; sourceTree = "<group>"; };
+		8457464A1F679C3400E8BBD2 /* UIColor+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Custom.h"; sourceTree = "<group>"; };
+		8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Custom.m"; sourceTree = "<group>"; };
+		8457464D1F67EBD500E8BBD2 /* custom.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = custom.fsh; sourceTree = "<group>"; };
 		845FB8611F4C245100672938 /* WZLearnOpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WZLearnOpenGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		845FB8651F4C245100672938 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		845FB8671F4C245100672938 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -149,10 +155,14 @@
 				84071B661F5FAA2E004F9CA8 /* DViewController.m */,
 				84379B8A1F62215400D1F6EF /* EViewController.h */,
 				84379B8B1F62215400D1F6EF /* EViewController.m */,
+				8457464A1F679C3400E8BBD2 /* UIColor+Custom.h */,
+				8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */,
 				84379B8E1F6223AB00D1F6EF /* FViewController.swift */,
 				84379B921F62309100D1F6EF /* GViewController.swift */,
 				4007CD051F64D439002C6E5A /* HViewController.h */,
 				4007CD061F64D439002C6E5A /* HViewController.m */,
+				845746401F678DC800E8BBD2 /* custom.vsh */,
+				8457464D1F67EBD500E8BBD2 /* custom.fsh */,
 				4007CD071F64D439002C6E5A /* HViewController.xib */,
 				845FB86D1F4C245100672938 /* Main.storyboard */,
 				845FB8701F4C245100672938 /* Assets.xcassets */,
@@ -316,6 +326,7 @@
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
 				4007CD091F64D439002C6E5A /* HViewController.xib in Resources */,
 				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
+				8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
@@ -353,6 +364,7 @@
 				4007CD081F64D439002C6E5A /* HViewController.m in Sources */,
 				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
 				84379B931F62309100D1F6EF /* GViewController.swift in Sources */,
+				8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */,
 				845FB8661F4C245100672938 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

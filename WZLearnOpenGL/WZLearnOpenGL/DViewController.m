@@ -44,7 +44,6 @@ static SceneVertex vertices[] = {
     glView.delegate = (id<GLKViewDelegate>)self;
     glView.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:glView.context];
-    
     baseEffect = [[GLKBaseEffect alloc] init];
     baseEffect.useConstantColor = GL_TRUE;
     baseEffect.constantColor = GLKVector4Make(1, 1, 1, 1);

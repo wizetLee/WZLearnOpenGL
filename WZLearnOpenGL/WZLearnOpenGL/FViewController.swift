@@ -100,6 +100,9 @@ class FViewController: GLKViewController {
     }
     
     func saySomething() {
+       
+        UIColor.wz_color(withHexString: "asd")
+        
         print("说了什么！❓")
     }
     
