@@ -30,6 +30,7 @@
                  @{@"title" : @"EViewController", @"attachment" : @"多重纹理"},
                  @{@"title" : @"FViewController", @"attachment" : @"Swift多重纹理"},
 //                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
+                  @{@"title" : @"IViewController", @"attachment" : @" GLSL"},
                  ];
     [self createViews];
     

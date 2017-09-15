@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4007CD081F64D439002C6E5A /* HViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4007CD061F64D439002C6E5A /* HViewController.m */; };
 		4007CD091F64D439002C6E5A /* HViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4007CD071F64D439002C6E5A /* HViewController.xib */; };
+		840167371F6BD2DD008FB775 /* JViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840167361F6BD2DD008FB775 /* JViewController.m */; };
 		84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B611F5F8F24004F9CA8 /* CViewController.m */; };
 		84071B641F5F989F004F9CA8 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 84071B631F5F989F004F9CA8 /* grid.png */; };
 		84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B661F5FAA2E004F9CA8 /* DViewController.m */; };
@@ -16,6 +17,7 @@
 		84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B8E1F6223AB00D1F6EF /* FViewController.swift */; };
 		84379B931F62309100D1F6EF /* GViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B921F62309100D1F6EF /* GViewController.swift */; };
 		843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */; };
+		844318461F6B877E00799E00 /* IViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844318451F6B877E00799E00 /* IViewController.m */; };
 		8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */; };
 		8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8457464D1F67EBD500E8BBD2 /* custom.fsh */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
@@ -26,6 +28,8 @@
 		845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845FB8721F4C245100672938 /* LaunchScreen.storyboard */; };
 		845FB87F1F4C245100672938 /* WZLearnOpenGLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB87E1F4C245100672938 /* WZLearnOpenGLTests.m */; };
 		845FB88A1F4C245100672938 /* WZLearnOpenGLUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */; };
+		849AB3E71F6BA25000FB7A84 /* shaderv1.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */; };
+		849AB3E91F6BA25E00FB7A84 /* shaderf1.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 849AB3E81F6BA25E00FB7A84 /* shaderf1.fsh */; };
 		84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BACD981F5E58CE00A82E02 /* BViewController.m */; };
 		84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84BACD9B1F5E76F900A82E02 /* leaves.gif */; };
 		84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F7B86F1F60EFC600B31DCB /* leaves2.gif */; };
@@ -53,6 +57,9 @@
 		4007CD051F64D439002C6E5A /* HViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HViewController.h; sourceTree = "<group>"; };
 		4007CD061F64D439002C6E5A /* HViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HViewController.m; sourceTree = "<group>"; };
 		4007CD071F64D439002C6E5A /* HViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HViewController.xib; sourceTree = "<group>"; };
+		840167351F6BD2DD008FB775 /* JViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JViewController.h; sourceTree = "<group>"; };
+		840167361F6BD2DD008FB775 /* JViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JViewController.m; sourceTree = "<group>"; };
+		840167381F6BD40F008FB775 /* WZOpenGLCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WZOpenGLCommon.h; sourceTree = "<group>"; };
 		84071B601F5F8F24004F9CA8 /* CViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CViewController.h; sourceTree = "<group>"; };
 		84071B611F5F8F24004F9CA8 /* CViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CViewController.m; sourceTree = "<group>"; };
 		84071B631F5F989F004F9CA8 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
@@ -65,6 +72,8 @@
 		84379B921F62309100D1F6EF /* GViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GViewController.swift; sourceTree = "<group>"; };
 		843F6DE41F4FF7DB00F9FBA4 /* AViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
 		843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
+		844318441F6B877E00799E00 /* IViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IViewController.h; sourceTree = "<group>"; };
+		844318451F6B877E00799E00 /* IViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IViewController.m; sourceTree = "<group>"; };
 		845746401F678DC800E8BBD2 /* custom.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = custom.vsh; sourceTree = "<group>"; };
 		8457464A1F679C3400E8BBD2 /* UIColor+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Custom.h"; sourceTree = "<group>"; };
 		8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Custom.m"; sourceTree = "<group>"; };
@@ -85,6 +94,8 @@
 		845FB8851F4C245100672938 /* WZLearnOpenGLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WZLearnOpenGLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WZLearnOpenGLUITests.m; sourceTree = "<group>"; };
 		845FB88B1F4C245100672938 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderv1.vsh; sourceTree = "<group>"; };
+		849AB3E81F6BA25E00FB7A84 /* shaderf1.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderf1.fsh; sourceTree = "<group>"; };
 		84BACD971F5E58CE00A82E02 /* BViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BViewController.h; sourceTree = "<group>"; };
 		84BACD981F5E58CE00A82E02 /* BViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BViewController.m; sourceTree = "<group>"; };
 		84BACD9B1F5E76F900A82E02 /* leaves.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = leaves.gif; sourceTree = "<group>"; };
@@ -161,6 +172,12 @@
 				84379B921F62309100D1F6EF /* GViewController.swift */,
 				4007CD051F64D439002C6E5A /* HViewController.h */,
 				4007CD061F64D439002C6E5A /* HViewController.m */,
+				844318441F6B877E00799E00 /* IViewController.h */,
+				844318451F6B877E00799E00 /* IViewController.m */,
+				840167351F6BD2DD008FB775 /* JViewController.h */,
+				840167361F6BD2DD008FB775 /* JViewController.m */,
+				849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */,
+				849AB3E81F6BA25E00FB7A84 /* shaderf1.fsh */,
 				845746401F678DC800E8BBD2 /* custom.vsh */,
 				8457464D1F67EBD500E8BBD2 /* custom.fsh */,
 				4007CD071F64D439002C6E5A /* HViewController.xib */,
@@ -207,6 +224,7 @@
 				84F7B86F1F60EFC600B31DCB /* leaves2.gif */,
 				84BACD9B1F5E76F900A82E02 /* leaves.gif */,
 				84071B631F5F989F004F9CA8 /* grid.png */,
+				840167381F6BD40F008FB775 /* WZOpenGLCommon.h */,
 			);
 			path = "素材";
 			sourceTree = "<group>";
@@ -330,6 +348,8 @@
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
+				849AB3E91F6BA25E00FB7A84 /* shaderf1.fsh in Resources */,
+				849AB3E71F6BA25000FB7A84 /* shaderv1.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +385,9 @@
 				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
 				84379B931F62309100D1F6EF /* GViewController.swift in Sources */,
 				8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */,
+				840167371F6BD2DD008FB775 /* JViewController.m in Sources */,
 				845FB8661F4C245100672938 /* main.m in Sources */,
+				844318461F6B877E00799E00 /* IViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

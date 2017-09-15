@@ -168,7 +168,7 @@ GLKVector3 SceneVector3Nromalize(GLKVector3 vector) {
     
 //    glShaderSource(shaderA, <#GLsizei count#>, <#const GLchar *const *string#>, <#const GLint *length#>);
     glCompileShader(shaderA);
-    glGetShaderiv(shaderA, GL_COMPILE_STATUS, <#GLint *params#>)
+//    glGetShaderiv(shaderA, GL_COMPILE_STATUS, <#GLint *params#>)
     
 }
 
