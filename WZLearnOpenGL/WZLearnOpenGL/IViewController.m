@@ -17,12 +17,117 @@
     GLuint textureBufferID;
     GLuint bufferID;
 }
+
 @end
+
+GLfloat *vertices;
+
+
+GLfloat vertices0[30] =
+{
+    0.5, -0.5, 0,     1, 0,
+    -0.5, 0.5, 0,     0, 1,
+    -0.5, -0.5, 0,    0, 0,
+    0.5, 0.5, 0,      1, 1,
+    -0.5, 0.5, 0,     0, 1,
+    0.5, -0.5, 0,     1, 0,
+};
+
+GLfloat vertices1[30] =
+{
+    0.5, -0.5, 0,     0, 1,
+    -0.5, 0.5, 0,     1, 0,
+    -0.5, -0.5, 0,    1, 1,
+    0.5, 0.5, 0,      0, 0,
+    -0.5, 0.5, 0,     1, 0,
+    0.5, -0.5, 0,     0, 1,
+};
+GLfloat vertices2[30] =
+{
+    0.5, -0.5, 0,     1, 1,
+    -0.5, 0.5, 0,     0, 0,
+    -0.5, -0.5, 0,    0, 1,
+    0.5, 0.5, 0,      1, 0,
+    -0.5, 0.5, 0,     0, 0,
+    0.5, -0.5, 0,     1, 1,
+};
+GLfloat vertices3[30] =
+{
+    0.5, -0.5, 0,     0, 0,
+    -0.5, 0.5, 0,     1, 1,
+    -0.5, -0.5, 0,    1, 0,
+    0.5, 0.5, 0,      0, 1,
+    -0.5, 0.5, 0,     1, 1,
+    0.5, -0.5, 0,     0, 0,
+};
 
 @implementation IViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self createViews];
+   
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    if (vertices == nil) {
+        vertices = vertices0;
+    }
+    [self openGL];
+}
+
+- (void)createViews {
+    for (int i = 0; i < 4; i++) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 64.0 + i * 44 + i * 10, [UIScreen mainScreen].bounds.size.width, 44)];
+        button.tag = i;
+        [self.view addSubview:button];
+        switch (i) {
+            case 0:
+                [button setTitle:@"正常" forState:UIControlStateNormal];
+                break;
+            case 1:
+                [button setTitle:@"以正常为基准的颠倒" forState:UIControlStateNormal];
+                break;
+            case 2:
+                [button setTitle:@"以正常为基准的垂直翻转" forState:UIControlStateNormal];
+                break;
+            case 3:
+                [button setTitle:@"以正常为基准的水平翻转" forState:UIControlStateNormal];
+                break;
+            default:
+                break;
+        }
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setBackgroundColor:[[UIColor yellowColor] colorWithAlphaComponent:0.35]];
+        [button addTarget:self action:@selector(clickedBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+    }
+    
+}
+
+- (void)clickedBtn:(UIButton *)sender {
+    switch (sender.tag) {
+        case 0:
+             vertices = vertices0;
+            break;
+        case 1:
+             vertices = vertices1;
+            break;
+        case 2:
+             vertices = vertices2;
+            break;
+        case 3:
+             vertices = vertices3;
+            break;
+        default:
+            break;
+    }
+    [self.view setNeedsLayout];
+}
+
+- (void)openGL {
     glkView = (GLKView *)self.view;
     //设置放大倍数
     [self.view setContentScaleFactor:[UIScreen mainScreen].scale];
@@ -30,7 +135,7 @@
     // 设置描绘属性  不维持渲染内容以及颜色格式为 RGBA8
     ((CAEAGLLayer *)glkView.layer).drawableProperties = @{kEAGLDrawablePropertyRetainedBacking : [NSNumber numberWithBool:false]
                                                           ,kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8
-          };
+                                                          };
     
     glkView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:glkView.context];
@@ -45,7 +150,7 @@
     
     glGenRenderbuffers(1, &renderBufferID);
     glBindRenderbuffer(GL_RENDERBUFFER, renderBufferID);
-      // 为 颜色缓冲区 分配存储空间
+    // 为 颜色缓冲区 分配存储空间
     [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
     
     glGenFramebuffers(1, &frameBufferID);
@@ -94,7 +199,7 @@
         glDeleteShader(fragmentShader);
     }
     
-  
+    
     { // MARK: - 开始链接
         glLinkProgram(program);
         GLint linkStatus;
@@ -119,34 +224,14 @@
             glUseProgram(program);
         }
     }
-    
-    GLfloat vertices[] =
-    {
-        0.5, -0.5, 0,     1, 0,
-        -0.5, 0.5, 0,     0, 1,
-        -0.5, -0.5, 0,    0, 0,
-        0.5, 0.5, 0,      1, 1,
-        -0.5, 0.5, 0,     0, 1,
-        0.5, -0.5, 0,     1, 0,
-    };
+   
     ///显示的图像是相反的。需要更改y轴坐标
     
-    GLfloat vertices2[] =
-    {
-        0.5, -0.5, -1.0,            1.0, 1.0,
-        -0.5, 0.5, -1.0,            0.0, 0.0,
-        -0.5, -0.5, -1.0,           0.0, 1.0,
-        0.5, 0.5f, -1.0,            1.0, 0.0,
-        -0.5, 0.5, -1.0,            0.0, 0.0,
-        0.5, -0.5, -1.0,            1.0, 1.0,
-    };
-    
-   
     glGenBuffers(1, &bufferID);
     glBindBuffer(GL_ARRAY_BUFFER, bufferID);
     glBufferData(GL_ARRAY_BUFFER
-                 , sizeof(vertices2)
-                 , vertices2
+                 , sizeof(vertices0)//
+                 , vertices
                  , GL_DYNAMIC_DRAW);//GL_STATIC_DRAW 的区别
     
     //外部赋值给着色器
@@ -168,32 +253,40 @@
                           , sizeof(GLfloat) * 5
                           , (float *)NULL + 3);
     
-//    ///纹理配置部分
+    //    ///纹理配置部分
     glDeleteTextures(1, &textureBufferID);
-//    textureBufferID = 0;
+    //    textureBufferID = 0;
     glGenTextures(1, &textureBufferID);
     //绘图
-
+    
     [self configTextureWithImage:@"beetle.png" textureBufferID:&textureBufferID];
-//    glFramebufferTexture2D(GL_FRAMEBUFFER
-//                               , GL_DEPTH_ATTACHMENT
-//                               , GL_TEXTURE_2D
-//                               , textureBufferID
-//                               , 0);
+    //    glFramebufferTexture2D(GL_FRAMEBUFFER
+    //                               , GL_DEPTH_ATTACHMENT
+    //                               , GL_TEXTURE_2D
+    //                               , textureBufferID
+    //                               , 0);
     
     GLuint rotateMatrix = glGetUniformLocation(program, "rotateMatrix");//uniform 传入旋转矩阵的值
-
+    
     float radians = 10 * 3.14159 / 180.0;
     float s = sin(radians);
     float c = cos(radians);
-
+    
     //z轴旋转矩阵
     GLfloat zRotation[16] = {
-        c, -s, 0, 0.2,
-        s, c, 0, 0,
+        1, 0, 0, 0,
+        0, 1, 0, 0,
         0, 0, 1.0, 0,
         0.0, 0, 0, 1.0
     };
+  
+//    GLfloat zRotation[16] = {
+//        c, -s, 0, 0.2,
+//        s, c, 0, 0,
+//        0, 0, 1.0, 0,
+//        0.0, 0, 0, 1.0
+//    };
+    
     glUniformMatrix4fv(rotateMatrix
                        , 1
                        , GL_FALSE//是否要转置
@@ -204,11 +297,9 @@
                  , 0
                  , 6);
     
-//    [glkView.context presentRenderbuffer:GL_FRAMEBUFFER];
+    //    [glkView.context presentRenderbuffer:GL_FRAMEBUFFER];
     [glkView.context presentRenderbuffer:GL_RENDERBUFFER];
-   
 }
-
 
 
 - (void)configTextureWithImage:(NSString *)imageName textureBufferID:(GLuint *)texBufferID{
