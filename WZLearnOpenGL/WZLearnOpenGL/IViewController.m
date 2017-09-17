@@ -15,6 +15,7 @@
     GLuint frameBufferID;
     GLuint renderBufferID;
     GLuint textureBufferID;
+    GLuint bufferID;
 }
 @end
 
@@ -27,26 +28,32 @@
     [self.view setContentScaleFactor:[UIScreen mainScreen].scale];
     
     // 设置描绘属性  不维持渲染内容以及颜色格式为 RGBA8
-    ((CAEAGLLayer *)glkView.layer).drawableProperties = @{kEAGLDrawablePropertyRetainedBacking : @(false),kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8
+    ((CAEAGLLayer *)glkView.layer).drawableProperties = @{kEAGLDrawablePropertyRetainedBacking : [NSNumber numberWithBool:false]
+                                                          ,kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8
           };
     
     glkView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:glkView.context];
     
     glDeleteFramebuffers(1, &frameBufferID);
+    frameBufferID = 0;
     glDeleteRenderbuffers(1, &renderBufferID);
-    //如果不重复利用 初始化之前先删除是个好习惯
-    glGenFramebuffers(1, &frameBufferID);
-    glGenRenderbuffers(1, &renderBufferID);
-    glBindFramebuffer(GL_FRAMEBUFFER, frameBufferID);
-    glBindRenderbuffer(GL_RENDERBUFFER, renderBufferID);
+    renderBufferID = 0;
     
-    // 为 颜色缓冲区 分配存储空间
+    //如果不重复利用 初始化之前先删除是个好习惯
+    
+    
+    glGenRenderbuffers(1, &renderBufferID);
+    glBindRenderbuffer(GL_RENDERBUFFER, renderBufferID);
+      // 为 颜色缓冲区 分配存储空间
     [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
+    
+    glGenFramebuffers(1, &frameBufferID);
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBufferID);
     
     //颜色·渲染缓存需要装配到帧缓存中
     glFramebufferRenderbuffer(GL_FRAMEBUFFER
-                              ,GL_COLOR_ATTACHMENT0//装配点 
+                              ,GL_COLOR_ATTACHMENT0//装配点
                               , GL_RENDERBUFFER
                               , renderBufferID);
     /* 有三种渲染缓存的类型
@@ -122,83 +129,94 @@
         -0.5, 0.5, 0,     0, 1,
         0.5, -0.5, 0,     1, 0,
     };
+    ///显示的图像是相反的。需要更改y轴坐标
     
-    GLuint bufferID;
+    GLfloat vertices2[] =
+    {
+        0.5, -0.5, -1.0,            1.0, 1.0,
+        -0.5, 0.5, -1.0,            0.0, 0.0,
+        -0.5, -0.5, -1.0,           0.0, 1.0,
+        0.5, 0.5f, -1.0,            1.0, 0.0,
+        -0.5, 0.5, -1.0,            0.0, 0.0,
+        0.5, -0.5, -1.0,            1.0, 1.0,
+    };
+    
+   
     glGenBuffers(1, &bufferID);
     glBindBuffer(GL_ARRAY_BUFFER, bufferID);
     glBufferData(GL_ARRAY_BUFFER
-                 , sizeof(vertices)
-                 , vertices
+                 , sizeof(vertices2)
+                 , vertices2
                  , GL_DYNAMIC_DRAW);//GL_STATIC_DRAW 的区别
     
     //外部赋值给着色器
     GLuint position = glGetAttribLocation(program, "position");
-    
+    glEnableVertexAttribArray(position);
     glVertexAttribPointer(position
                           , 3
                           , GL_FLOAT
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
                           , NULL);
-    glEnableVertexAttribArray(position);
-    GLuint textureColor = glGetAttribLocation(program
-                                              , "textCoordinate");
-   
-    glVertexAttribPointer(textureColor
+    
+    GLuint textureCoord = glGetAttribLocation(program, "textCoordinate");
+    glEnableVertexAttribArray(textureCoord);
+    glVertexAttribPointer(textureCoord
                           , 2
                           , GL_FLOAT
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
                           , (float *)NULL + 3);
-     glEnableVertexAttribArray(textureColor);
+    
 //    ///纹理配置部分
     glDeleteTextures(1, &textureBufferID);
-    textureBufferID = 0;
+//    textureBufferID = 0;
     glGenTextures(1, &textureBufferID);
     //绘图
 
-    [self configTextureWithImage:@"beetle" textureBufferID:&textureBufferID];
-    glFramebufferTexture2D(GL_FRAMEBUFFER
-                               , GL_COLOR_ATTACHMENT0
-                               , GL_TEXTURE_2D
-                               , textureBufferID
-                               , 0);
+    [self configTextureWithImage:@"beetle.png" textureBufferID:&textureBufferID];
+//    glFramebufferTexture2D(GL_FRAMEBUFFER
+//                               , GL_DEPTH_ATTACHMENT
+//                               , GL_TEXTURE_2D
+//                               , textureBufferID
+//                               , 0);
     
-    GLuint cotateMatrix = glGetUniformLocation(program, "rotateMatrix");//uniform 传入旋转矩阵的值
+    GLuint rotateMatrix = glGetUniformLocation(program, "rotateMatrix");//uniform 传入旋转矩阵的值
 
-    float radians = 10 * M_PI/ 180.0;
+    float radians = 10 * 3.14159 / 180.0;
     float s = sin(radians);
     float c = cos(radians);
 
     //z轴旋转矩阵
     GLfloat zRotation[16] = {
-        c, -s, 0, 0,
+        c, -s, 0, 0.2,
         s, c, 0, 0,
         0, 0, 1.0, 0,
         0.0, 0, 0, 1.0
     };
-    glUniformMatrix4fv(cotateMatrix
+    glUniformMatrix4fv(rotateMatrix
                        , 1
                        , GL_FALSE//是否要转置
                        , (GLfloat *)&zRotation[0]);
     
+    
     glDrawArrays(GL_TRIANGLES
                  , 0
                  , 6);
+    
+//    [glkView.context presentRenderbuffer:GL_FRAMEBUFFER];
     [glkView.context presentRenderbuffer:GL_RENDERBUFFER];
+   
 }
 
-- (void)viewDidLayoutSubviews {
-  
-}
 
-- (void)configTextureWithImage:(NSString *)imageName textureBufferID:(GLuint *)textureBufferID{
+
+- (void)configTextureWithImage:(NSString *)imageName textureBufferID:(GLuint *)texBufferID{
     if (!imageName.length) {return;};
     
     CGImageRef imageRef = [UIImage imageNamed:imageName].CGImage;
     
     if(!imageRef) {
-        NSLog(@"111");
         return;
     };
     
@@ -221,7 +239,7 @@
                                     , width, height)
                        , imageRef);
  
-    glBindTexture(GL_TEXTURE_2D, *textureBufferID);
+    glBindTexture(GL_TEXTURE_2D, *texBufferID);
     //配置左右上下环绕采样模式
     glTexParameteri(GL_TEXTURE_2D
                     , GL_TEXTURE_MIN_FILTER
@@ -245,10 +263,11 @@
                  , GL_RGBA
                  , GL_UNSIGNED_BYTE
                  , spriteData);
+    
     free(spriteData);
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
-    CGImageRelease(imageRef);
+//    CGImageRelease(imageRef);
 }
 
 

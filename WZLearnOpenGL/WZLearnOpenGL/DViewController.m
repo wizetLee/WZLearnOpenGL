@@ -59,7 +59,7 @@ static SceneVertex vertices[] = {
     //图片纹理信息获取
     info1 = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"leaves2.gif"].CGImage options:nil error:NULL];
     info2 = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"beetle.png"].CGImage options:nil error:NULL];
-#warning 有BUG 就是使用了下面这个key 图片数据的方向就会改变，感觉每次都相反
+#warning 有BUG 就是使用了下面这个key 图片数据的方向就会改变，感觉每次都相反 应该是缓存清楚的原因
     @{GLKTextureLoaderOriginBottomLeft : [NSNumber numberWithBool:YES]};//
     /*
      option 字典可以改为
