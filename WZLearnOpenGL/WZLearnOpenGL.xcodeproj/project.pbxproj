@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4007CD081F64D439002C6E5A /* HViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4007CD061F64D439002C6E5A /* HViewController.m */; };
 		4007CD091F64D439002C6E5A /* HViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4007CD071F64D439002C6E5A /* HViewController.xib */; };
+		40CD2A511F6EB82200D84AD9 /* WZOpenGLDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 40CD2A501F6EB82200D84AD9 /* WZOpenGLDriver.m */; };
 		840167371F6BD2DD008FB775 /* JViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840167361F6BD2DD008FB775 /* JViewController.m */; };
 		84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B611F5F8F24004F9CA8 /* CViewController.m */; };
 		84071B641F5F989F004F9CA8 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 84071B631F5F989F004F9CA8 /* grid.png */; };
@@ -57,9 +58,10 @@
 		4007CD051F64D439002C6E5A /* HViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HViewController.h; sourceTree = "<group>"; };
 		4007CD061F64D439002C6E5A /* HViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HViewController.m; sourceTree = "<group>"; };
 		4007CD071F64D439002C6E5A /* HViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HViewController.xib; sourceTree = "<group>"; };
+		40CD2A4F1F6EB82200D84AD9 /* WZOpenGLDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZOpenGLDriver.h; sourceTree = "<group>"; };
+		40CD2A501F6EB82200D84AD9 /* WZOpenGLDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZOpenGLDriver.m; sourceTree = "<group>"; };
 		840167351F6BD2DD008FB775 /* JViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JViewController.h; sourceTree = "<group>"; };
 		840167361F6BD2DD008FB775 /* JViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JViewController.m; sourceTree = "<group>"; };
-		840167381F6BD40F008FB775 /* WZOpenGLCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WZOpenGLCommon.h; sourceTree = "<group>"; };
 		84071B601F5F8F24004F9CA8 /* CViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CViewController.h; sourceTree = "<group>"; };
 		84071B611F5F8F24004F9CA8 /* CViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CViewController.m; sourceTree = "<group>"; };
 		84071B631F5F989F004F9CA8 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
@@ -176,6 +178,8 @@
 				844318451F6B877E00799E00 /* IViewController.m */,
 				840167351F6BD2DD008FB775 /* JViewController.h */,
 				840167361F6BD2DD008FB775 /* JViewController.m */,
+				40CD2A4F1F6EB82200D84AD9 /* WZOpenGLDriver.h */,
+				40CD2A501F6EB82200D84AD9 /* WZOpenGLDriver.m */,
 				849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */,
 				849AB3E81F6BA25E00FB7A84 /* shaderf1.fsh */,
 				845746401F678DC800E8BBD2 /* custom.vsh */,
@@ -224,7 +228,6 @@
 				84F7B86F1F60EFC600B31DCB /* leaves2.gif */,
 				84BACD9B1F5E76F900A82E02 /* leaves.gif */,
 				84071B631F5F989F004F9CA8 /* grid.png */,
-				840167381F6BD40F008FB775 /* WZOpenGLCommon.h */,
 			);
 			path = "素材";
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */,
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
 				845FB86C1F4C245100672938 /* ViewController.m in Sources */,
+				40CD2A511F6EB82200D84AD9 /* WZOpenGLDriver.m in Sources */,
 				84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */,
 				845FB8691F4C245100672938 /* AppDelegate.m in Sources */,
 				84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */,

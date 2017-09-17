@@ -7,10 +7,12 @@
 //
 
 #import "JViewController.h"
-#import "WZOpenGLCommon.h"
+#import "WZOpenGLDriver.h"
 
 @interface JViewController ()
-
+{
+    GLKView * glkView;
+}
 @end
 
 @implementation JViewController
@@ -18,6 +20,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    //以一个计时器作为驱动 对数据的进行修改
+    
+    glkView = (GLKView *)self.view;
+    
+    glkView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    [EAGLContext setCurrentContext:glkView.context];
+    
+    //数据匹配
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
