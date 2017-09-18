@@ -127,8 +127,13 @@ GLfloat vertices3[30] =
     [self.view setNeedsLayout];
 }
 
+- (void)glkViewControllerUpdate:(GLKViewController *)controller {
+//    [self openGL];
+}
+
 - (void)openGL {
     glkView = (GLKView *)self.view;
+    self.delegate = (id<GLKViewControllerDelegate>)self;
     //设置放大倍数
     [self.view setContentScaleFactor:[UIScreen mainScreen].scale];
     

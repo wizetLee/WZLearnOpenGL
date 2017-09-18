@@ -9,7 +9,6 @@
 import UIKit
 import GLKit
 
-
 struct SceneVertex {
    var  positionCoords : GLKVector3
    var textureCoords :GLKVector2

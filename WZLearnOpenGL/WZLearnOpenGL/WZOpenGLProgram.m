@@ -1,20 +1,55 @@
 //
-//  WZOpenGLDriver.m
+//  WZOpenGLProgram.m
 //  WZLearnOpenGL
 //
-//  Created by 李炜钊 on 2017/9/17.
+//  Created by admin on 18/9/17.
 //  Copyright © 2017年 wizet. All rights reserved.
 //
 
-#import "WZOpenGLDriver.h"
+#import "WZOpenGLProgram.h"
 
-@implementation WZOpenGLDriver
+@implementation WZOpenGLProgram
 
-//MARK: -  仿写GPUImage 的一个编译判断
-BOOL complierShader(GLuint *shader , GLenum type, NSString *shaderString) {
+
++ (void)link:(GLuint *)program result:(void (^)(NSString *infoLogStr))result {
+    NSString *infoLogStr;
     
+    //开始链接
+    glLinkProgram(*program);
+    GLint linkStatus;
+    glGetProgramiv(*program, GL_LINK_STATUS, &linkStatus);
+    
+    if (linkStatus == GL_FALSE) {
+        //链接失败
+        GLint infoLogLength;
+        glGetProgramiv(*program, GL_INFO_LOG_LENGTH, &infoLogLength);
+        
+        if (infoLogLength) {
+            GLchar *infoLog = malloc(infoLogLength);
+            
+            glGetProgramInfoLog(*program
+                                , infoLogLength
+                                , &infoLogLength
+                                , infoLog);
+            printf("链接出错:%s", infoLog);
+            infoLogStr = [NSString stringWithFormat:@"%s", infoLog];
+            free(infoLog);
+        }
+    }
+    
+    //可以删掉着色器的句柄
+    
+    
+    result(infoLogStr);
+}
+
+void complierShader(GLuint *shader, GLenum type, NSString *shaderString, void (^result)(NSString *infoLogStr)) {
     const GLchar *source = shaderString.UTF8String;
-    if (!source) {return false;}//字符串
+    if (!source) {
+        result(@"source为空");
+        return;
+    }//字符串
+    NSString *infoLogStr = nil;
     
     *shader = glCreateShader(type);//顶点或者是片元的
     glShaderSource(*shader
@@ -38,11 +73,28 @@ BOOL complierShader(GLuint *shader , GLenum type, NSString *shaderString) {
                                , &infoLogLength
                                , infoLog);
             printf("编译报错 : %s", infoLog);
+            infoLogStr = [NSString stringWithFormat:@"%s", infoLog];
             free(infoLog);//释放
         }
     }
+    //complierStatus == GL_TRUE
+    result(infoLogStr);
+}
+
+//使得当前程序无效
+- (void)validate;
+{
+    GLint logLength;
     
-    return complierStatus == GL_TRUE;
+    glValidateProgram(program);//使当前的程序生效
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
+    if (logLength > 0)
+    {
+        GLchar *log = (GLchar *)malloc(logLength);
+        glGetProgramInfoLog(program, logLength, &logLength, log);
+        printf("%s", log);
+        free(log);
+    }	
 }
 
 ///配置 纹理图片
@@ -107,5 +159,6 @@ BOOL complierShader(GLuint *shader , GLenum type, NSString *shaderString) {
     CGColorSpaceRelease(colorSpace);
     //    CGImageRelease(imageRef);
 }
+
 
 @end
