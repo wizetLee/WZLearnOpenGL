@@ -144,22 +144,26 @@ GLfloat vertices3[30] =
     
     glkView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:glkView.context];
-    
-    glDeleteFramebuffers(1, &frameBufferID);
-    frameBufferID = 0;
-    glDeleteRenderbuffers(1, &renderBufferID);
-    renderBufferID = 0;
-    
+    if (glIsBuffer(frameBufferID)) {
+        glDeleteFramebuffers(1, &frameBufferID);
+        frameBufferID = 0;
+    }
+    if (glIsBuffer(renderBufferID)) {
+        glDeleteRenderbuffers(1, &renderBufferID);
+        renderBufferID = 0;
+    }
     //如果不重复利用 初始化之前先删除是个好习惯
     
     
     glGenRenderbuffers(1, &renderBufferID);
     glBindRenderbuffer(GL_RENDERBUFFER, renderBufferID);
+    
     // 为 颜色缓冲区 分配存储空间
     [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
     
     glGenFramebuffers(1, &frameBufferID);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBufferID);
+    
     
     //颜色·渲染缓存需要装配到帧缓存中
     glFramebufferRenderbuffer(GL_FRAMEBUFFER
@@ -202,6 +206,7 @@ GLfloat vertices3[30] =
         //不会马上释放  等到不需要的时候才会释放掉
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
+        
     }
     
     
@@ -232,31 +237,32 @@ GLfloat vertices3[30] =
    
     ///显示的图像是相反的。需要更改y轴坐标
     
-    glGenBuffers(1, &bufferID);
+    glGenBuffers(1, &bufferID);//VBO 顶点缓存对象的创建  vertex buffer object  返回N个未使用的缓存对象名称 n小于0则产生GL_INVALID_VALUL错误  而0是系统保留的缓存对象名称
     glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+    //GL_ARRAY_BUFFER  将顶点数据保存在缓存中
     glBufferData(GL_ARRAY_BUFFER
                  , sizeof(vertices0)//
                  , vertices
                  , GL_DYNAMIC_DRAW);//GL_STATIC_DRAW 的区别
     
     //外部赋值给着色器
-    GLuint position = glGetAttribLocation(program, "position");
-    glEnableVertexAttribArray(position);
+    GLuint position = glGetAttribLocation(program, "position"); ///着色器变量 着色器并不知道自己的数据从哪里来，只是每次运行时直接获取数据对应的输入变量 我们必须要自己完成着色线管的装配
     glVertexAttribPointer(position
                           , 3
                           , GL_FLOAT
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
-                          , NULL);
+                          , NULL);//将着色器变量关联到一个顶点属性数组
+    glEnableVertexAttribArray(position);
     
-    GLuint textureCoord = glGetAttribLocation(program, "textCoordinate");
-    glEnableVertexAttribArray(textureCoord);
+    GLuint textureCoord = glGetAttribLocation(program, "textCoordinate");//textureCoord 属于 [0, GL_MAX_VERTEX_ATTRIBS -1];
     glVertexAttribPointer(textureCoord
                           , 2
                           , GL_FLOAT
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
-                          , (float *)NULL + 3);
+                          , (void *)NULL + 3);
+     glEnableVertexAttribArray(textureCoord);
     
     //    ///纹理配置部分
     glDeleteTextures(1, &textureBufferID);
@@ -300,7 +306,7 @@ GLfloat vertices3[30] =
     
     glDrawArrays(GL_TRIANGLES
                  , 0
-                 , 6);
+                 , 6);//绘制命令:请求渲染几何图元
     
     //    [glkView.context presentRenderbuffer:GL_FRAMEBUFFER];
     [glkView.context presentRenderbuffer:GL_RENDERBUFFER];
