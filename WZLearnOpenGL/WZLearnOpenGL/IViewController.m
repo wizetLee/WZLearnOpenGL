@@ -127,13 +127,13 @@ GLfloat vertices3[30] =
     [self.view setNeedsLayout];
 }
 
-- (void)glkViewControllerUpdate:(GLKViewController *)controller {
+//- (void)glkViewControllerUpdate:(GLKViewController *)controller {
 //    [self openGL];
-}
+//}
 
 - (void)openGL {
     glkView = (GLKView *)self.view;
-    self.delegate = (id<GLKViewControllerDelegate>)self;
+//    self.delegate = (id<GLKViewControllerDelegate>)self;
     //设置放大倍数
     [self.view setContentScaleFactor:[UIScreen mainScreen].scale];
     
@@ -144,22 +144,22 @@ GLfloat vertices3[30] =
     
     glkView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:glkView.context];
-    if (glIsBuffer(frameBufferID)) {
+    
+//    if (glIsBuffer(frameBufferID)) {
         glDeleteFramebuffers(1, &frameBufferID);
         frameBufferID = 0;
-    }
-    if (glIsBuffer(renderBufferID)) {
+//    }
+//    if (glIsBuffer(renderBufferID)) {
         glDeleteRenderbuffers(1, &renderBufferID);
         renderBufferID = 0;
-    }
+//    }
     //如果不重复利用 初始化之前先删除是个好习惯
     
     
     glGenRenderbuffers(1, &renderBufferID);
     glBindRenderbuffer(GL_RENDERBUFFER, renderBufferID);
     
-    // 为 颜色缓冲区 分配存储空间
-    [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
+    
     
     glGenFramebuffers(1, &frameBufferID);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBufferID);
@@ -170,17 +170,15 @@ GLfloat vertices3[30] =
                               ,GL_COLOR_ATTACHMENT0//装配点
                               , GL_RENDERBUFFER
                               , renderBufferID);
-    /* 有三种渲染缓存的类型
-     # GL_DEPTH_BUFFER_BIT
-     # GL_STENCIL_BUFFER_BIT
-     # GL_COLOR_BUFFER_BIT
-     */
-    glClearColor(1, 1, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
     
+    
+    // 为 颜色缓冲区 分配存储空间
+    [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
+   
+
     //视图放大倍数
     CGFloat scale = [UIScreen mainScreen].scale;
-    //设置视口大小
+    //设置视口
     glViewport(self.view.frame.origin.x * scale
                , self.view.frame.origin.y * scale
                , self.view.frame.size.width * scale
@@ -219,10 +217,8 @@ GLfloat vertices3[30] =
             //链接失败
             GLint infoLogLength;
             glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLogLength);
-            
             if (infoLogLength) {
                 GLchar *infoLog = malloc(infoLogLength);
-                
                 glGetProgramInfoLog(program
                                     , infoLogLength
                                     , &infoLogLength
@@ -262,21 +258,22 @@ GLfloat vertices3[30] =
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
                           , (void *)NULL + 3);
-     glEnableVertexAttribArray(textureCoord);
+    glEnableVertexAttribArray(textureCoord);
     
+    glActiveTexture(GL_TEXTURE0);
+    glEnable(GL_TEXTURE_2D);
     //    ///纹理配置部分
     glDeleteTextures(1, &textureBufferID);
-    //    textureBufferID = 0;
+	textureBufferID = 0;
     glGenTextures(1, &textureBufferID);
     //绘图
-    
     [self configTextureWithImage:@"beetle.png" textureBufferID:&textureBufferID];
     //    glFramebufferTexture2D(GL_FRAMEBUFFER
     //                               , GL_DEPTH_ATTACHMENT
     //                               , GL_TEXTURE_2D
     //                               , textureBufferID
     //                               , 0);
-    
+    ///获取rotateMatrix在uniform变量列表的索引
     GLuint rotateMatrix = glGetUniformLocation(program, "rotateMatrix");//uniform 传入旋转矩阵的值
     
     float radians = 10 * 3.14159 / 180.0;
@@ -297,12 +294,26 @@ GLfloat vertices3[30] =
 //        0, 0, 1.0, 0,
 //        0.0, 0, 0, 1.0
 //    };
-    
+    //对rotateMatrix变量进行赋值
     glUniformMatrix4fv(rotateMatrix
                        , 1
                        , GL_FALSE//是否要转置
                        , (GLfloat *)&zRotation[0]);
     
+    
+    
+    /* 有三种渲染缓存的类型
+     # GL_DEPTH_BUFFER_BIT
+     # GL_STENCIL_BUFFER_BIT
+     # GL_COLOR_BUFFER_BIT
+     */
+    glClearColor(1, 1, 1, 1);
+    glClear(GL_COLOR_BUFFER_BIT);//颜色值缓存
+    //    glClearDepthf(GLclampf depth)
+    //    glClear(GL_DEPTH_BUFFER_BIT);//深度缓存
+    
+    //    glClearStencil(GLint s)
+    //    glClear(GL_STENCIL_BUFFER_BIT);//模板缓存
     
     glDrawArrays(GL_TRIANGLES
                  , 0

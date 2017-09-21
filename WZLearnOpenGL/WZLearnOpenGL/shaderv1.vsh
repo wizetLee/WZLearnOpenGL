@@ -1,5 +1,5 @@
 
-/*layout (location = 1)  手动指定location*/ attribute vec4 position;                    //外部
+attribute vec4 position;                    //外部 /*layout (location = 1)  手动指定location*/ 
 attribute vec2 textCoordinate;              //外部
 uniform mat4 rotateMatrix;              //外部传进来的
 
