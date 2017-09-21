@@ -138,21 +138,21 @@ GLfloat vertices3[30] =
     [self.view setContentScaleFactor:[UIScreen mainScreen].scale];
     
     // 设置描绘属性  不维持渲染内容以及颜色格式为 RGBA8
-    ((CAEAGLLayer *)glkView.layer).drawableProperties = @{kEAGLDrawablePropertyRetainedBacking : [NSNumber numberWithBool:false]
-                                                          ,kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8
+    ((CAEAGLLayer *)glkView.layer).drawableProperties = @{kEAGLDrawablePropertyRetainedBacking:[NSNumber numberWithBool:false]
+                                                          ,kEAGLDrawablePropertyColorFormat:kEAGLColorFormatRGBA8
                                                           };
     
     glkView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:glkView.context];
     
-//    if (glIsBuffer(frameBufferID)) {
+    if (glIsBuffer(frameBufferID)) {
         glDeleteFramebuffers(1, &frameBufferID);
         frameBufferID = 0;
-//    }
-//    if (glIsBuffer(renderBufferID)) {
+    }
+    if (glIsBuffer(renderBufferID)) {
         glDeleteRenderbuffers(1, &renderBufferID);
         renderBufferID = 0;
-//    }
+    }
     //如果不重复利用 初始化之前先删除是个好习惯
     
     
@@ -170,7 +170,6 @@ GLfloat vertices3[30] =
                               ,GL_COLOR_ATTACHMENT0//装配点
                               , GL_RENDERBUFFER
                               , renderBufferID);
-    
     
     // 为 颜色缓冲区 分配存储空间
     [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
@@ -243,22 +242,23 @@ GLfloat vertices3[30] =
     
     //外部赋值给着色器
     GLuint position = glGetAttribLocation(program, "position"); ///着色器变量 着色器并不知道自己的数据从哪里来，只是每次运行时直接获取数据对应的输入变量 我们必须要自己完成着色线管的装配
+    glEnableVertexAttribArray(position);
     glVertexAttribPointer(position
                           , 3
                           , GL_FLOAT
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
                           , NULL);//将着色器变量关联到一个顶点属性数组
-    glEnableVertexAttribArray(position);
+    
     
     GLuint textureCoord = glGetAttribLocation(program, "textCoordinate");//textureCoord 属于 [0, GL_MAX_VERTEX_ATTRIBS -1];
+    glEnableVertexAttribArray(textureCoord);
     glVertexAttribPointer(textureCoord
                           , 2
                           , GL_FLOAT
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
-                          , (void *)NULL + 3);
-    glEnableVertexAttribArray(textureCoord);
+                          , (float *)NULL + 3);
     
     glActiveTexture(GL_TEXTURE0);
     glEnable(GL_TEXTURE_2D);
