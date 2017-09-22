@@ -189,21 +189,25 @@ GLfloat vertices3[30] =
     GLuint program = glCreateProgram();//着色器程序
     
     {
-        GLuint vertexShader;
-        GLuint fragmentShader;
+        GLuint vertexShader = 0;//写成全局的吧...
+        GLuint fragmentShader = 0;
         
-        [[self class] complierShader:&vertexShader
-                                type:GL_VERTEX_SHADER
-                        shaderString:[NSString stringWithContentsOfFile:vertex encoding:NSUTF8StringEncoding error:nil]];
-        [[self class] complierShader:&fragmentShader
-                                type:GL_FRAGMENT_SHADER
-                        shaderString:[NSString stringWithContentsOfFile:fragment encoding:NSUTF8StringEncoding error:nil]];
+        if (!glIsShader(vertexShader)) {
+            [[self class] complierShader:&vertexShader
+                                    type:GL_VERTEX_SHADER
+                            shaderString:[NSString stringWithContentsOfFile:vertex encoding:NSUTF8StringEncoding error:nil]];
+        }
+        if (!glIsShader(fragmentShader)) {
+            [[self class] complierShader:&fragmentShader
+                                    type:GL_FRAGMENT_SHADER
+                            shaderString:[NSString stringWithContentsOfFile:fragment encoding:NSUTF8StringEncoding error:nil]];
+        }
         glAttachShader(program, vertexShader);
         glAttachShader(program, fragmentShader);
         //不会马上释放  等到不需要的时候才会释放掉
-        glDeleteShader(vertexShader);
+        glDeleteShader(vertexShader);//如果着色器对象当前已经链接到了一个或者多个激活的着色器程序上，那么将会被标示为“可删除”，当对应的着色器不再使用的时候，会自动删除这个对象
         glDeleteShader(fragmentShader);
-        
+
     }
     
     
@@ -226,7 +230,7 @@ GLfloat vertices3[30] =
                 free(infoLog);
             }
         } else {
-            glUseProgram(program);
+            glUseProgram(program);//使用链接过的着色器程序
         }
     }
    
@@ -385,6 +389,14 @@ GLfloat vertices3[30] =
 
 
 
+- (void)clean {
+//    glShaderBinary(GLsizei n, const GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLsizei length)
+//    GL_SHADER_BINARY_FORMATS
+    
+    ///各种删掉缓存
+//    glDeleteProgram()
+}
+
 
 //仿写GPUImage 的一个编译判断
 + (BOOL)complierShader:(GLuint *)shader
@@ -399,7 +411,7 @@ GLfloat vertices3[30] =
     glShaderSource(*shader
                    , 1
                    , &source
-                   , NULL);
+                   , NULL);//如果length为NULL 则
     
     glCompileShader(*shader);//开始编译
     
