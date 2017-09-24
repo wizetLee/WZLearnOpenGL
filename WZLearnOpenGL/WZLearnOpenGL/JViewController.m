@@ -23,9 +23,13 @@
     glkView = (GLKView *)self.view;
     glkView.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:glkView.context];
-    
+//    GL_POINT_SIZE
+//    glLineWidth(GLfloat width)//设置线段的固定宽度
+
     //数据匹配
     
+//    glPolygonOffset(GLfloat factor, GLfloat unit);
+//    glFrontFace(GLenum mode);//反转背面
 }
 
 - (void)didReceiveMemoryWarning {
