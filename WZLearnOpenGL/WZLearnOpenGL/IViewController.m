@@ -97,7 +97,7 @@ GLfloat vertices3[30] =
                 break;
             default:
                 break;
-        }
+        }g
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setBackgroundColor:[[UIColor yellowColor] colorWithAlphaComponent:0.35]];
@@ -171,7 +171,7 @@ GLfloat vertices3[30] =
                               , GL_RENDERBUFFER
                               , renderBufferID);
     
-    // 为 颜色缓冲区 分配存储空间
+    // 为 颜色缓冲区  分配存储空间 || 为缓存对象分配存储空间
     [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
    
 

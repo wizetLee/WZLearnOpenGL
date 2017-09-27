@@ -28,6 +28,8 @@
 		845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845FB8721F4C245100672938 /* LaunchScreen.storyboard */; };
 		845FB87F1F4C245100672938 /* WZLearnOpenGLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB87E1F4C245100672938 /* WZLearnOpenGLTests.m */; };
 		845FB88A1F4C245100672938 /* WZLearnOpenGLUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */; };
+		846704E71F7B429600EDE946 /* KViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846704E61F7B429600EDE946 /* KViewController.m */; };
+		846704EA1F7B42A200EDE946 /* KView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846704E91F7B42A200EDE946 /* KView.m */; };
 		849AA3EE1F6F618F00F6E5AE /* WZOpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AA3ED1F6F618F00F6E5AE /* WZOpenGLContext.m */; };
 		849AA3F11F6F648D00F6E5AE /* WZOpenGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */; };
 		849AB3E71F6BA25000FB7A84 /* shaderv1.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */; };
@@ -95,6 +97,10 @@
 		845FB8851F4C245100672938 /* WZLearnOpenGLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WZLearnOpenGLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WZLearnOpenGLUITests.m; sourceTree = "<group>"; };
 		845FB88B1F4C245100672938 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		846704E51F7B429600EDE946 /* KViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KViewController.h; sourceTree = "<group>"; };
+		846704E61F7B429600EDE946 /* KViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KViewController.m; sourceTree = "<group>"; };
+		846704E81F7B42A200EDE946 /* KView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KView.h; sourceTree = "<group>"; };
+		846704E91F7B42A200EDE946 /* KView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KView.m; sourceTree = "<group>"; };
 		849AA3EC1F6F618F00F6E5AE /* WZOpenGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZOpenGLContext.h; sourceTree = "<group>"; };
 		849AA3ED1F6F618F00F6E5AE /* WZOpenGLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZOpenGLContext.m; sourceTree = "<group>"; };
 		849AA3EF1F6F648D00F6E5AE /* WZOpenGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZOpenGLProgram.h; sourceTree = "<group>"; };
@@ -181,6 +187,7 @@
 				844318451F6B877E00799E00 /* IViewController.m */,
 				840167351F6BD2DD008FB775 /* JViewController.h */,
 				840167361F6BD2DD008FB775 /* JViewController.m */,
+				846704E41F7B427C00EDE946 /* KViewController */,
 				849AA3EF1F6F648D00F6E5AE /* WZOpenGLProgram.h */,
 				849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */,
 				849AA3EC1F6F618F00F6E5AE /* WZOpenGLContext.h */,
@@ -224,6 +231,17 @@
 				845FB88B1F4C245100672938 /* Info.plist */,
 			);
 			path = WZLearnOpenGLUITests;
+			sourceTree = "<group>";
+		};
+		846704E41F7B427C00EDE946 /* KViewController */ = {
+			isa = PBXGroup;
+			children = (
+				846704E51F7B429600EDE946 /* KViewController.h */,
+				846704E61F7B429600EDE946 /* KViewController.m */,
+				846704E81F7B42A200EDE946 /* KView.h */,
+				846704E91F7B42A200EDE946 /* KView.m */,
+			);
+			path = KViewController;
 			sourceTree = "<group>";
 		};
 		84BACD9A1F5E76F100A82E02 /* 素材 */ = {
@@ -392,7 +410,9 @@
 				849AA3EE1F6F618F00F6E5AE /* WZOpenGLContext.m in Sources */,
 				84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */,
 				4007CD081F64D439002C6E5A /* HViewController.m in Sources */,
+				846704E71F7B429600EDE946 /* KViewController.m in Sources */,
 				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
+				846704EA1F7B42A200EDE946 /* KView.m in Sources */,
 				84379B931F62309100D1F6EF /* GViewController.swift in Sources */,
 				8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */,
 				840167371F6BD2DD008FB775 /* JViewController.m in Sources */,

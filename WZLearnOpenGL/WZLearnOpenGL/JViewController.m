@@ -30,11 +30,9 @@
     
 //    glPolygonOffset(GLfloat factor, GLfloat unit);
 //    glFrontFace(GLenum mode);//反转背面
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-   
+    
+//    glVertexAttribPointer(GLuint indx, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *ptr);
+    
 }
 
 
