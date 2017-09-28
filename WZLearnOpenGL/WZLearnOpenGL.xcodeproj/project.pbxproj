@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4007CD081F64D439002C6E5A /* HViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4007CD061F64D439002C6E5A /* HViewController.m */; };
 		4007CD091F64D439002C6E5A /* HViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4007CD071F64D439002C6E5A /* HViewController.xib */; };
+		404C33561F7D3CF9002BDF32 /* shaderv2.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 404C33551F7D3CF9002BDF32 /* shaderv2.vsh */; };
+		404C33581F7D3D0C002BDF32 /* shaderf2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 404C33571F7D3D0C002BDF32 /* shaderf2.fsh */; };
 		840167371F6BD2DD008FB775 /* JViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840167361F6BD2DD008FB775 /* JViewController.m */; };
 		84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84071B611F5F8F24004F9CA8 /* CViewController.m */; };
 		84071B641F5F989F004F9CA8 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 84071B631F5F989F004F9CA8 /* grid.png */; };
@@ -63,6 +65,8 @@
 		4007CD051F64D439002C6E5A /* HViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HViewController.h; sourceTree = "<group>"; };
 		4007CD061F64D439002C6E5A /* HViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HViewController.m; sourceTree = "<group>"; };
 		4007CD071F64D439002C6E5A /* HViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HViewController.xib; sourceTree = "<group>"; };
+		404C33551F7D3CF9002BDF32 /* shaderv2.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderv2.vsh; sourceTree = "<group>"; };
+		404C33571F7D3D0C002BDF32 /* shaderf2.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderf2.fsh; sourceTree = "<group>"; };
 		840167351F6BD2DD008FB775 /* JViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JViewController.h; sourceTree = "<group>"; };
 		840167361F6BD2DD008FB775 /* JViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JViewController.m; sourceTree = "<group>"; };
 		84071B601F5F8F24004F9CA8 /* CViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CViewController.h; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 				849AA3ED1F6F618F00F6E5AE /* WZOpenGLContext.m */,
 				849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */,
 				849AB3E81F6BA25E00FB7A84 /* shaderf1.fsh */,
+				404C33551F7D3CF9002BDF32 /* shaderv2.vsh */,
+				404C33571F7D3D0C002BDF32 /* shaderf2.fsh */,
 				845746401F678DC800E8BBD2 /* custom.vsh */,
 				8457464D1F67EBD500E8BBD2 /* custom.fsh */,
 				4007CD071F64D439002C6E5A /* HViewController.xib */,
@@ -390,6 +396,8 @@
 				84F7B8711F60F45B00B31DCB /* beetle.png in Resources */,
 				84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */,
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
+				404C33581F7D3D0C002BDF32 /* shaderf2.fsh in Resources */,
+				404C33561F7D3CF9002BDF32 /* shaderv2.vsh in Resources */,
 				4007CD091F64D439002C6E5A /* HViewController.xib in Resources */,
 				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
 				8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */,

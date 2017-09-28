@@ -11,7 +11,7 @@
 
 @interface WZOpenGLContext : NSObject
 
-@property (nonatomic, strong) EAGLContext *context;
+@property (nonatomic, strong, readonly) EAGLContext *context;
 
 
 @end

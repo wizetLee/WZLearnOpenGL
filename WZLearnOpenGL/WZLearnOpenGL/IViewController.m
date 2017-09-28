@@ -97,7 +97,7 @@ GLfloat vertices3[30] =
                 break;
             default:
                 break;
-        }g
+        }
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setBackgroundColor:[[UIColor yellowColor] colorWithAlphaComponent:0.35]];
@@ -149,7 +149,7 @@ GLfloat vertices3[30] =
         glDeleteFramebuffers(1, &frameBufferID);
         frameBufferID = 0;
     }
-    if (glIsBuffer(renderBufferID)) {
+    if (glIsRenderbuffer(renderBufferID)) {
         glDeleteRenderbuffers(1, &renderBufferID);
         renderBufferID = 0;
     }
