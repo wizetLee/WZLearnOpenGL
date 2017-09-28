@@ -34,6 +34,8 @@
 		849AA3F11F6F648D00F6E5AE /* WZOpenGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */; };
 		849AB3E71F6BA25000FB7A84 /* shaderv1.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */; };
 		849AB3E91F6BA25E00FB7A84 /* shaderf1.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 849AB3E81F6BA25E00FB7A84 /* shaderf1.fsh */; };
+		84A1D0AE1F7CFDD600EA43AC /* GLESMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 84A1D0A81F7CFDD600EA43AC /* GLESMath.c */; };
+		84A1D0AF1F7CFDD600EA43AC /* GLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1D0AB1F7CFDD600EA43AC /* GLESUtils.m */; };
 		84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BACD981F5E58CE00A82E02 /* BViewController.m */; };
 		84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84BACD9B1F5E76F900A82E02 /* leaves.gif */; };
 		84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F7B86F1F60EFC600B31DCB /* leaves2.gif */; };
@@ -107,6 +109,12 @@
 		849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZOpenGLProgram.m; sourceTree = "<group>"; };
 		849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderv1.vsh; sourceTree = "<group>"; };
 		849AB3E81F6BA25E00FB7A84 /* shaderf1.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderf1.fsh; sourceTree = "<group>"; };
+		84A1D0A81F7CFDD600EA43AC /* GLESMath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GLESMath.c; sourceTree = "<group>"; };
+		84A1D0A91F7CFDD600EA43AC /* GLESMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESMath.h; sourceTree = "<group>"; };
+		84A1D0AA1F7CFDD600EA43AC /* GLESUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESUtils.h; sourceTree = "<group>"; };
+		84A1D0AB1F7CFDD600EA43AC /* GLESUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLESUtils.m; sourceTree = "<group>"; };
+		84A1D0AC1F7CFDD600EA43AC /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		84A1D0AD1F7CFDD600EA43AC /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		84BACD971F5E58CE00A82E02 /* BViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BViewController.h; sourceTree = "<group>"; };
 		84BACD981F5E58CE00A82E02 /* BViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BViewController.m; sourceTree = "<group>"; };
 		84BACD9B1F5E76F900A82E02 /* leaves.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = leaves.gif; sourceTree = "<group>"; };
@@ -236,12 +244,26 @@
 		846704E41F7B427C00EDE946 /* KViewController */ = {
 			isa = PBXGroup;
 			children = (
+				84A1D0A71F7CFDD600EA43AC /* Utils */,
 				846704E51F7B429600EDE946 /* KViewController.h */,
 				846704E61F7B429600EDE946 /* KViewController.m */,
 				846704E81F7B42A200EDE946 /* KView.h */,
 				846704E91F7B42A200EDE946 /* KView.m */,
 			);
 			path = KViewController;
+			sourceTree = "<group>";
+		};
+		84A1D0A71F7CFDD600EA43AC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				84A1D0A81F7CFDD600EA43AC /* GLESMath.c */,
+				84A1D0A91F7CFDD600EA43AC /* GLESMath.h */,
+				84A1D0AA1F7CFDD600EA43AC /* GLESUtils.h */,
+				84A1D0AB1F7CFDD600EA43AC /* GLESUtils.m */,
+				84A1D0AC1F7CFDD600EA43AC /* Quaternion.h */,
+				84A1D0AD1F7CFDD600EA43AC /* Vector.h */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		84BACD9A1F5E76F100A82E02 /* 素材 */ = {
@@ -402,6 +424,7 @@
 			files = (
 				84379B8C1F62215400D1F6EF /* EViewController.m in Sources */,
 				849AA3F11F6F648D00F6E5AE /* WZOpenGLProgram.m in Sources */,
+				84A1D0AF1F7CFDD600EA43AC /* GLESUtils.m in Sources */,
 				84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */,
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
 				845FB86C1F4C245100672938 /* ViewController.m in Sources */,
@@ -412,6 +435,7 @@
 				4007CD081F64D439002C6E5A /* HViewController.m in Sources */,
 				846704E71F7B429600EDE946 /* KViewController.m in Sources */,
 				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
+				84A1D0AE1F7CFDD600EA43AC /* GLESMath.c in Sources */,
 				846704EA1F7B42A200EDE946 /* KView.m in Sources */,
 				84379B931F62309100D1F6EF /* GViewController.swift in Sources */,
 				8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */,

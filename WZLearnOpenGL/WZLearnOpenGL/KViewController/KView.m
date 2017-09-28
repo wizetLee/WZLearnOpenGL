@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSTimer *timer;
 
+
 @end
 
 @implementation KView
@@ -27,10 +28,12 @@
 
 - (void)createViews {
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(renderLoop) userInfo:nil repeats:true];
+    
+    
 }
 
 - (void)renderLoop {
-    
+    //变更坐标啊
 }
 
 @end
