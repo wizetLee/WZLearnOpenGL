@@ -20,6 +20,11 @@
 		84379B931F62309100D1F6EF /* GViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84379B921F62309100D1F6EF /* GViewController.swift */; };
 		843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */; };
 		844318461F6B877E00799E00 /* IViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844318451F6B877E00799E00 /* IViewController.m */; };
+		844FBA721F7F2CFC0051425F /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 844FBA701F7F2CFB0051425F /* GLProgram.m */; };
+		844FBA751F7F2DC20051425F /* LViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844FBA741F7F2DC20051425F /* LViewController.m */; };
+		844FBA791F7F2DE10051425F /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844FBA781F7F2DE10051425F /* LView.m */; };
+		844FBA7B1F7F855B0051425F /* LshaderNormal.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 844FBA7A1F7F855B0051425F /* LshaderNormal.vsh */; };
+		844FBA7D1F7F85670051425F /* LshaderNormal.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 844FBA7C1F7F85670051425F /* LshaderNormal.fsh */; };
 		8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */; };
 		8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8457464D1F67EBD500E8BBD2 /* custom.fsh */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
@@ -83,6 +88,14 @@
 		843F6DE51F4FF7DB00F9FBA4 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 		844318441F6B877E00799E00 /* IViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IViewController.h; sourceTree = "<group>"; };
 		844318451F6B877E00799E00 /* IViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IViewController.m; sourceTree = "<group>"; };
+		844FBA701F7F2CFB0051425F /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
+		844FBA711F7F2CFC0051425F /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
+		844FBA731F7F2DC20051425F /* LViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LViewController.h; sourceTree = "<group>"; };
+		844FBA741F7F2DC20051425F /* LViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LViewController.m; sourceTree = "<group>"; };
+		844FBA771F7F2DE10051425F /* LView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LView.h; sourceTree = "<group>"; };
+		844FBA781F7F2DE10051425F /* LView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
+		844FBA7A1F7F855B0051425F /* LshaderNormal.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = LshaderNormal.vsh; sourceTree = "<group>"; };
+		844FBA7C1F7F85670051425F /* LshaderNormal.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = LshaderNormal.fsh; sourceTree = "<group>"; };
 		845746401F678DC800E8BBD2 /* custom.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = custom.vsh; sourceTree = "<group>"; };
 		8457464A1F679C3400E8BBD2 /* UIColor+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Custom.h"; sourceTree = "<group>"; };
 		8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Custom.m"; sourceTree = "<group>"; };
@@ -151,6 +164,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		844FBA761F7F2DD20051425F /* LViewController */ = {
+			isa = PBXGroup;
+			children = (
+				844FBA731F7F2DC20051425F /* LViewController.h */,
+				844FBA741F7F2DC20051425F /* LViewController.m */,
+				844FBA7A1F7F855B0051425F /* LshaderNormal.vsh */,
+				844FBA7C1F7F85670051425F /* LshaderNormal.fsh */,
+				844FBA771F7F2DE10051425F /* LView.h */,
+				844FBA781F7F2DE10051425F /* LView.m */,
+			);
+			path = LViewController;
+			sourceTree = "<group>";
+		};
 		845FB8581F4C245100672938 = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +200,8 @@
 		845FB8631F4C245100672938 /* WZLearnOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				844FBA711F7F2CFC0051425F /* GLProgram.h */,
+				844FBA701F7F2CFB0051425F /* GLProgram.m */,
 				84BACD9A1F5E76F100A82E02 /* 素材 */,
 				845FB8671F4C245100672938 /* AppDelegate.h */,
 				845FB8681F4C245100672938 /* AppDelegate.m */,
@@ -201,6 +229,7 @@
 				840167361F6BD2DD008FB775 /* JViewController.m */,
 				846704E41F7B427C00EDE946 /* KViewController */,
 				849AA3EF1F6F648D00F6E5AE /* WZOpenGLProgram.h */,
+				844FBA761F7F2DD20051425F /* LViewController */,
 				849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */,
 				849AA3EC1F6F618F00F6E5AE /* WZOpenGLContext.h */,
 				849AA3ED1F6F618F00F6E5AE /* WZOpenGLContext.m */,
@@ -396,6 +425,7 @@
 				84F7B8711F60F45B00B31DCB /* beetle.png in Resources */,
 				84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */,
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
+				844FBA7D1F7F85670051425F /* LshaderNormal.fsh in Resources */,
 				404C33581F7D3D0C002BDF32 /* shaderf2.fsh in Resources */,
 				404C33561F7D3CF9002BDF32 /* shaderv2.vsh in Resources */,
 				4007CD091F64D439002C6E5A /* HViewController.xib in Resources */,
@@ -403,6 +433,7 @@
 				8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
+				844FBA7B1F7F855B0051425F /* LshaderNormal.vsh in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
 				849AB3E91F6BA25E00FB7A84 /* shaderf1.fsh in Resources */,
 				849AB3E71F6BA25000FB7A84 /* shaderv1.vsh in Resources */,
@@ -432,6 +463,7 @@
 			files = (
 				84379B8C1F62215400D1F6EF /* EViewController.m in Sources */,
 				849AA3F11F6F648D00F6E5AE /* WZOpenGLProgram.m in Sources */,
+				844FBA791F7F2DE10051425F /* LView.m in Sources */,
 				84A1D0AF1F7CFDD600EA43AC /* GLESUtils.m in Sources */,
 				84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */,
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
@@ -444,10 +476,12 @@
 				846704E71F7B429600EDE946 /* KViewController.m in Sources */,
 				84071B671F5FAA2E004F9CA8 /* DViewController.m in Sources */,
 				84A1D0AE1F7CFDD600EA43AC /* GLESMath.c in Sources */,
+				844FBA721F7F2CFC0051425F /* GLProgram.m in Sources */,
 				846704EA1F7B42A200EDE946 /* KView.m in Sources */,
 				84379B931F62309100D1F6EF /* GViewController.swift in Sources */,
 				8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */,
 				840167371F6BD2DD008FB775 /* JViewController.m in Sources */,
+				844FBA751F7F2DC20051425F /* LViewController.m in Sources */,
 				845FB8661F4C245100672938 /* main.m in Sources */,
 				844318461F6B877E00799E00 /* IViewController.m in Sources */,
 			);

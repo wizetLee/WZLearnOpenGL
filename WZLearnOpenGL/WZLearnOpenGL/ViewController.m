@@ -30,7 +30,8 @@
                  @{@"title" : @"EViewController", @"attachment" : @"多重纹理"},
                  @{@"title" : @"FViewController", @"attachment" : @"Swift多重纹理"},
 //                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
-                  @{@"title" : @"IViewController", @"attachment" : @" GLSL"},
+                  @{@"title" : @"IViewController", @"attachment" : @"GLSL"},
+                 @{@"title" : @"LViewController", @"attachment" : @"多个着色器程序"},
                  ];
     [self createViews];
     

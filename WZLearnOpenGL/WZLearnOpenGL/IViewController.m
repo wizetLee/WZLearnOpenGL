@@ -173,8 +173,9 @@ GLfloat vertices3[30] =
     
     // 为 颜色缓冲区  分配存储空间 || 为缓存对象分配存储空间
     [glkView.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)glkView.layer];
-   
+   ////为某一个容器 分配渲染缓存空间
 
+    
     //视图放大倍数
     CGFloat scale = [UIScreen mainScreen].scale;
     //设置视口
@@ -263,20 +264,14 @@ GLfloat vertices3[30] =
                           , GL_FALSE
                           , sizeof(GLfloat) * 5
                           , (float *)NULL + 3);
-    
-    glActiveTexture(GL_TEXTURE0);
-    glEnable(GL_TEXTURE_2D);
     //    ///纹理配置部分
+    
     glDeleteTextures(1, &textureBufferID);
 	textureBufferID = 0;
     glGenTextures(1, &textureBufferID);
     //绘图
     [self configTextureWithImage:@"beetle.png" textureBufferID:&textureBufferID];
-    //    glFramebufferTexture2D(GL_FRAMEBUFFER
-    //                               , GL_DEPTH_ATTACHMENT
-    //                               , GL_TEXTURE_2D
-    //                               , textureBufferID
-    //                               , 0);
+
     ///获取rotateMatrix在uniform变量列表的索引
     GLuint rotateMatrix = glGetUniformLocation(program, "rotateMatrix");//uniform 传入旋转矩阵的值
     
@@ -325,8 +320,8 @@ GLfloat vertices3[30] =
     
     //    [glkView.context presentRenderbuffer:GL_FRAMEBUFFER];
     [glkView.context presentRenderbuffer:GL_RENDERBUFFER];
+    ////呈现渲染缓存 -> 后帧缓存（渲染） -> 前帧缓存
 }
-
 
 - (void)configTextureWithImage:(NSString *)imageName textureBufferID:(GLuint *)texBufferID{
     if (!imageName.length) {return;};
@@ -341,7 +336,7 @@ GLfloat vertices3[30] =
     size_t height = CGImageGetHeight(imageRef);
     /////做判断是否需要图片渲染小一点
     
-    GLubyte *spriteData = (GLubyte *) calloc(width * height * 4, sizeof(GLubyte))/*RGBA*/;
+    GLubyte *spriteData = (GLubyte *)calloc(width * height * 4, sizeof(GLubyte))/*RGBA*/;
     //在CGContext上绘制图片
     
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(imageRef);
@@ -350,13 +345,20 @@ GLfloat vertices3[30] =
                                                  , height
                                                  , 8
                                                  , width * 4
-                                                 , colorSpace, kCGImageAlphaPremultipliedLast);//RGBA!
+                                                 , colorSpace
+                                                 , kCGImageAlphaPremultipliedLast);//RGBA!
     CGContextDrawImage(context
                        , CGRectMake(0.0, 0.0
                                     , width, height)
                        , imageRef);
- 
+    
+    glActiveTexture(GL_TEXTURE0); // 类似于状态机，开启了TEXTURE1纹理   TextureUnit  GL_TEXTURE0默认激活，在使用其它纹理单元的时候需要手动激活。
+    glEnable(GL_TEXTURE_2D);
+    if (!glIsTexture(*texBufferID)) {
+        glGenTextures(1, texBufferID);
+    }
     glBindTexture(GL_TEXTURE_2D, *texBufferID);
+    
     //配置左右上下环绕采样模式
     glTexParameteri(GL_TEXTURE_2D
                     , GL_TEXTURE_MIN_FILTER
@@ -380,7 +382,17 @@ GLfloat vertices3[30] =
                  , GL_RGBA
                  , GL_UNSIGNED_BYTE
                  , spriteData);
-    
+    /**
+     参数 target ：指定纹理单元的类型，二维纹理需要指定为GL_TEXTURE_2D
+     参数 level：指定纹理单元的层次，非mipmap纹理level设置为0，mipmap纹理设置为纹理的层级
+     参数 internalFormat：指定OpenGL ES是如何管理纹理单元中数据格式的
+     参数 width：指定纹理单元的宽度
+     参数 height：指定纹理单元的高度
+     参数 border：指定纹理单元的边框，如果包含边框取值为1，不包含边框取值为0
+     参数 format：指定data所指向的数据的格式
+     参数 type：指定data所指向的数据的类型
+     参数 data：实际指向的数据
+     */
     free(spriteData);
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
