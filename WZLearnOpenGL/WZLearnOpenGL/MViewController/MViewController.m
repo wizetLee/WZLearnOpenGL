@@ -1,104 +1,95 @@
 //
-//  LViewController.m
+//  MViewController.m
 //  WZLearnOpenGL
 //
-//  Created by admin on 30/9/17.
+//  Created by 李炜钊 on 2017/10/4.
 //  Copyright © 2017年 wizet. All rights reserved.
 //
 
-#import "LViewController.h"
+#import "MViewController.h"
 #import "GLProgram.h"
-
-@interface LViewController ()
+#import "MView.h"
+@interface MViewController ()
 
 @property (nonatomic, strong) EAGLContext *context;
-
 @property (nonatomic, strong) CAEAGLLayer *eaglLayer;
-
 @property (nonatomic, strong) GLProgram *program1;
-//@property (nonatomic, strong) GLProgram *program2;
+
 
 @property (nonatomic, assign) GLuint frameBufferHandle;
 @property (nonatomic, assign) GLuint renderBufferHandle;
 
-
 @property (nonatomic, assign) GLuint VBOHandle1;
-//@property (nonatomic, assign) GLuint VBOHandle2;
 @property (nonatomic, assign) GLuint textureHandle1;
-//@property (nonatomic, assign) GLuint textureHandle2;
-
 
 @end
 
-@implementation LViewController
+@implementation MViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = false;
-    
-    [self createViews];
-
-    _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    [EAGLContext setCurrentContext:_context];
-    
-    [self viewPort];
-    
-    NSString *vertex = [[NSBundle mainBundle] pathForResource:@"LshaderNormal" ofType:@"vsh"];
-    vertex = [NSString stringWithContentsOfFile:vertex encoding:NSUTF8StringEncoding error:nil];
-    NSString *fragment = [[NSBundle mainBundle] pathForResource:@"LshaderNormal" ofType:@"fsh"];
-    fragment = [NSString stringWithContentsOfFile:fragment encoding:NSUTF8StringEncoding error:nil];
-    
-    _program1 = [[GLProgram alloc] initWithVertexShaderString:vertex fragmentShaderString:fragment];
-//    _program2 = [[GLProgram alloc] initWithVertexShaderString:vertex fragmentShaderString:fragment];//更换
-
-    [_program1 addAttribute:@"position"];
-    [_program1 addAttribute:@"textureCoordinate"];
-
-//    [_program2 link];
-    if (![_program1 link]) {
-        NSLog(@"链接失败！！！！！！！！！！");
-    }
-    
-    [_program1 use];
-    
-    [self destroyRenderBuffer:&_renderBufferHandle];
-    [self destroyFrameBuffer:&_frameBufferHandle];
-    
-    [self setupRenderBuffer:&_renderBufferHandle];
-    [self setupFrameBuffer:&_frameBufferHandle];
-    
-    
-    
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderBufferHandle);
-    
-    
-
-    ///空间分配在设置之后
-    [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
-    
-    
-    GLfloat vertices[30] =
-    {
-        0.5, -0.5, 0,     1, 0,
-        -0.5, 0.5, 0,     0, 1,
-        -0.5, -0.5, 0,    0, 0,
-        0.5, 0.5, 0,      1, 1,
-        -0.5, 0.5, 0,     0, 1,
-        0.5, -0.5, 0,     1, 0,
-    };
-   
-    ///数据匹配
-    glGenBuffers(1, &_VBOHandle1);
-    glBindBuffer(GL_ARRAY_BUFFER, _VBOHandle1);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-//    glGenBuffers(1, &_VBOHandle2);
-//    glBindBuffer(GL_ARRAY_BUFFER, _VBOHandle2);
+//   [self createViews];
+//
+//    _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+//    [EAGLContext setCurrentContext:_context];
+//
+//      [self viewPort];
+//
+//
+//    NSString *vertex = [[NSBundle mainBundle] pathForResource:@"MshaderV" ofType:@"vsh"];
+//    vertex = [NSString stringWithContentsOfFile:vertex encoding:NSUTF8StringEncoding error:nil];
+//    NSString *fragment = [[NSBundle mainBundle] pathForResource:@"MshaderF" ofType:@"fsh"];
+//    fragment = [NSString stringWithContentsOfFile:fragment encoding:NSUTF8StringEncoding error:nil];
+//    _program1 = [[GLProgram alloc] initWithVertexShaderString:vertex fragmentShaderString:fragment];
+//
+//    [_program1 addAttribute:@"position"];
+//    [_program1 addAttribute:@"texcoord"];
+//
+//    if (![_program1 link]) {
+//        NSLog(@"链接失败！！！！！！！！！！");
+//    }
+//
+//    [_program1 use];
+//
+//    [self destroyRenderBuffer:&_renderBufferHandle];
+//    [self destroyFrameBuffer:&_frameBufferHandle];
+//
+//    [self setupRenderBuffer:&_renderBufferHandle];
+//    [self setupFrameBuffer:&_frameBufferHandle];
+//    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderBufferHandle);
+//
+//    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderBufferHandle);
+//
+//    ///空间分配在设置之后
+//    [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
+//
+//    GLfloat vertices[30] =
+//    {
+//        0.5, -0.5, 0,     1, 0,
+//        -0.5, 0.5, 0,     0, 1,
+//        -0.5, -0.5, 0,    0, 0,
+//        0.5, 0.5, 0,      1, 1,
+//        -0.5, 0.5, 0,     0, 1,
+//        0.5, -0.5, 0,     1, 0,
+//    };
+//
+//    ///数据匹配
+//    glGenBuffers(1, &_VBOHandle1);
+//    glBindBuffer(GL_ARRAY_BUFFER, _VBOHandle1);
 //    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    [self render];
+//    //    glGenBuffers(1, &_VBOHandle2);
+//    //    glBindBuffer(GL_ARRAY_BUFFER, _VBOHandle2);
+//    //    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+//    [self render];
+    
+    
+    
+    MView *v = [[MView alloc]initWithFrame:self.view.bounds];
+    [self.view addSubview:v];
+    
 }
-
-
 
 - (void)destroyFrameBuffer:(GLuint *)frameBufferHandle {
     glDeleteFramebuffers(1, frameBufferHandle);
@@ -117,7 +108,7 @@
 - (void)setupRenderBuffer:(GLuint *)renderBufferHandle {
     glGenRenderbuffers(1, renderBufferHandle);
     glBindRenderbuffer(GL_RENDERBUFFER, *renderBufferHandle);
- 
+    
 }
 
 ////设置完上下文 即可配置ViewPoint
@@ -131,22 +122,34 @@
                , self.view.frame.size.height * scale);
 }
 
+- (void)createViews {
+    _eaglLayer = [[CAEAGLLayer alloc] init];
+    _eaglLayer.frame = UIScreen.mainScreen.bounds;
+    _eaglLayer.backgroundColor = [UIColor orangeColor].CGColor;
+    _eaglLayer.opaque = true;
+    _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking:[NSNumber numberWithBool:false]
+                                      ,kEAGLDrawablePropertyColorFormat:kEAGLColorFormatRGBA8
+                                      };
+    [self.view.layer addSublayer:_eaglLayer];
+    
+}
+
 - (void)render {
     ///如果再次触发渲染的时候不清屏 就会有纹理残留
     glClearColor(1, 1, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     
-///1、切换着色器程序1
+    ///1、切换着色器程序1
     [_program1 use];
-///2、绑定数据
-//    glBindBuffer(GL_ARRAY_BUFFER, _VBOHandle1);
-///3、顶点开启以及着色器属性重配置
-    GLuint texture0 = [_program1 uniformIndex:@"texture0"];
+    ///2、绑定数据
+    //    glBindBuffer(GL_ARRAY_BUFFER, _VBOHandle1);
+    ///3、顶点开启以及着色器属性重配置
+    GLuint texture0 = [_program1 uniformIndex:@"image"];
     GLuint positionLocation = [_program1 attributeIndex:@"position"];
-    GLuint textureCoordinateLoaction = [_program1 attributeIndex:@"textureCoordinate"];
+    GLuint textureCoordinateLoaction = [_program1 attributeIndex:@"texcoord"];
     
     glEnableVertexAttribArray(positionLocation);
-   
+    
     glVertexAttribPointer(positionLocation, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);//顶点部分
     glEnableVertexAttribArray(textureCoordinateLoaction);
     glVertexAttribPointer(textureCoordinateLoaction, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);//纹理部分
@@ -157,26 +160,13 @@
     
     [_context presentRenderbuffer:GL_RENDERBUFFER];//绘制命令:请求渲染几何图元
     
-//    glClearColor(1, 1, 1, 1);
-//    glClear(GL_COLOR_BUFFER_BIT);
-//    ///着色器程序2
-//    [_program2 use];
-//    glBindRenderbuffer(GL_RENDERBUFFER, _renderBufferHandle2);
-//    glBindFramebuffer(GL_FRAMEBUFFER, _frameBufferHandle2);
+    //    glClearColor(1, 1, 1, 1);
+    //    glClear(GL_COLOR_BUFFER_BIT);
+    //    ///着色器程序2
+    //    [_program2 use];
+    //    glBindRenderbuffer(GL_RENDERBUFFER, _renderBufferHandle2);
+    //    glBindFramebuffer(GL_FRAMEBUFFER, _frameBufferHandle2);
 }
-
-- (void)createViews {
-    _eaglLayer = [[CAEAGLLayer alloc] init];
-    _eaglLayer.frame = UIScreen.mainScreen.bounds;
-    _eaglLayer.backgroundColor = [UIColor orangeColor].CGColor;
-    _eaglLayer.opaque = true;
-    _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking:[NSNumber numberWithBool:false]
-                                  ,kEAGLDrawablePropertyColorFormat:kEAGLColorFormatRGBA8
-                                  };
-    [self.view.layer addSublayer:_eaglLayer];
-    
-}
-
 - (void)configTextureWithImage:(NSString *)imageName textureBufferID:(GLuint *)texBufferID{
     if (!imageName.length) {return;};
     
@@ -211,7 +201,7 @@
     glDeleteTextures(1, &_textureHandle1);
     glGenTextures(1, &_textureHandle1);
     glBindTexture(GL_TEXTURE_2D, _textureHandle1);
-
+    
     //配置左右上下环绕采样模式
     glTexParameteri(GL_TEXTURE_2D
                     , GL_TEXTURE_MIN_FILTER
@@ -251,4 +241,5 @@
     CGColorSpaceRelease(colorSpace);
     //    CGImageRelease(imageRef);
 }
+
 @end

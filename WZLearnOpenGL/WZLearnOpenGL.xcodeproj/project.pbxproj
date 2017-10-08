@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400768321F85FF930047DB07 /* MView.m in Sources */ = {isa = PBXBuildFile; fileRef = 400768311F85FF930047DB07 /* MView.m */; };
+		400768341F8670B40047DB07 /* shaderDefaultV.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 400768331F8670B40047DB07 /* shaderDefaultV.vsh */; };
+		400768361F8670C50047DB07 /* shaderDefaultF.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 400768351F8670C50047DB07 /* shaderDefaultF.fsh */; };
+		400768381F86750C0047DB07 /* shaderTransformF.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 400768371F86750C0047DB07 /* shaderTransformF.fsh */; };
+		4007683A1F86752C0047DB07 /* shaderTransformV.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 400768391F86752C0047DB07 /* shaderTransformV.vsh */; };
 		4007CD081F64D439002C6E5A /* HViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4007CD061F64D439002C6E5A /* HViewController.m */; };
 		4007CD091F64D439002C6E5A /* HViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4007CD071F64D439002C6E5A /* HViewController.xib */; };
+		400BD1171F84D2250049C75C /* MViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 400BD1161F84D2250049C75C /* MViewController.m */; };
+		400BD1191F84D2590049C75C /* MshaderV.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 400BD1181F84D2590049C75C /* MshaderV.vsh */; };
+		400BD11B1F84D2670049C75C /* MshaderF.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 400BD11A1F84D2670049C75C /* MshaderF.fsh */; };
 		404C33561F7D3CF9002BDF32 /* shaderv2.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 404C33551F7D3CF9002BDF32 /* shaderv2.vsh */; };
 		404C33581F7D3D0C002BDF32 /* shaderf2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 404C33571F7D3D0C002BDF32 /* shaderf2.fsh */; };
 		840167371F6BD2DD008FB775 /* JViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840167361F6BD2DD008FB775 /* JViewController.m */; };
@@ -67,9 +75,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		400768301F85FF930047DB07 /* MView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MView.h; sourceTree = "<group>"; };
+		400768311F85FF930047DB07 /* MView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MView.m; sourceTree = "<group>"; };
+		400768331F8670B40047DB07 /* shaderDefaultV.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderDefaultV.vsh; sourceTree = "<group>"; };
+		400768351F8670C50047DB07 /* shaderDefaultF.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderDefaultF.fsh; sourceTree = "<group>"; };
+		400768371F86750C0047DB07 /* shaderTransformF.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderTransformF.fsh; sourceTree = "<group>"; };
+		400768391F86752C0047DB07 /* shaderTransformV.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderTransformV.vsh; sourceTree = "<group>"; };
 		4007CD051F64D439002C6E5A /* HViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HViewController.h; sourceTree = "<group>"; };
 		4007CD061F64D439002C6E5A /* HViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HViewController.m; sourceTree = "<group>"; };
 		4007CD071F64D439002C6E5A /* HViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HViewController.xib; sourceTree = "<group>"; };
+		400BD1151F84D2250049C75C /* MViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MViewController.h; sourceTree = "<group>"; };
+		400BD1161F84D2250049C75C /* MViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MViewController.m; sourceTree = "<group>"; };
+		400BD1181F84D2590049C75C /* MshaderV.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = MshaderV.vsh; sourceTree = "<group>"; };
+		400BD11A1F84D2670049C75C /* MshaderF.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = MshaderF.fsh; sourceTree = "<group>"; };
 		404C33551F7D3CF9002BDF32 /* shaderv2.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderv2.vsh; sourceTree = "<group>"; };
 		404C33571F7D3D0C002BDF32 /* shaderf2.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderf2.fsh; sourceTree = "<group>"; };
 		840167351F6BD2DD008FB775 /* JViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JViewController.h; sourceTree = "<group>"; };
@@ -164,6 +182,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		400BD1141F84D2030049C75C /* MViewController */ = {
+			isa = PBXGroup;
+			children = (
+				400BD1151F84D2250049C75C /* MViewController.h */,
+				400BD1161F84D2250049C75C /* MViewController.m */,
+				400768301F85FF930047DB07 /* MView.h */,
+				400768311F85FF930047DB07 /* MView.m */,
+				400768331F8670B40047DB07 /* shaderDefaultV.vsh */,
+				400768351F8670C50047DB07 /* shaderDefaultF.fsh */,
+				400768371F86750C0047DB07 /* shaderTransformF.fsh */,
+				400768391F86752C0047DB07 /* shaderTransformV.vsh */,
+				400BD1181F84D2590049C75C /* MshaderV.vsh */,
+				400BD11A1F84D2670049C75C /* MshaderF.fsh */,
+			);
+			path = MViewController;
+			sourceTree = "<group>";
+		};
 		844FBA761F7F2DD20051425F /* LViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,8 +263,9 @@
 				840167351F6BD2DD008FB775 /* JViewController.h */,
 				840167361F6BD2DD008FB775 /* JViewController.m */,
 				846704E41F7B427C00EDE946 /* KViewController */,
-				849AA3EF1F6F648D00F6E5AE /* WZOpenGLProgram.h */,
 				844FBA761F7F2DD20051425F /* LViewController */,
+				400BD1141F84D2030049C75C /* MViewController */,
+				849AA3EF1F6F648D00F6E5AE /* WZOpenGLProgram.h */,
 				849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */,
 				849AA3EC1F6F618F00F6E5AE /* WZOpenGLContext.h */,
 				849AA3ED1F6F618F00F6E5AE /* WZOpenGLContext.m */,
@@ -425,12 +461,18 @@
 				84F7B8711F60F45B00B31DCB /* beetle.png in Resources */,
 				84F7B8701F60F44F00B31DCB /* leaves2.gif in Resources */,
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
+				400768341F8670B40047DB07 /* shaderDefaultV.vsh in Resources */,
 				844FBA7D1F7F85670051425F /* LshaderNormal.fsh in Resources */,
 				404C33581F7D3D0C002BDF32 /* shaderf2.fsh in Resources */,
+				400768381F86750C0047DB07 /* shaderTransformF.fsh in Resources */,
+				4007683A1F86752C0047DB07 /* shaderTransformV.vsh in Resources */,
+				400BD11B1F84D2670049C75C /* MshaderF.fsh in Resources */,
+				400BD1191F84D2590049C75C /* MshaderV.vsh in Resources */,
 				404C33561F7D3CF9002BDF32 /* shaderv2.vsh in Resources */,
 				4007CD091F64D439002C6E5A /* HViewController.xib in Resources */,
 				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
 				8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */,
+				400768361F8670C50047DB07 /* shaderDefaultF.fsh in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
 				844FBA7B1F7F855B0051425F /* LshaderNormal.vsh in Resources */,
@@ -469,7 +511,9 @@
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
 				845FB86C1F4C245100672938 /* ViewController.m in Sources */,
 				84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */,
+				400BD1171F84D2250049C75C /* MViewController.m in Sources */,
 				845FB8691F4C245100672938 /* AppDelegate.m in Sources */,
+				400768321F85FF930047DB07 /* MView.m in Sources */,
 				849AA3EE1F6F618F00F6E5AE /* WZOpenGLContext.m in Sources */,
 				84BACD991F5E58CE00A82E02 /* BViewController.m in Sources */,
 				4007CD081F64D439002C6E5A /* HViewController.m in Sources */,
@@ -634,6 +678,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGL/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -652,6 +697,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7MUPB6659U;
 				INFOPLIST_FILE = WZLearnOpenGL/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wizet.learn.WZLearnOpenGL;
 				PRODUCT_NAME = "$(TARGET_NAME)";

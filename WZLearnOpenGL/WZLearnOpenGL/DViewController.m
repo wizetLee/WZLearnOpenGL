@@ -71,7 +71,7 @@ static SceneVertex vertices[] = {
      命令GLKit 的 GLKTextureLoader类垂直翻转图像数据，以抵消图像的原点和OpenGL ES标准原点之间的差异  上面的bug预计是因为没有删掉buffer数据导致的！
      */
     
-    glEnable(GL_BLEND);//开启缓和模式
+    glEnable(GL_BLEND);//开启混合模式
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//设置混合模式
     /**
      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 此配置与iOS CoreGraohics 的“正常混合模式”产生相同的结果

@@ -159,11 +159,8 @@ GLfloat vertices3[30] =
     glGenRenderbuffers(1, &renderBufferID);
     glBindRenderbuffer(GL_RENDERBUFFER, renderBufferID);
     
-    
-    
     glGenFramebuffers(1, &frameBufferID);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBufferID);
-    
     
     //颜色·渲染缓存需要装配到帧缓存中
     glFramebufferRenderbuffer(GL_FRAMEBUFFER

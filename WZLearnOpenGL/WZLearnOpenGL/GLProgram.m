@@ -102,7 +102,7 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
                  type:(GLenum)type 
                string:(NSString *)shaderString
 {
-    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();//当前绝对时间
+//    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();//当前绝对时间
 
     GLint status;
     const GLchar *source;
@@ -144,8 +144,8 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
 		}
 	}	
 	
-    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);//编译时长的计算
-    NSLog(@"Compiled in %f ms", linkTime * 1000.0);
+//    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);//编译时长的计算
+//    NSLog(@"Compiled in %f ms", linkTime * 1000.0);
 
     return status == GL_TRUE;
 }

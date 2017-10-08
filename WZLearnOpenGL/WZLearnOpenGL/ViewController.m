@@ -32,6 +32,7 @@
 //                 @{@"title" : @"FViewController", @"attachment" : @"纹理"},
                   @{@"title" : @"IViewController", @"attachment" : @"GLSL"},
                  @{@"title" : @"LViewController", @"attachment" : @"多个着色器程序"},
+                 @{@"title" : @"MViewController", @"attachment" : @"多个着色器程序"},
                  ];
     [self createViews];
     
