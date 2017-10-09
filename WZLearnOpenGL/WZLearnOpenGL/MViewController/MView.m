@@ -8,8 +8,16 @@
 
 #import "MView.h"
 #import <GLKit/GLKit.h>
-@interface MView()
-
+#include <math.h>
+@interface MView()<UIGestureRecognizerDelegate>
+{
+    CGPoint startPoint;
+    CGFloat tmpXOffsetValue;
+    CGFloat tmpYOffsetValue;
+    int xCount;
+    int yCount;
+    int numberOfPoint;
+}
 @property (nonatomic, strong) CAEAGLLayer *eaglLayer;
 @property (nonatomic, strong) EAGLContext *context;
 
@@ -33,6 +41,10 @@
 @property (nonatomic, assign) float lastZoomLevel;
 @property (nonatomic, assign) float zoomLevel;//缩放变量
 
+//anchor
+@property (nonatomic, assign) GLuint anchorPoint;
+@property (nonatomic, assign) GLuint whRate;
+
 @property (nonatomic, assign) GLuint xOffset;
 @property (nonatomic, assign) GLuint yOffset;
 
@@ -42,6 +54,13 @@
 @property (nonatomic, assign) CGFloat verticalOffset;
 @property (nonatomic, assign) CGFloat horizontalOffset;
 
+@property (nonatomic, assign) BOOL updating;
+//@property (nonatomic, assign) BOOL roating;
+//@property (nonatomic, assign) BOOL pinching;
+///p2
+@property (nonatomic, assign) GLuint texture2;
+@property (nonatomic, assign) GLuint buffer2;
+@property (nonatomic, strong) GLProgram *program2;
 
 
 
@@ -55,7 +74,12 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
+//
     self = [super initWithFrame:frame];
+    ///画布尺寸。。。
+
+#warning 保持画布和需要绘制的图片的宽高 比例保持一致
+    
     if (self) {
        [self createViews];
     }
@@ -75,8 +99,10 @@
     
     [self viewPort];
     
+
     [self setupProgram0];
-    [self setupProgram1];
+//    [self setupProgram1]s;
+    [self setupProgram2];
     
     [self update];
     
@@ -87,20 +113,23 @@
 - (void)gestures {
     UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotation:)];
     [self addGestureRecognizer:rotation];
-    
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [self addGestureRecognizer:pan];
-    pan.maximumNumberOfTouches = 1;
-    pan.minimumNumberOfTouches = 1;
-    
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
     [self addGestureRecognizer:pinch];
+    rotation.delegate = self;
+    pinch.delegate = self;
+    pan.delegate = self;
 }
 
 - (void)rotation:(UIRotationGestureRecognizer *)rotation {
+    if (_updating) {
+        return;
+    }
 //    NSLog(@"%lf", rotation.rotation);
     /// rotation.rotation 由0开始无限自增或者自减   rotation.rotation>0 为顺时针 反之逆时针
     _rotateAngle = _lastRotateAngle -(rotation.rotation);
+
     if (rotation.state == UIGestureRecognizerStateEnded) {
         _lastRotateAngle = _rotateAngle;//记录上次的旋转点
     }
@@ -109,6 +138,9 @@
 }
 
 - (void)pinch:(UIPinchGestureRecognizer *)pinch {
+    if (_updating) {
+        return;
+    }
     //捏合初始点为 缩小小于1。放大大于1
     _zoomLevel = _lastZoomLevel + (pinch.scale - 1);
     if (_zoomLevel < 0.1) {
@@ -121,30 +153,40 @@
     [self update];
 }
 
-static  CGPoint startPoint;
-static  CGFloat tmpXOffsetValue;
-static  CGFloat tmpYOffsetValue;
+
 - (void)pan:(UIPanGestureRecognizer *)pan {
- 
-    CGPoint curPoint = [pan locationInView:self];
+    if (_updating) {
+        return;
+    }
+    
+    if (!pan.view.subviews) {
+        return;
+    }
+    CGPoint translation = [pan translationInView:[pan.view superview]];
+//    NSLog(@"%@", NSStringFromCGPoint(translation));
     if (pan.state == UIGestureRecognizerStateBegan) {
         startPoint = [pan locationInView:self];
     }
 
-    
-    _xOffsetValue = curPoint.x - startPoint.x + tmpXOffsetValue;
-    _yOffsetValue = curPoint.y - startPoint.y + tmpYOffsetValue;
+    _xOffsetValue = translation.x + tmpXOffsetValue;
+    _yOffsetValue = -(translation.y + tmpYOffsetValue);
     _xOffsetValue *= 0.0025;//缓冲量。不太准确.。。
     _yOffsetValue *= 0.0025;
    
     [self update];
     if (pan.state == UIGestureRecognizerStateEnded) {
-        tmpXOffsetValue = curPoint.x - startPoint.x + tmpXOffsetValue;
-        tmpYOffsetValue = curPoint.y - startPoint.y + tmpYOffsetValue;
+        tmpXOffsetValue = translation.x + tmpXOffsetValue;
+        tmpYOffsetValue = translation.y + tmpYOffsetValue;
     }
     
-    NSLog(@"%f - %f",_xOffsetValue, _yOffsetValue );
+//    NSLog(@"%f - %f",_xOffsetValue, _yOffsetValue );
 }
+
+// MARK: - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return true;
+}
+
 
 
 - (void)setupLayer {
@@ -161,11 +203,19 @@ static  CGFloat tmpYOffsetValue;
 - (void)viewPort {
     CGFloat scale = [UIScreen mainScreen].scale;
     //设置视口
-    glViewport(self.frame.origin.x * scale
-               , self.frame.origin.y * scale
+    glViewport(0.0
+               , 0.0
                , self.frame.size.width * scale
                , self.frame.size.height * scale);
+
+    ///视点决定描绘的位置以及尺寸
+//    glViewport(self.frame.origin.x * scale
+//               , self.frame.origin.y * scale
+//               , self.frame.size.width * scale
+//               , self.frame.size.height * scale);
+
 }
+
 
 - (void)setupProgram0 {
  
@@ -192,14 +242,14 @@ static  CGFloat tmpYOffsetValue;
         }
     }
     
-    GLuint texture0Uniform = [_program0 uniformIndex:@"texture0"];
+    GLuint texture0Uniform = [_program0 uniformIndex:@"texture"];
     GLuint displayPositionAttribute = [_program0 attributeIndex:@"position"];
     GLuint displayTextureCoordinateAttribute = [_program0 attributeIndex:@"textureCoordinate"];
     [_program0 use];
     glEnableVertexAttribArray(displayPositionAttribute);
     glEnableVertexAttribArray(displayTextureCoordinateAttribute);
     
-    CGFloat scale = 0.5;
+    CGFloat scale = 1;
     GLfloat attrArr[] =
     {
         1.0 * scale, 1.0 * scale, -1.0,     1.0, 0.0,
@@ -248,13 +298,16 @@ static  CGFloat tmpYOffsetValue;
             NSAssert(NO, @"Filter shader link failed");
         }
     }
-    GLuint texture1Uniform = [_program1 uniformIndex:@"texture1"];
+    GLuint texture1Uniform = [_program1 uniformIndex:@"texture"];
     GLuint displayPositionAttribute = [_program1 attributeIndex:@"position"];
     GLuint displayTextureCoordinateAttribute = [_program1 attributeIndex:@"textureCoordinate"];
     _rotateMatrix = [_program1 uniformIndex:@"rotateMatrix"];
     _scale = [_program1 uniformIndex:@"scale"];
     _yOffset = [_program1 uniformIndex:@"yOffset"];
     _xOffset = [_program1 uniformIndex:@"xOffset"];
+    _anchorPoint = [_program1 uniformIndex:@"anchorPoint"];
+    _whRate = [_program1 uniformIndex:@"whRate"];
+    
     
     [_program1 use];
     glEnableVertexAttribArray(displayPositionAttribute);
@@ -262,7 +315,8 @@ static  CGFloat tmpYOffsetValue;
     
     //前三个是顶点坐标， 后面两个是纹理坐标
     
-    CGFloat scale = 0.5 ;///大小标量
+    ///保持于图片的一致性
+    CGFloat scale = 1 ;///大小标量
     GLfloat attrArr[] =
     {
         1.0 * scale, 1.0 * scale, -1.0,     1.0, 0.0,
@@ -272,114 +326,7 @@ static  CGFloat tmpYOffsetValue;
         -1.0 * scale, 1.0 * scale, -1.0,     0.0, 0.0,
         1.0 * scale, 1.0 * scale, -1.0,     1.0, 0.0,
     };
-    /**
-     
-     **/
-    
-    ///数据配置
-    int verticalCount = 1000;//将像图片划分为1000个正方向 无论垂直方向还是水平方向
-    int horizontalCount = 1000;//将像图片划分为1000个正方向 无论垂直方向还是水平方向
-    //1000 * 1000的图片坐标系
-    CGFloat verticalOffset = 0.0;
-    CGFloat horizontalOffset = 0.0;
-    CGFloat w = self.bounds.size.width;
-    CGFloat h = self.bounds.size.height;
-    
-//    CGFloat xSpace = w / horizontalCount;
-//    CGFloat ySpace = h / verticalCount;
-    
-    ///每个分段切割出4个点。6个坐标 使用 比较消耗内存
-//    glDrawArrays(GLenum mode, GLint first, GLsizei count)
-    
-    ///每个分段切割出4个点。4个坐标 使用
-//    glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
-    
-
-    GLfloat arr[verticalCount * horizontalCount * 30];
-    
-//    for (int y = 0; y < verticalCount; y++) {                   //Y
-//        for (int x = 0; x < horizontalCount; x++) {             //X
-//            //水平平铺 到垂直平铺
-//
-//            //////position   所有坐标 * 2 - 1 的得到position
-//            CGFloat multiple  = 2.0;
-//
-//            //左上
-//            CGPoint leftTop = CGPointMake((x / (horizontalCount * 1.0)), ((y + 1) / (verticalCount * 1.0) ));
-//            //右上
-//            CGPoint rightTop = CGPointMake(((x + 1) / (horizontalCount * 1.0)), ((y + 1) / (verticalCount * 1.0)));
-//            //左下
-//            CGPoint leftBottom = CGPointMake((x / (horizontalCount * 1.0)),  (y / (verticalCount * 1.0))) ;
-//            //右下
-//            CGPoint rightBottom = CGPointMake(((x + 1) / (horizontalCount * 1.0)) ,  (y / (verticalCount * 1.0)));
-//
-//            ///由于循环是由0 自增 因此 左上是左下  右上是右下
-//            CGPoint t0 = CGPointMake(leftTop.x, 1 - leftTop.y);
-//            CGPoint t1 = CGPointMake(rightTop.x, 1 - rightTop.y);
-//            CGPoint t2 = CGPointMake(leftBottom.x, 1 - leftBottom.y);
-//            CGPoint t3 = CGPointMake(rightBottom.x, 1 - rightBottom.y);
-//
-////            if (x < 1) {
-////                NSLog(@"%@ - %@ - %@ - %@", NSStringFromCGPoint(leftTop), NSStringFromCGPoint(rightTop), NSStringFromCGPoint(leftBottom), NSStringFromCGPoint(rightBottom));
-////            }
-//
-//            //0
-//            //position
-//            arr[(x + y) * 30 + 0] =
-//            arr[(x + y) * 30 + 1] =
-//            arr[(x + y) * 30 + 2] =
-//              //纹理
-//            arr[(x + y) * 30 + 3] =
-//            arr[(x + y) * 30 + 4] =
-//
-//
-//            //1
-//            arr[(x + y) * 30 + 5] =
-//            arr[(x + y) * 30 + 6] =
-//            arr[(x + y) * 30 + 7] =
-//            arr[(x + y) * 30 + 8] =
-//            arr[(x + y) * 30 + 9] =
-//            //2
-//            arr[(x + y) * 30 + 10] =
-//            arr[(x + y) * 30 + 11] =
-//            arr[(x + y) * 30 + 12] =
-//            arr[(x + y) * 30 + 13] =
-//            arr[(x + y) * 30 + 14] =
-//            arr[(x + y) * 30 + 15] =
-//            arr[(x + y) * 30 + 16] =
-//            arr[(x + y) * 30 + 17] =
-//            arr[(x + y) * 30 + 18] =
-//            arr[(x + y) * 30 + 19] =
-//            arr[(x + y) * 30 + 20] =
-//            arr[(x + y) * 30 + 21] =
-//            arr[(x + y) * 30 + 22] =
-//            arr[(x + y) * 30 + 23] =
-//            arr[(x + y) * 30 + 24] =
-//            arr[(x + y) * 30 + 25] =
-//            arr[(x + y) * 30 + 26] =
-//            arr[(x + y) * 30 + 27] =
-//            arr[(x + y) * 30 + 28] =
-//            arr[(x + y) * 30 + 29] =
-////            arr[verticalCount * horizontalCount * 6] =
-//            /*
-//             position
-//             -1  1        1  1
-//                    0  0
-//             -1 -1        1 -1
-//
-//             ->
-//             0 2        2 2
-//             0 0        2 0
-//
-//             texture
-//             0 1    1 1
-//             0 0    1 0
-//             */
-//
-//
-//        }
-//    }
-    
+  
     //数据配置
     glGenBuffers(1, &_buffer1);
     glBindBuffer(GL_ARRAY_BUFFER, _buffer1);
@@ -392,9 +339,14 @@ static  CGFloat tmpYOffsetValue;
     glEnableVertexAttribArray(displayTextureCoordinateAttribute);
     
     //纹理加载
-    [self setupTexture:@"beetle.png" textures:&_texture1 textureUnit:GL_TEXTURE1];
+    
+    NSAssert([UIImage imageNamed:@"74172016103114541058969337.jpg"], @"OMG");
+   
+    
+    [self setupTexture:@"74172016103114541058969337.jpg" textures:&_texture1 textureUnit:GL_TEXTURE1];
     glUniform1i(texture1Uniform, 1);///配置纹理
- 
+
+    
     ///矩阵旋转
     glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, GLKMatrix4MakeZRotation(_rotateAngle).m);
     glUniform1f(_scale, _zoomLevel);
@@ -420,6 +372,9 @@ static  CGFloat tmpYOffsetValue;
      **/
 }
 
+
+
+
 - (void)render {
     glClearColor(1.0, 1.0, 1.0  , 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -432,35 +387,98 @@ static  CGFloat tmpYOffsetValue;
     glEnableVertexAttribArray([_program0 attributeIndex:@"textureCoordinate"]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
+//    {
+//        [_program1 use];
+//        //系统API生成绕Z轴旋转X角的矩阵
+//        {
+//            {
+//                glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, GLKMatrix4MakeZRotation(_rotateAngle).m);//顶点着色器 矩阵更换_rotateMatrix 旋转角度配置
+//                NSLog(@"____%f", _rotateAngle);
+//                /** 围绕X轴旋转
+//                 cosX  sinX  0  0
+//                 -sinX consx 0  0
+//                 0     0     1  0
+//                 0     0     0  1
+//                 **/
+//                //                printf("\n--------------\n");
+//                //                for(int i = 0 ; i < 16 ; i++) {if (i % 4 == 0) {printf("\n"); }printf("%f ", GLKMatrix4MakeZRotation(_rotateAngle).m[i]);}
+//                //                printf("\n--------------\n");
+//            }
+//            ///效果一致
+//            //        {
+//            //            float radians = _rotateAngle;// 180.0 / M_PI * _rotateAngle * M_PI / 180.0;
+//            //            float s = sin(radians);
+//            //            float c = cos(radians);
+//            //            //z轴旋转矩阵
+//            //            GLfloat zRotation[16] = {
+//            //                c, s, 0, 0,
+//            //                -s, c, 0, 0,
+//            //                0, 0, 1.0, 0,
+//            //                0.0, 0, 0, 1.0
+//            //            };
+//            //            glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, (float *)&zRotation);
+//            //        }
+//            // 角度转弧度
+//            //    GLKMathDegreesToRadians(float degrees)
+//            //弧度转角度
+//            //    GLKMathRadiansToDegrees(float radians)
+//        }//PS 旋转的时候如何维持一个矩形？ 画布跟图片的尺寸比保持一致
+//
+//        glUniform1f(_scale, _zoomLevel);// scale
+//        glUniform1f(_yOffset, _yOffsetValue);
+//        glUniform1f(_xOffset, _xOffsetValue);
+//        glUniform2f(_anchorPoint, 0.0, 0.0);//计算这个锚点
+//        //    [UIImage imageNamed:@"74172016103114541058969337.jpg"].size.width / [UIImage imageNamed:@"74172016103114541058969337.jpg"].size.height
+//        glUniform1f(_whRate, 1.0);
+//        //    NSLog(@"_rotateMatrix %u", _rotateMatrix);
+//        //    NSLog(@"_rotateAngle %f", _rotateAngle);
+//
+//        //通过一个单位矩阵来返回一个定义了坐标系的新矩阵
+//        //    GLKMatrix4MakeTranslation(float tx, float ty, float tz)
+//
+//
+//        glBindBuffer(GL_ARRAY_BUFFER, _buffer1);
+//        glVertexAttribPointer([_program1 attributeIndex:@"position"], 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);
+//        glEnableVertexAttribArray([_program1 attributeIndex:@"position"]);
+//        glVertexAttribPointer([_program1 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
+//        glEnableVertexAttribArray([_program1 attributeIndex:@"textureCoordinate"]);
+//        glDrawArrays(GL_TRIANGLES, 0, 6);
+//        //    [_context presentRenderbuffer:GL_RENDERBUFFER];
+//    }
     
-    [_program1 use];
-    glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, GLKMatrix4MakeZRotation(_rotateAngle).m);//顶点着色器 矩阵更换_rotateMatrix 旋转角度配置
-    glUniform1f(_scale, _zoomLevel);// scale
-    glUniform1f(_yOffset, _yOffsetValue);
-    glUniform1f(_xOffset, _xOffsetValue);
-//    NSLog(@"_rotateMatrix %u", _rotateMatrix);
-//    NSLog(@"_rotateAngle %f", _rotateAngle);
+    [self use2];
     
+}
+
+- (void)use2 {
+    [_program2 use];
+    GLProgram *program = _program2;
     
-    glBindBuffer(GL_ARRAY_BUFFER, _buffer1);
-    [_program1 addAttribute:@"position"];
-    [_program1 addAttribute:@"textureCoordinate"];
+    glBindBuffer(GL_ARRAY_BUFFER, _buffer2);
     
-    glVertexAttribPointer([_program1 attributeIndex:@"position"], 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);
-    glEnableVertexAttribArray([_program1 attributeIndex:@"position"]);
-    glVertexAttribPointer([_program1 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
-    glEnableVertexAttribArray([_program1 attributeIndex:@"textureCoordinate"]);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glUniform2f([program uniformIndex:@"touchPoint"], 0.1, 0.01);
+    glVertexAttribPointer([program attributeIndex:@"position"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, NULL);
+    glEnableVertexAttribArray([program attributeIndex:@"position"]);
+    glVertexAttribPointer([program attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (float *)NULL + 2);
+    glEnableVertexAttribArray([program attributeIndex:@"textureCoordinate"]);
+//    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, xCount * yCount * numberOfPoint / 4);
     [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
+
 - (void)update {
+    if (_updating) {
+        return;
+    }
+    _updating = true;
     [self destroyRenderAndFrameBuffer];
     [self setupRenderBuffer];
     [self setupFrameBuffer];
     [self render];
+    _updating = false;
+    
 }
-
 
 - (void)setupContext {
     _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -523,8 +541,7 @@ static  CGFloat tmpYOffsetValue;
 }
 
 
-- (void)destroyRenderAndFrameBuffer
-{
+- (void)destroyRenderAndFrameBuffer {
     glDeleteFramebuffers(1, &_colorFrameBuffer);
     _colorFrameBuffer = 0;
     glDeleteRenderbuffers(1, &_colorRenderBuffer);
@@ -550,5 +567,154 @@ static  CGFloat tmpYOffsetValue;
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                               GL_RENDERBUFFER, _colorRenderBuffer);
 }
+
+- (void)setupProgram2 {
+    //读取文件路径
+    NSString *vsh = [[NSBundle mainBundle] pathForResource:@"shaderAnomalyV" ofType:@"vsh"];
+    NSString *fsh = [[NSBundle mainBundle] pathForResource:@"shaderAnomalyF" ofType:@"fsh"];
+    
+    _program2 = [[GLProgram alloc] initWithVertexShaderString:[NSString stringWithContentsOfFile:vsh encoding:NSUTF8StringEncoding error:nil] fragmentShaderString:[NSString stringWithContentsOfFile:fsh encoding:NSUTF8StringEncoding error:nil]];
+    GLProgram *program = _program2;
+    if (!program.initialized)
+    {
+        [program addAttribute:@"position"];
+        [program addAttribute:@"textureCoordinate"];
+        
+        if (![program link]) {
+            NSString *progLog = [program programLog];
+            NSLog(@"Program link log: %@", progLog);
+            NSString *fragLog = [program fragmentShaderLog];
+            NSLog(@"Fragment shader compile log: %@", fragLog);
+            NSString *vertLog = [program vertexShaderLog];
+            NSLog(@"Vertex shader compile log: %@", vertLog);
+            program = nil;
+            NSAssert(NO, @"Filter shader link failed");
+        }
+    }
+    GLuint texture1Uniform = [program uniformIndex:@"texture"];
+    GLuint displayPositionAttribute = [program attributeIndex:@"position"];
+    GLuint displayTextureCoordinateAttribute = [program attributeIndex:@"textureCoordinate"];
+    GLuint touchPointUniform = [program uniformIndex:@"touchPoint"];
+    
+    [program use];
+    glEnableVertexAttribArray(displayPositionAttribute);
+    glEnableVertexAttribArray(displayTextureCoordinateAttribute);
+    
+    ///数据配置
+    xCount = 100;//将像图片划分为1000个正方向 无论垂直方向还是水平方向
+    yCount = 100;//将像图片划分为1000个正方向 无论垂直方向还是水平方向
+    //1000 * 1000的图片坐标系
+    
+    ///每个分段切割出4个点。6个坐标 使用 比较消耗内存
+    //    glDrawArrays(GLenum mode, GLint first, GLsizei count)
+    
+    ///每个分段切割出4个点。4个坐标 使用
+    //    glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
+
+    numberOfPoint = 24;
+    GLfloat arr[xCount * yCount * numberOfPoint];
+    CGFloat xfloat = (xCount * 1.0);
+    CGFloat yfloat = (yCount * 1.0);
+    printf("sizeofArr: %lu", sizeof(arr) / 4);
+    //////position   所有坐标 * 2 - 1 的得到position
+    CGFloat xOffsetContent = 0.1;
+    
+    CGFloat xGanraoti = 0;
+    CGFloat yGanraoti = 0;
+    
+    NSInteger index = 0;
+    CGFloat multiple  = 2.0;
+        for (int y = 0; y < yCount; y++) {                   //Y
+            for (int x = 0; x < xCount; x++) {             //X
+                
+                //X影响水平偏移
+                //Y影响垂直偏移
+                
+                //水平平铺 到垂直平铺 由OPEN GL 坐标的0，0开始到1，1
+                
+                //左上
+                CGPoint leftTop = CGPointMake((x / xfloat)            , ((y + 1) / yfloat ));
+                //右上
+                CGPoint rightTop = CGPointMake(((x + 1) / xfloat)     , ((y + 1) / yfloat));
+                //左下
+                CGPoint leftBottom = CGPointMake((x / xfloat)          ,  (y / yfloat)) ;
+                //右下
+                CGPoint rightBottom = CGPointMake(((x + 1) / xfloat)   ,  (y / yfloat));
+
+                ///由于循环是由0 自增 因此 左上是左下  右上是右下
+
+                CGPoint t0 = CGPointMake(rightTop.x, 1 - rightTop.y);
+                CGPoint t2 = CGPointMake(leftBottom.x, 1 - leftBottom.y);
+                CGPoint t1 = CGPointMake(rightBottom.x, 1 - rightBottom.y);
+                CGPoint t3 = CGPointMake(leftTop.x, 1 - leftTop.y);
+                //左上
+                leftTop = CGPointMake(leftTop.x * multiple - 1            , leftTop.y * multiple-1);
+                //右上
+                rightTop = CGPointMake(rightTop.x* multiple -1      , rightTop.y* multiple-1);
+                //左下
+                leftBottom = CGPointMake(leftBottom.x* multiple -1          , leftBottom.y* multiple-1) ;
+                //右下
+               rightBottom = CGPointMake(rightBottom.x* multiple -1   ,  rightBottom.y* multiple-1);
+
+                arr[index + 0] = rightTop.x;
+                arr[index + 1] = rightTop.y;
+                //纹理
+                arr[index + 2] = t0.x;
+                arr[index + 3] = t0.y;
+                
+                //1
+                arr[index + 4] = rightBottom.x;
+                arr[index + 5] = rightBottom.y;
+                arr[index + 6] = t1.x;
+                arr[index + 7] = t1.y;
+                //2
+                arr[index + 8] = leftBottom.x;
+                arr[index + 9] = leftBottom.y;
+                arr[index + 10] = t2.x;
+                arr[index + 11] = t2.y;
+                //3
+                arr[index + 12] = leftBottom.x;
+                arr[index + 13] = leftBottom.y;
+                arr[index + 14] = t2.x;
+                arr[index + 15] = t2.y;
+                //4
+                arr[index + 16] = leftTop.x;
+                arr[index + 17] = leftTop.y;
+                arr[index + 18] = t3.x;
+                arr[index + 19] = t3.y;
+                
+                arr[index + 20] = rightTop.x;
+                arr[index + 21] = rightTop.y;
+                arr[index + 22] = t0.x;
+                arr[index + 23] = t0.y;
+                index += numberOfPoint;
+            }
+        }
+    
+    //根据坐标点的数目调整位置
+    //数据配置
+    glGenBuffers(1, &_buffer2);
+    glBindBuffer(GL_ARRAY_BUFFER, _buffer2);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(arr), arr, GL_DYNAMIC_DRAW);
+    
+    glVertexAttribPointer(displayPositionAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, NULL);
+    glEnableVertexAttribArray(displayPositionAttribute);
+    
+    glVertexAttribPointer(displayTextureCoordinateAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (float *)NULL + 2);
+    glEnableVertexAttribArray(displayTextureCoordinateAttribute);
+    
+    //纹理加载
+    
+    NSAssert([UIImage imageNamed:@"40682016071512070526937635.jpg"], @"OMG");
+    
+    [self setupTexture:@"40682016071512070526937635.jpg" textures:&_texture2 textureUnit:GL_TEXTURE2];
+    glUniform1i(texture1Uniform, 2);///配置纹理 保持一致
+    
+    
+    glEnable(GL_BLEND);//开启混合模式
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//设置混合模式
+    
+}
+
 
 @end

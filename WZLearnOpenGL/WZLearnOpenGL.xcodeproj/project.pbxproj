@@ -33,6 +33,20 @@
 		844FBA791F7F2DE10051425F /* LView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844FBA781F7F2DE10051425F /* LView.m */; };
 		844FBA7B1F7F855B0051425F /* LshaderNormal.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 844FBA7A1F7F855B0051425F /* LshaderNormal.vsh */; };
 		844FBA7D1F7F85670051425F /* LshaderNormal.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 844FBA7C1F7F85670051425F /* LshaderNormal.fsh */; };
+		84570CE61F8B406B00675428 /* 28782016071512052157402710.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CDA1F8B406900675428 /* 28782016071512052157402710.jpg */; };
+		84570CE71F8B406B00675428 /* 24472016071513372170498279.png in Resources */ = {isa = PBXBuildFile; fileRef = 84570CDB1F8B406900675428 /* 24472016071513372170498279.png */; };
+		84570CE81F8B406B00675428 /* 39532016071517340927252420.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CDC1F8B406900675428 /* 39532016071517340927252420.jpg */; };
+		84570CE91F8B406B00675428 /* 16392016071512064015036483.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CDD1F8B406900675428 /* 16392016071512064015036483.jpg */; };
+		84570CEA1F8B406B00675428 /* 62122016071513370127436018.png in Resources */ = {isa = PBXBuildFile; fileRef = 84570CDE1F8B406A00675428 /* 62122016071513370127436018.png */; };
+		84570CEB1F8B406B00675428 /* 43652016103114571391967844.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CDF1F8B406A00675428 /* 43652016103114571391967844.jpg */; };
+		84570CEC1F8B406B00675428 /* 74172016103114541791262983.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CE01F8B406A00675428 /* 74172016103114541791262983.jpg */; };
+		84570CED1F8B406B00675428 /* 74172016103114541058969337.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CE11F8B406A00675428 /* 74172016103114541058969337.jpg */; };
+		84570CEE1F8B406B00675428 /* 61252016103114565441911616.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CE21F8B406A00675428 /* 61252016103114565441911616.jpg */; };
+		84570CEF1F8B406B00675428 /* 40682016071512070526937635.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CE31F8B406A00675428 /* 40682016071512070526937635.jpg */; };
+		84570CF01F8B406B00675428 /* 15952016071513373913911529.png in Resources */ = {isa = PBXBuildFile; fileRef = 84570CE41F8B406A00675428 /* 15952016071513373913911529.png */; };
+		84570CF11F8B406B00675428 /* 5011201607151733569669796.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84570CE51F8B406B00675428 /* 5011201607151733569669796.jpg */; };
+		84570CF51F8B869E00675428 /* shaderAnomalyV.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 84570CF41F8B869E00675428 /* shaderAnomalyV.vsh */; };
+		84570CF71F8B86AF00675428 /* shaderAnomalyF.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 84570CF61F8B86AF00675428 /* shaderAnomalyF.fsh */; };
 		8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */; };
 		8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8457464D1F67EBD500E8BBD2 /* custom.fsh */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
@@ -114,6 +128,20 @@
 		844FBA781F7F2DE10051425F /* LView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LView.m; sourceTree = "<group>"; };
 		844FBA7A1F7F855B0051425F /* LshaderNormal.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = LshaderNormal.vsh; sourceTree = "<group>"; };
 		844FBA7C1F7F85670051425F /* LshaderNormal.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = LshaderNormal.fsh; sourceTree = "<group>"; };
+		84570CDA1F8B406900675428 /* 28782016071512052157402710.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 28782016071512052157402710.jpg; sourceTree = "<group>"; };
+		84570CDB1F8B406900675428 /* 24472016071513372170498279.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24472016071513372170498279.png; sourceTree = "<group>"; };
+		84570CDC1F8B406900675428 /* 39532016071517340927252420.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 39532016071517340927252420.jpg; sourceTree = "<group>"; };
+		84570CDD1F8B406900675428 /* 16392016071512064015036483.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 16392016071512064015036483.jpg; sourceTree = "<group>"; };
+		84570CDE1F8B406A00675428 /* 62122016071513370127436018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 62122016071513370127436018.png; sourceTree = "<group>"; };
+		84570CDF1F8B406A00675428 /* 43652016103114571391967844.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 43652016103114571391967844.jpg; sourceTree = "<group>"; };
+		84570CE01F8B406A00675428 /* 74172016103114541791262983.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 74172016103114541791262983.jpg; sourceTree = "<group>"; };
+		84570CE11F8B406A00675428 /* 74172016103114541058969337.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 74172016103114541058969337.jpg; sourceTree = "<group>"; };
+		84570CE21F8B406A00675428 /* 61252016103114565441911616.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 61252016103114565441911616.jpg; sourceTree = "<group>"; };
+		84570CE31F8B406A00675428 /* 40682016071512070526937635.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 40682016071512070526937635.jpg; sourceTree = "<group>"; };
+		84570CE41F8B406A00675428 /* 15952016071513373913911529.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 15952016071513373913911529.png; sourceTree = "<group>"; };
+		84570CE51F8B406B00675428 /* 5011201607151733569669796.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5011201607151733569669796.jpg; sourceTree = "<group>"; };
+		84570CF41F8B869E00675428 /* shaderAnomalyV.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderAnomalyV.vsh; sourceTree = "<group>"; };
+		84570CF61F8B86AF00675428 /* shaderAnomalyF.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shaderAnomalyF.fsh; sourceTree = "<group>"; };
 		845746401F678DC800E8BBD2 /* custom.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = custom.vsh; sourceTree = "<group>"; };
 		8457464A1F679C3400E8BBD2 /* UIColor+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Custom.h"; sourceTree = "<group>"; };
 		8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Custom.m"; sourceTree = "<group>"; };
@@ -185,6 +213,18 @@
 		400BD1141F84D2030049C75C /* MViewController */ = {
 			isa = PBXGroup;
 			children = (
+				84570CE11F8B406A00675428 /* 74172016103114541058969337.jpg */,
+				84570CE01F8B406A00675428 /* 74172016103114541791262983.jpg */,
+				84570CDA1F8B406900675428 /* 28782016071512052157402710.jpg */,
+				84570CDE1F8B406A00675428 /* 62122016071513370127436018.png */,
+				84570CE21F8B406A00675428 /* 61252016103114565441911616.jpg */,
+				84570CE31F8B406A00675428 /* 40682016071512070526937635.jpg */,
+				84570CE41F8B406A00675428 /* 15952016071513373913911529.png */,
+				84570CDF1F8B406A00675428 /* 43652016103114571391967844.jpg */,
+				84570CDB1F8B406900675428 /* 24472016071513372170498279.png */,
+				84570CE51F8B406B00675428 /* 5011201607151733569669796.jpg */,
+				84570CDC1F8B406900675428 /* 39532016071517340927252420.jpg */,
+				84570CDD1F8B406900675428 /* 16392016071512064015036483.jpg */,
 				400BD1151F84D2250049C75C /* MViewController.h */,
 				400BD1161F84D2250049C75C /* MViewController.m */,
 				400768301F85FF930047DB07 /* MView.h */,
@@ -193,6 +233,8 @@
 				400768351F8670C50047DB07 /* shaderDefaultF.fsh */,
 				400768371F86750C0047DB07 /* shaderTransformF.fsh */,
 				400768391F86752C0047DB07 /* shaderTransformV.vsh */,
+				84570CF41F8B869E00675428 /* shaderAnomalyV.vsh */,
+				84570CF61F8B86AF00675428 /* shaderAnomalyF.fsh */,
 				400BD1181F84D2590049C75C /* MshaderV.vsh */,
 				400BD11A1F84D2670049C75C /* MshaderF.fsh */,
 			);
@@ -463,21 +505,35 @@
 				845FB8741F4C245100672938 /* LaunchScreen.storyboard in Resources */,
 				400768341F8670B40047DB07 /* shaderDefaultV.vsh in Resources */,
 				844FBA7D1F7F85670051425F /* LshaderNormal.fsh in Resources */,
+				84570CEF1F8B406B00675428 /* 40682016071512070526937635.jpg in Resources */,
+				84570CE61F8B406B00675428 /* 28782016071512052157402710.jpg in Resources */,
 				404C33581F7D3D0C002BDF32 /* shaderf2.fsh in Resources */,
+				84570CE81F8B406B00675428 /* 39532016071517340927252420.jpg in Resources */,
 				400768381F86750C0047DB07 /* shaderTransformF.fsh in Resources */,
+				84570CF11F8B406B00675428 /* 5011201607151733569669796.jpg in Resources */,
+				84570CED1F8B406B00675428 /* 74172016103114541058969337.jpg in Resources */,
 				4007683A1F86752C0047DB07 /* shaderTransformV.vsh in Resources */,
 				400BD11B1F84D2670049C75C /* MshaderF.fsh in Resources */,
 				400BD1191F84D2590049C75C /* MshaderV.vsh in Resources */,
+				84570CEC1F8B406B00675428 /* 74172016103114541791262983.jpg in Resources */,
+				84570CEA1F8B406B00675428 /* 62122016071513370127436018.png in Resources */,
+				84570CF51F8B869E00675428 /* shaderAnomalyV.vsh in Resources */,
 				404C33561F7D3CF9002BDF32 /* shaderv2.vsh in Resources */,
 				4007CD091F64D439002C6E5A /* HViewController.xib in Resources */,
 				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
 				8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */,
+				84570CF01F8B406B00675428 /* 15952016071513373913911529.png in Resources */,
 				400768361F8670C50047DB07 /* shaderDefaultF.fsh in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
+				84570CE91F8B406B00675428 /* 16392016071512064015036483.jpg in Resources */,
 				84BACD9C1F5E76F900A82E02 /* leaves.gif in Resources */,
+				84570CE71F8B406B00675428 /* 24472016071513372170498279.png in Resources */,
 				844FBA7B1F7F855B0051425F /* LshaderNormal.vsh in Resources */,
+				84570CEE1F8B406B00675428 /* 61252016103114565441911616.jpg in Resources */,
 				845FB86F1F4C245100672938 /* Main.storyboard in Resources */,
 				849AB3E91F6BA25E00FB7A84 /* shaderf1.fsh in Resources */,
+				84570CF71F8B86AF00675428 /* shaderAnomalyF.fsh in Resources */,
+				84570CEB1F8B406B00675428 /* 43652016103114571391967844.jpg in Resources */,
 				849AB3E71F6BA25000FB7A84 /* shaderv1.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
