@@ -44,7 +44,6 @@
     [_table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"id"];
     _table.delegate = self;
     _table.dataSource = self;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
