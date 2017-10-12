@@ -70,6 +70,7 @@ static SceneVetex vertices[] = {
     
     //确认单一通道可以结合多少个纹理
     GLint iUnits;
+    /// 查询函数
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &iUnits);
     
     baseEffect.texture2d0.target = info1.target;

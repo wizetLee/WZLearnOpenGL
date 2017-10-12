@@ -124,6 +124,7 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     
     [self viewPort];
     
+    
 
     [self setupProgram0];
 //    [self setupProgram1]s;
@@ -161,6 +162,8 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
 
     [self update];
 }
+
+
 
 - (void)pinch:(UIPinchGestureRecognizer *)pinch {
     if (_updating) {
@@ -404,6 +407,7 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
 
     ///矩阵旋转
     glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, GLKMatrix4MakeZRotation(_rotateAngle).m);
+    
     glUniform1f(_scale, _zoomLevel);
     glUniform1f(_yOffset, _yOffsetValue);
     glUniform1f(_xOffset, _xOffsetValue);
@@ -417,11 +421,17 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
 }
 
 - (void)render {
+    
+    //通常在一帧渲染完成之后 最常见的图形操作就是清除缓存 每帧都需要清除一次缓存
     glClearColor(1.0, 1.0, 1.0  , 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
+    //缓存的掩码 掩码操作
+//    glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
+    
     
     [_program0 use];
     glBindBuffer(GL_ARRAY_BUFFER, _buffer0);
+                                                                                //不进行归一化处理 即转换为归一化的浮点数(0~1)
     glVertexAttribPointer([_program0 attributeIndex:@"position"], 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);
     glEnableVertexAttribArray([_program0 attributeIndex:@"position"]);
     glVertexAttribPointer([_program0 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
@@ -860,11 +870,51 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     [self setupTexture:@"40682016071512070526937635.jpg" textures:&_texture2 textureUnit:GL_TEXTURE2];
     glUniform1i(texture1Uniform, 2);///配置纹理 保持一致
     
-    
-    glEnable(GL_BLEND);//开启混合模式
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//设置混合模式
-    
+    //开启所有缓存的混融模式
+    glEnable(GL_BLEND);//开启混融模式
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//设置混融模式
+    //控制片元输出的颜色值与存储在帧缓存中的值之间的缓和方式
+//    glBlendFuncSeparate(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
+    [self readPixels];
 }
 
+///片元的测试与操作
+///剪切测试
+- (void)scissorTest {
+    glClearStencil(0);//设置模板的清除值
+    glEnable(GL_SCISSOR_TEST);
+    //将程序窗口中的一个矩形区域称为一个剪切盒，并且将所有的绘制操作都限制在这个区域当中
+    glScissor(0.0, 0.0, 1.0, 1.0);
+}
+///模板测试
+- (void)stencilTest {
+    glEnable(GL_STENCIL_TEST);
+    //模板值为1的时候绘制球体
+    glStencilFunc(GL_EQUAL, 1, 1);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    
+    //控制OpenGL的一些具体特性
+//    glHint(GLenum target, GLenum mode)
+//    GL_FASTEST等
+}
 
+- (void)readPixels {
+    CGSize imageSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
+    size_t size = imageSize.width * imageSize.height * 4/*RGBA*/;
+    GLubyte *rawImagePixels = malloc(size);
+    glReadPixels(0.0, 0.0, imageSize.width, imageSize.height, GL_RGBA, GL_UNSIGNED_BYTE, rawImagePixels);
+    
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, rawImagePixels, size, dataProviderReleaseCallback/*一个指定类型的函数指针*/);
+    CGColorSpaceRef defaultRGBColorSpace = CGColorSpaceCreateDeviceRGB();//颜色空间
+    CGImageRef cgImageFromBytes = CGImageCreate((int)imageSize.width, (int)imageSize.height, 8, 32, 4 * (int)imageSize.width, defaultRGBColorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaLast, dataProvider, NULL, NO, kCGRenderingIntentDefault);
+    CGDataProviderRelease(dataProvider);
+    CGColorSpaceRelease(defaultRGBColorSpace);
+    
+    UIImage *image =  [UIImage imageWithCGImage:cgImageFromBytes];
+}
+
+void dataProviderReleaseCallback (void *info, const void *data, size_t size)
+{
+    free((void *)data);
+}
 @end

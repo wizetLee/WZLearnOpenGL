@@ -7,22 +7,11 @@
 //
 
 #import "LView.h"
-#import "GLProgram.h"
+
 
 @interface LView()
 
-@property (nonatomic, weak) CAEAGLLayer *eaglLayer;
-@property (nonatomic, strong) EAGLContext *context;
 
-//整体
-@property (nonatomic, assign) GLuint colorRenderBuffer;
-@property (nonatomic, assign) GLuint colorFrameBuffer;
-
-///个别
-@property (nonatomic, strong) GLProgram *program0;
-@property (nonatomic, assign) GLuint buffer0;
-@property (nonatomic, assign) GLuint dataBuffer0;
-@property (nonatomic, assign) GLuint texture0;
 
 @end
 
@@ -41,6 +30,10 @@
     return self;
 }
 
+- (CGFloat)canvasScale {
+    return 1.0;
+}
+
 - (void)createViews {
     _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:_context];
@@ -56,7 +49,7 @@
     [self setupProgram:_program0 attributeArray:attributeStrs];
     
     ///保持于图片的一致性
-    CGFloat scale = 1 ;///大小标量
+    CGFloat scale = [self canvasScale] ;///大小标量
     GLfloat attrArr[] =
     {
         1.0 * scale, 1.0 * scale, -1.0,     1.0, 0.0,
@@ -77,13 +70,14 @@
     
     ///数据配置之后启用顶点
     [self enableAttribute:_program0 attributeArray:attributeStrs];
-    
+  
     
     [self destroyFrameBuffer:&_colorFrameBuffer];
     [self destroyRenderBuffer:&_colorRenderBuffer];
     [self setupFrameBuffer:&_colorFrameBuffer];
     [self setupRenderBuffer:&_colorRenderBuffer];
     [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:self.eaglLayer];
+    //集成到帧缓存中
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                               GL_RENDERBUFFER, _colorRenderBuffer);
     
@@ -135,6 +129,7 @@ void setupTexture(NSString *fileName, GLuint *textures, GLenum texture) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
     float fw = width, fh = height;
+                                   //该格式决定颜色和深度的存储值
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
     
     
