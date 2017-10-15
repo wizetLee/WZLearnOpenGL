@@ -12,6 +12,8 @@
 
 @interface LViewController ()
 
+@property (nonatomic, strong) LView *aview;
+
 @end
 
 @implementation LViewController
@@ -21,23 +23,30 @@
     self.view.backgroundColor = [UIColor blueColor];
     self.automaticallyAdjustsScrollViewInsets = false;
 
-    [self viewPort];
     
-    ///空间分配在设置之后
-    GLfloat vertices[30] =
-    {
-        0.5, -0.5, 0,     1, 0,
-        -0.5, 0.5, 0,     0, 1,
-        -0.5, -0.5, 0,    0, 0,
-        0.5, 0.5, 0,      1, 1,
-        -0.5, 0.5, 0,     0, 1,
-        0.5, -0.5, 0,     1, 0,
-    };
+    _aview = [[LView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:_aview];
+    
+//
+//    [self viewPort];
+//
+//    ///空间分配在设置之后
+//    GLfloat vertices[30] =
+//    {
+//        0.5, -0.5, 0,     1, 0,
+//        -0.5, 0.5, 0,     0, 1,
+//        -0.5, -0.5, 0,    0, 0,
+//        0.5, 0.5, 0,      1, 1,
+//        -0.5, 0.5, 0,     0, 1,
+//        0.5, -0.5, 0,     1, 0,
+//    };
     
     
 }
 
-
+- (void)dealloc {
+    [_aview stop];
+}
 
 - (void)destroyFrameBuffer:(GLuint *)frameBufferHandle {
     glDeleteFramebuffers(1, frameBufferHandle);

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
 #import "GLProgram.h"
 
 @interface LView : UIView
@@ -23,5 +24,7 @@
 @property (nonatomic, assign) GLuint buffer0;
 @property (nonatomic, assign) GLuint dataBuffer0;
 @property (nonatomic, assign) GLuint texture0;
+
+- (void)stop;
 
 @end

@@ -304,9 +304,12 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
         }
     }
     
+    
+    //取出
     GLuint texture0Uniform = [_program0 uniformIndex:@"texture"];
     GLuint displayPositionAttribute = [_program0 attributeIndex:@"position"];
     GLuint displayTextureCoordinateAttribute = [_program0 attributeIndex:@"textureCoordinate"];
+    
     [_program0 use];
     glEnableVertexAttribArray(displayPositionAttribute);
     glEnableVertexAttribArray(displayTextureCoordinateAttribute);
@@ -400,7 +403,6 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     glEnableVertexAttribArray(displayTextureCoordinateAttribute);
     
     //纹理加载
-    
     NSAssert([UIImage imageNamed:@"74172016103114541058969337.jpg"], @"OMG");
     [self setupTexture:@"74172016103114541058969337.jpg" textures:&_texture1 textureUnit:GL_TEXTURE1];
     glUniform1i(texture1Uniform, 1);///配置纹理
@@ -495,9 +497,12 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
         glVertexAttribPointer([_program1 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
         glEnableVertexAttribArray([_program1 attributeIndex:@"textureCoordinate"]);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-            [_context presentRenderbuffer:GL_RENDERBUFFER];
+    
     }
 
+    
+        [_context presentRenderbuffer:GL_RENDERBUFFER];
+    
 //    [self use2];
 }
 
