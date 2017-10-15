@@ -170,7 +170,7 @@ static  GLKVector3 SceneVector3UnitNormal(
      所以观察矩阵可以理解为OpenGL 3D世界中的摄像机。
      我们有了摄像机这个变换矩阵之后，就可以很方便的在3D世界中游览，就像第一人称视角游戏中一样
     */
-    {  
+    {
         GLKMatrix4 modelViewMatrix = GLKMatrix4MakeRotation(
                                                             GLKMathDegreesToRadians(-60.0f), 1.0f, 0.0f, 0.0f);
         modelViewMatrix = GLKMatrix4Rotate(
@@ -205,6 +205,7 @@ static  GLKVector3 SceneVector3UnitNormal(
                          bytes:triangles
                          usage:GL_DYNAMIC_DRAW];
     
+    
     self.extraBuffer = [[AGLKVertexAttribArrayBuffer alloc]
                         initWithAttribStride:sizeof(SceneVertex)
                         numberOfVertices:0
@@ -216,9 +217,8 @@ static  GLKVector3 SceneVector3UnitNormal(
 }
 
 
-
-- (void)drawNormals
-{
+///绘制法向量
+- (void)drawNormals {
     GLKVector3  normalLineVertices[NUM_LINE_VERTS];
     SceneTrianglesNormalLinesUpdate(triangles,
                                     GLKVector3MakeWithArray(self.baseEffect.light0.position.v),
@@ -280,8 +280,7 @@ static  GLKVector3 SceneVector3UnitNormal(
     }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     GLKView *view = (GLKView *)self.view;
     [AGLKContext setCurrentContext:view.context];
