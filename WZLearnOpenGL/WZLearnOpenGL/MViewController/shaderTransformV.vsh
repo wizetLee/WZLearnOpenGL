@@ -19,10 +19,12 @@ void main() {
     varyTextCoord = textureCoordinate;
     
     ///scale normal 为 1
-    mat4 scaleMatrix = mat4(scale, 0, 0, 0,
-                             0, scale, 0, 0,
-                             0, 0, 1, 0,
-                             0, 0, 0, 1);
+    mat4 scaleMatrix = mat4(scale, 0, 0, 0,     //第一列
+                             0, scale, 0, 0,    //第二列
+                             0, 0, 1, 0,        //第三列
+                             0, 0, 0, 1);       //第四列
+    //顺序跟数学上的设置有所区别
+    
     /*同时修改Sx Sy Sz
       Sx
          Sy

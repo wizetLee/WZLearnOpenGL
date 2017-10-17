@@ -498,6 +498,11 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
         glEnableVertexAttribArray([_program1 attributeIndex:@"textureCoordinate"]);
         glDrawArrays(GL_TRIANGLES, 0, 6);
     
+        
+        //通知OpenGL 在哪里设置近平面和远平面
+        //glDepthRangef(GLclampf zNear, GLclampf zFar) /// [0, 1]
+        
+        
     }
 
     
@@ -791,7 +796,6 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     
     float fw = width, fh = height;
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
-    
     
     free(spriteData);
     return 0;
