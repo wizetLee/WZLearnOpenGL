@@ -33,6 +33,7 @@
                   @{@"title" : @"IViewController", @"attachment" : @"GLSL"},
                  @{@"title" : @"LViewController", @"attachment" : @"透视变换"},
                  @{@"title" : @"MViewController", @"attachment" : @"多个着色器程序"},
+                @{@"title" : @"NViewController", @"attachment" : @"测试"},
                  @{@"title" : @"OViewController", @"attachment" : @"GLK集成的光线"},
                  ];
     [self createViews];

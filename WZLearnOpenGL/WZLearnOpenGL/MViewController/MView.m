@@ -513,8 +513,10 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
 
 - (void)changeData {
     
-    GLfloat tmpArr[xCount * yCount * numberOfPoint];//size临时缓存
+    NSUInteger sizeOfArr = xCount * yCount * numberOfPoint;
+   
     if (arrBuffer == NULL) {///重复使用数据缓存
+         GLfloat tmpArr[xCount * yCount * numberOfPoint];//size临时缓存
         arrBuffer = (float *)tmpArr;
     }
     float *arr = (float *)arrBuffer;
@@ -548,6 +550,7 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
              2     |      1
              |
              **/
+            ///纹理位置设置
             CGPoint t0 = CGPointMake(rightTop.x, 1 - rightTop.y);
             CGPoint t1 = CGPointMake(rightBottom.x, 1 - rightBottom.y);
             CGPoint t2 = CGPointMake(leftBottom.x, 1 - leftBottom.y);
@@ -708,7 +711,7 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     }
     
     glBindBuffer(GL_ARRAY_BUFFER, _buffer2);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(tmpArr), arrBuffer, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(CGFloat), arrBuffer, GL_DYNAMIC_DRAW);
 }
 
 - (void)use2 {

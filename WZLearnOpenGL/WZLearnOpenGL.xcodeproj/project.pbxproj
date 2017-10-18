@@ -70,6 +70,8 @@
 		84570CF71F8B86AF00675428 /* shaderAnomalyF.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 84570CF61F8B86AF00675428 /* shaderAnomalyF.fsh */; };
 		8457464C1F679C3400E8BBD2 /* UIColor+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */; };
 		8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8457464D1F67EBD500E8BBD2 /* custom.fsh */; };
+		845EBB571F975640005633A4 /* NViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845EBB561F975640005633A4 /* NViewController.m */; };
+		845EBB5A1F97564E005633A4 /* NView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845EBB591F97564E005633A4 /* NView.m */; };
 		845FB8661F4C245100672938 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8651F4C245100672938 /* main.m */; };
 		845FB8691F4C245100672938 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8681F4C245100672938 /* AppDelegate.m */; };
 		845FB86C1F4C245100672938 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB86B1F4C245100672938 /* ViewController.m */; };
@@ -202,6 +204,10 @@
 		8457464A1F679C3400E8BBD2 /* UIColor+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Custom.h"; sourceTree = "<group>"; };
 		8457464B1F679C3400E8BBD2 /* UIColor+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Custom.m"; sourceTree = "<group>"; };
 		8457464D1F67EBD500E8BBD2 /* custom.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = custom.fsh; sourceTree = "<group>"; };
+		845EBB551F975640005633A4 /* NViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NViewController.h; sourceTree = "<group>"; };
+		845EBB561F975640005633A4 /* NViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NViewController.m; sourceTree = "<group>"; };
+		845EBB581F97564E005633A4 /* NView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NView.h; sourceTree = "<group>"; };
+		845EBB591F97564E005633A4 /* NView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NView.m; sourceTree = "<group>"; };
 		845FB8611F4C245100672938 /* WZLearnOpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WZLearnOpenGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		845FB8651F4C245100672938 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		845FB8671F4C245100672938 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -367,6 +373,17 @@
 			path = LViewController;
 			sourceTree = "<group>";
 		};
+		845EBB541F97560F005633A4 /* NViewController */ = {
+			isa = PBXGroup;
+			children = (
+				845EBB551F975640005633A4 /* NViewController.h */,
+				845EBB561F975640005633A4 /* NViewController.m */,
+				845EBB581F97564E005633A4 /* NView.h */,
+				845EBB591F97564E005633A4 /* NView.m */,
+			);
+			path = NViewController;
+			sourceTree = "<group>";
+		};
 		845FB8581F4C245100672938 = {
 			isa = PBXGroup;
 			children = (
@@ -421,6 +438,7 @@
 				846704E41F7B427C00EDE946 /* KViewController */,
 				844FBA761F7F2DD20051425F /* LViewController */,
 				400BD1141F84D2030049C75C /* MViewController */,
+				845EBB541F97560F005633A4 /* NViewController */,
 				401AADA71F932C6D00D81C77 /* OViewController */,
 				849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */,
 				849AA3EF1F6F648D00F6E5AE /* WZOpenGLProgram.h */,
@@ -693,9 +711,11 @@
 				844FBA791F7F2DE10051425F /* LView.m in Sources */,
 				84A1D0AF1F7CFDD600EA43AC /* GLESUtils.m in Sources */,
 				84379B8F1F6223AB00D1F6EF /* FViewController.swift in Sources */,
+				845EBB5A1F97564E005633A4 /* NView.m in Sources */,
 				843F6DE61F4FF7DB00F9FBA4 /* AViewController.m in Sources */,
 				400FC9941F933DA50094B38F /* AGLKTextureLoader.m in Sources */,
 				400FC9911F933DA50094B38F /* AGLKFrustum.m in Sources */,
+				845EBB571F975640005633A4 /* NViewController.m in Sources */,
 				400FC9961F933DA50094B38F /* AGLKVertexAttribArrayBuffer.m in Sources */,
 				845FB86C1F4C245100672938 /* ViewController.m in Sources */,
 				84071B621F5F8F24004F9CA8 /* CViewController.m in Sources */,
