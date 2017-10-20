@@ -12,6 +12,11 @@
 #import <GLKit/GLKit.h>
 #include <math.h>
 
+
+#define Column (1000)
+#define SizeOFVectorTextureCoordinate (Column * 2/*position :x, y*/ * 2/*texture: x, y*/ * 2/*两个点*/ + 4*2)
+#define SizeOfIndices  (Column * 3/*位置*/ * 2/*个数*/)
+
 typedef NS_ENUM(NSUInteger, VertorOriention) {
     VertorOriention_None,
     VertorOriention_Left,
@@ -21,9 +26,17 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
 @interface NView()<UIGestureRecognizerDelegate>
 {
 
+    float new_arrBuffer[SizeOFVectorTextureCoordinate];
+//    float new_arrBufferOrigion[SizeOFVectorTextureCoordinate];
+    int new_indices[SizeOfIndices];
+    
+    
+    CGFloat targetY;//计算非线性方程极大值的依据   0~1
+    CGFloat targetX;//计算偏移程度的依据
+    CGFloat lastLocationX;
+#warning  需要手动计算向左向右 依赖translation不怎么好
 }
 
-@property (nonatomic, assign) VertorOriention touchPointOriention;
 
 @property (nonatomic, strong) CAEAGLLayer *eaglLayer;
 @property (nonatomic, strong) EAGLContext *context;
@@ -36,8 +49,9 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
 @property (nonatomic, assign) GLuint buffer0;
 @property (nonatomic, strong) GLProgram *program0;
 @property (nonatomic, assign) GLuint index0;
-@property (nonatomic, assign) float * arrBuffer;
-@property (nonatomic, assign) int * indices;
+
+@property (nonatomic, assign) BOOL updating;
+
 @end
 
 @implementation NView
@@ -53,7 +67,6 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
     ///画布尺寸。。。
     
 #warning 保持画布和需要绘制的图片的宽高 比例保持一致
-    
     if (self) {
         [self createViews];
     }
@@ -61,57 +74,75 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
 }
 
 - (void)createViews {
+    {
+//        for (int i = 0; i < SizeOFVectorTextureCoordinate; i++) {
+//            new_arrBuffer[i] = 0.0;//初始值均为0
+//        }
+        int tmpIndex = 0;
+        int stride = 4;//只保存顶点坐标xy 纹理坐标xy
+        CGFloat yfloat = (Column * 1.0);
+        CGFloat multiple = 2.0;
+        float *arr = (float *)new_arrBuffer;
+//        float *arr2 = (float *)new_arrBufferOrigion;
+///顶点坐标 纹理坐标
+        for (int j = 0; j < Column + 1; j++) {
+            for (int i = 0; i < 2; i++) {//2个点为顶点坐标 另外两个点为纹理坐标
+                CGFloat positionX = i;
+                CGFloat positionY =  j / yfloat;
+
+                CGFloat textureX = i;
+                CGFloat texturey = j / yfloat;
+                if (positionX == NAN
+                    ||positionY == NAN
+                    ||textureX == NAN
+                    ||texturey == NAN) {
+                    NSLog(@"~~~");
+                }
+
+                arr[tmpIndex + 0] = positionX * multiple - 1.0;
+                arr[tmpIndex + 1] = positionY * multiple - 1.0;
+
+                arr[tmpIndex + 2] = textureX;
+                arr[tmpIndex + 3] = 1.0 - texturey;//texturey; //纹理坐标跟position坐标Y翻转
+//                {
+//                    arr2[tmpIndex + 0] = arr[tmpIndex + 0];
+//                    arr2[tmpIndex + 1] = arr[tmpIndex + 1];
+//                    arr2[tmpIndex + 2] = arr[tmpIndex + 2];
+//                    arr2[tmpIndex + 3] = arr[tmpIndex + 3];
+//                }
+                tmpIndex += stride;
+            }
+        }
+        
+        stride = 6;
+        tmpIndex = 0;
+///索引
+        for (int i = 0; i < Column; i++) {
+            new_indices[tmpIndex + 0] = 1 + i*2;
+            new_indices[tmpIndex + 1] = 3 + i*2;
+            new_indices[tmpIndex + 2] = 2 + i*2;
+            new_indices[tmpIndex + 3] = 2 + i*2;
+            new_indices[tmpIndex + 4] = 0 + i*2;
+            new_indices[tmpIndex + 5] = 1 + i*2;
+            tmpIndex += stride;
+        }
+    }
+    
     [self setupLayer];
     [self setupContext];
-    
     [self viewPort];
-    
     [self setupProgram0];
     
     [self update];
     
-    
     [self gestures];
 }
-
-- (void)gestures {
-    UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotation:)];
-    [self addGestureRecognizer:rotation];
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self addGestureRecognizer:pan];
-    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
-    [self addGestureRecognizer:pinch];
-    rotation.delegate = self;
-    pinch.delegate = self;
-    pan.delegate = self;
-}
-
-
-
-
-
-- (void)pinch:(UIPinchGestureRecognizer *)pinch {
- 
-}
-
-
-- (void)pan:(UIPanGestureRecognizer *)pan {
-   
-}
-
-// MARK: - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return true;
-}
-
-
 
 - (void)setupLayer {
     _eaglLayer = (CAEAGLLayer*) self.layer;
     [self setContentScaleFactor:[[UIScreen mainScreen] scale]];
     
     _eaglLayer.opaque = true;
-    // 设置描绘属性，在这里设置不维持渲染内容以及颜色格式为 RGBA8
     _eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
                                      [NSNumber numberWithBool:false], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
 }
@@ -123,14 +154,8 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
     glViewport(0.0
                , 0.0
                , self.frame.size.width * scale
-               , self.frame.size.height * scale);
-    
-    ///视点决定描绘的位置以及尺寸
-    //    glViewport(self.frame.origin.x * scale
-    //               , self.frame.origin.y * scale
-    //               , self.frame.size.width * scale
-    //               , self.frame.size.height * scale);
-    
+               , self.frame.size.height * scale
+               );
 }
 
 - (NSString *)shaderStrWithResource:(NSString *)resource type:(NSString *)type {
@@ -165,162 +190,97 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
         }
     }
     
+    [_program0 use];
+    glGenBuffers(1, &_buffer0);
+    glGenBuffers(1, &_index0);
     
     //取出
     GLuint texture0Uniform = [_program0 uniformIndex:@"texture"];
-    GLuint displayPositionAttribute = [_program0 attributeIndex:@"position"];
-    GLuint displayTextureCoordinateAttribute = [_program0 attributeIndex:@"textureCoordinate"];
-    
-    [_program0 use];
-    glEnableVertexAttribArray(displayPositionAttribute);
-    glEnableVertexAttribArray(displayTextureCoordinateAttribute);
-    
-    CGFloat scale = 0.5;
-    GLfloat attrArr[] =
-    {
-        1.0 * scale, 1.0 * scale, -1.0,     1.0, 0.0,
-        1.0 * scale, -1.0 * scale, -1.0,     1.0, 1.0,
-        -1.0 * scale, -1.0 * scale, -1.0,    0.0, 1.0,
-        -1.0 * scale, -1.0 * scale, -1.0,      0.0, 1.0,
-        -1.0 * scale, 1.0 * scale, -1.0,     0.0, 0.0,
-        1.0 * scale, 1.0 * scale, -1.0,     1.0, 0.0,
-    };///矫正图片后的矩阵
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    glGenBuffers(1, &_buffer0);
-    glBindBuffer(GL_ARRAY_BUFFER, _buffer0);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(attrArr), attrArr, GL_DYNAMIC_DRAW);
-    
-#warning 尝试使用点的复用
-    //顶点索引
-    GLuint tmpIndices[] =
-    {
-        0, 3, 2,
-        0, 1, 3,
-        //可以去掉注释
-        //        0, 2, 4,
-        //        0, 4, 1,
-        //        2, 3, 4,
-        //        1, 4, 3,
-    };
-    ///
-    glGenBuffers(1, &_index0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _index0);//绑定
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(tmpIndices), tmpIndices, GL_STATIC_DRAW);
-    
-    glVertexAttribPointer(displayPositionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);
-    glEnableVertexAttribArray(displayPositionAttribute);
-    
-    glVertexAttribPointer(displayTextureCoordinateAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
-    glEnableVertexAttribArray(displayTextureCoordinateAttribute);
-    
     //加载纹理
-    [self setupTexture:@"leaves.gif" textures:&_texture0 textureUnit:GL_TEXTURE0];
-    glUniform1i(texture0Uniform, 0);
+    [self setupTexture:@"74172016103114541058969337.jpg" textures:&_texture0 textureUnit:GL_TEXTURE0];
+    glUnifotexture2D(rm1i(texture0Uniform, 0);
 }
 
-
-
 - (void)render {
-    
-    //通常在一帧渲染完成之后 最常见的图形操作就是清除缓存 每帧都需要清除一次缓存
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
-    //缓存的掩码 掩码操作
-    //    glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
-    
     
     [_program0 use];
     glBindBuffer(GL_ARRAY_BUFFER, _buffer0);
-//    {
-//        //不进行归一化处理 即转换为归一化的浮点数(0~1)
-//        glVertexAttribPointer([_program0 attributeIndex:@"position"], 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);
-//        glEnableVertexAttribArray([_program0 attributeIndex:@"position"]);
-//        glVertexAttribPointer([_program0 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
-//        glEnableVertexAttribArray([_program0 attributeIndex:@"textureCoordinate"]);
-//        glDrawArrays(GL_TRIANGLES, 0, 6);
-//    }
-    
     glVertexAttribPointer([_program0 attributeIndex:@"position"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, NULL);
     glEnableVertexAttribArray([_program0 attributeIndex:@"position"]);
     glVertexAttribPointer([_program0 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (float *)NULL + 2);
     glEnableVertexAttribArray([_program0 attributeIndex:@"textureCoordinate"]);
-//            glDrawArrays(GL_TRIANGLES, 0, 6);
-    
+
     [self changeData];
-    [_context presentRenderbuffer:GL_RENDERBUFFER];
     
-  
+    //渲染
+    [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 - (void)changeData {
-    
-    int column = 100 / 2 * 2;// 0 ~column-1  为偶数
-    NSUInteger sizeOfArr = column * 2/*position :x, y*/ * 2/*texture: x, y*/ * 2/*两个点*/;
-    
-    if (_arrBuffer == NULL) {///重复使用数据缓存
-        GLfloat tmpArr[sizeOfArr];//size临时缓存
-        for (int i = 0; i < sizeOfArr; i++) {
-            tmpArr[i] = 0;//初始值均为0
-        }
-        _arrBuffer = (float *)tmpArr;
-    }
-    
-    if (_indices == NULL) {
-        int tmpArr[column * 3/*位置*/ * 2/*个数*/];//
-        _indices = (int *)tmpArr;
-        int stride = 6;
-        int index = 0;
-        for (int i = 0; i < column; i++) {
-            _indices[index + 0] = 1 + i*2;
-            _indices[index + 1] = 3 + i*2;
-            _indices[index + 2] = 2 + i*2;
-            _indices[index + 3] = 2 + i*2;
-            _indices[index + 4] = 0 + i*2;
-            _indices[index + 5] = 1 + i*2;
-            index += stride;
-        }
-    }
-    
-    int tmpIndex = 0;
-    int stride = 4;//只保存顶点坐标xy 纹理坐标xy
+    {//--------------point : 计算偏移量
+        
+        CGFloat tmpTargetY = 1.0 - targetY;//取反得到纹理坐标系中的点
+   
+        ///手势对坐标的压缩量
+        float xCompreess = 0.0;
+        //计算偏移值
+        int tmpIndex = 0;
+        int stride = 4;//只保存顶点坐标xy 纹理坐标xy
+        for (int j = 0; j < Column + 1; j++) {
+            for (int i = 0; i < 2; i++) {//2个点为顶点坐标 另外两个点为纹理坐标
+                //将[0.0, 1.0]区间映射到[-PI, PI]区间上
+                xCompreess = j / (Column * 1.0);//0~1.0
+                xCompreess = xCompreess * 2 * M_PI ;//0~2PI
+                xCompreess = xCompreess - M_PI;//-PI~PI
 
-//    CGFloat xfloat = (1 * 1.0);
-    CGFloat yfloat = (column * 1.0);
-    for (int j = 0; j < column; j++) {
-        for (int i = 0; i < 2; i++) {//2个点为顶点坐标 另外两个点为纹理坐标
-            CGFloat positionX = i;
-            CGFloat positionY =  j / yfloat;
-            
-            CGFloat textureX = i;
-            CGFloat texturey = j / yfloat;
-            
-            _arrBuffer[tmpIndex + 0] += positionX;
-            _arrBuffer[tmpIndex + 1] += positionY;
-            
-            _arrBuffer[tmpIndex + 2] += textureX;
-            _arrBuffer[tmpIndex + 3] += texturey;
-            tmpIndex += stride;
+                CGFloat tmpY = tmpTargetY;
+                tmpY = tmpY * 2 * M_PI;//映射到[-PI, PI]区间上
+                tmpY = tmpY - M_PI;
+
+                //作差 得到 图形偏移
+//                NSLog(@"图形偏移~%f", cos(xCompreess - tmpY) + 1);
+
+                CGFloat degree = xCompreess - tmpY;
+                if (degree > M_PI) {
+                    degree = M_PI;
+                } else if (degree < -M_PI) {
+                    degree = -M_PI;
+                }
+
+                CGFloat tmpComPress = sqrt((cos(degree) + 1)) * targetX;
+
+                new_arrBuffer[tmpIndex + 0] = new_arrBuffer[tmpIndex + 0] + tmpComPress;//只修改X坐标  根据j代入相应的非线性方程中 得到偏移量
+                tmpIndex += stride;
+            }
         }
     }
+    
+    ///打印数据
+//    printf("\n--------------\n");
+//    for(int i = 0 ; i < sizeOfArr ; i++) {if (i % 4 == 0) {printf("\n"); }
+//        printf("%f ", arrBuffer[i]);
+//    }
+//    printf("\n--------------\n");
+//    printf("\n--------------\n");
+//    for(int i = 0 ; i < column * 3/*位置*/ * 2/*个数*/ ; i++) {if (i % 3 == 0) { printf("\n"); }
+//        printf("%d ", _indices[i]);
+//    }
+//    printf("\n--------------\n");
+    
     
     glBindBuffer(GL_ARRAY_BUFFER, _buffer0);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(CGFloat)*sizeOfArr , _arrBuffer, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*SizeOFVectorTextureCoordinate , new_arrBuffer, GL_DYNAMIC_DRAW);
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _index0);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_indices), _indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*SizeOfIndices, new_indices, GL_STATIC_DRAW);
+    
+    glDrawElements(GL_TRIANGLES, SizeOfIndices, GL_UNSIGNED_INT, 0);//绘制
 }
 
 
 - (void)update {
-
     [self destroyRenderAndFrameBuffer];
     [self setupRenderBuffer];
     [self setupFrameBuffer];
@@ -388,7 +348,6 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
     return 0;
 }
 
-
 - (void)destroyRenderAndFrameBuffer {
     glDeleteFramebuffers(1, &_colorFrameBuffer);
     _colorFrameBuffer = 0;
@@ -401,7 +360,6 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
     glGenRenderbuffers(1, &buffer);
     _colorRenderBuffer = buffer;
     glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderBuffer);
-    // 为 颜色缓冲区 分配存储空间
     [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
 }
 
@@ -409,11 +367,55 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
     GLuint buffer;
     glGenFramebuffers(1, &buffer);
     _colorFrameBuffer = buffer;
-    // 设置为当前 framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, _colorFrameBuffer);
-    // 将 _colorRenderBuffer 装配到 GL_COLOR_ATTACHMENT0 这个装配点上
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                               GL_RENDERBUFFER, _colorRenderBuffer);
+}
+
+#pragma mark - 手势
+- (void)gestures {
+ UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];    [self addGestureRecognizer:pan];
+}
+
+- (void)pan:(UIPanGestureRecognizer *)pan {
+    if (_updating) { return;}
+    _updating = true;
+    ///区分方向
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        lastLocationX = [pan locationInView:pan.view].x;//拾获最初的角标
+    } else if (pan.state == UIGestureRecognizerStateChanged) {
+        CGPoint translation = [pan translationInView:pan.view];
+//        NSLog(@"%@", NSStringFromCGPoint(translation));
+        
+        CGFloat result = [pan translationInView:pan.view].x - lastLocationX;//方向判别
+        lastLocationX = [pan translationInView:pan.view].x;//更新位置
+        if (result > 0) {
+            //向右
+            targetX = 0.003;
+        } else if (result < 0) {
+            //向左
+            targetX = -0.003;
+        } else {
+            //不变
+            targetX = 0.0;
+        }
+        
+        /**
+         translation.x < 0    向左
+         translation.y < 0    向上
+         **/
+        CGPoint curPoint = [pan locationInView:pan.view];
+        targetY =  curPoint.y / self.bounds.size.height;//iOS 设备坐标下的0~1.0
+
+        //数据范围
+        if (targetY < 0) {targetY = 0.0;}
+        if (targetY > 1) {targetY = 1.0;}
+        
+    } else if (pan.state == UIGestureRecognizerStateEnded) {
+        
+    }
+    [self update];
+    _updating = false;
 }
 
 @end

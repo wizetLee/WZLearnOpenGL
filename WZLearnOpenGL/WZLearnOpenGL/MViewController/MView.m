@@ -127,8 +127,8 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     
 
     [self setupProgram0];
-    [self setupProgram1];
-//    [self setupProgram2];
+//    [self setupProgram1];
+    [self setupProgram2];
     
     [self update];
     
@@ -441,82 +441,80 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     glEnableVertexAttribArray([_program0 attributeIndex:@"textureCoordinate"]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    {
-        [_program1 use];
-        //系统API生成绕Z轴旋转X角的矩阵
-        {
-            {
-                glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, GLKMatrix4MakeZRotation(_rotateAngle).m);//顶点着色器 矩阵更换_rotateMatrix 旋转角度配置
-                NSLog(@"____%f", _rotateAngle);
-                /** 围绕X轴旋转
-                 cosX  sinX  0  0
-                 -sinX consx 0  0
-                 0     0     1  0
-                 0     0     0  1
-                 **/
-                //                printf("\n--------------\n");
-                //                for(int i = 0 ; i < 16 ; i++) {if (i % 4 == 0) {printf("\n"); }printf("%f ", GLKMatrix4MakeZRotation(_rotateAngle).m[i]);}
-                //                printf("\n--------------\n");
-            }
-            ///效果一致
-            //        {
-            //            float radians = _rotateAngle;// 180.0 / M_PI * _rotateAngle * M_PI / 180.0;
-            //            float s = sin(radians);
-            //            float c = cos(radians);
-            //            //z轴旋转矩阵
-            //            GLfloat zRotation[16] = {
-            //                c, s, 0, 0,
-            //                -s, c, 0, 0,
-            //                0, 0, 1.0, 0,
-            //                0.0, 0, 0, 1.0
-            //            };
-            //            glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, (float *)&zRotation);
-            //        }
-            // 角度转弧度
-            //    GLKMathDegreesToRadians(float degrees)
-            //弧度转角度
-            //    GLKMathRadiansToDegrees(float radians)
-        }//PS 旋转的时候如何维持一个矩形？ 画布跟图片的尺寸比保持一致
+//    {
+//        [_program1 use];
+//        //系统API生成绕Z轴旋转X角的矩阵
+//        {
+//            {
+//                glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, GLKMatrix4MakeZRotation(_rotateAngle).m);//顶点着色器 矩阵更换_rotateMatrix 旋转角度配置
+//                NSLog(@"____%f", _rotateAngle);
+//                /** 围绕X轴旋转
+//                 cosX  sinX  0  0
+//                 -sinX consx 0  0
+//                 0     0     1  0
+//                 0     0     0  1
+//                 **/
+//                //                printf("\n--------------\n");
+//                //                for(int i = 0 ; i < 16 ; i++) {if (i % 4 == 0) {printf("\n"); }printf("%f ", GLKMatrix4MakeZRotation(_rotateAngle).m[i]);}
+//                //                printf("\n--------------\n");
+//            }
+//            ///效果一致
+//            //        {
+//            //            float radians = _rotateAngle;// 180.0 / M_PI * _rotateAngle * M_PI / 180.0;
+//            //            float s = sin(radians);
+//            //            float c = cos(radians);
+//            //            //z轴旋转矩阵
+//            //            GLfloat zRotation[16] = {
+//            //                c, s, 0, 0,
+//            //                -s, c, 0, 0,
+//            //                0, 0, 1.0, 0,
+//            //                0.0, 0, 0, 1.0
+//            //            };
+//            //            glUniformMatrix4fv(_rotateMatrix, 1, GL_FALSE, (float *)&zRotation);
+//            //        }
+//            // 角度转弧度
+//            //    GLKMathDegreesToRadians(float degrees)
+//            //弧度转角度
+//            //    GLKMathRadiansToDegrees(float radians)
+//        }//PS 旋转的时候如何维持一个矩形？ 画布跟图片的尺寸比保持一致
+//
+//        glUniform1f(_scale, _zoomLevel);// scale
+//        glUniform1f(_yOffset, _yOffsetValue);
+//        glUniform1f(_xOffset, _xOffsetValue);
+//        glUniform2f(_anchorPoint, 0.0, 0.0);//计算这个锚点
+//        //    [UIImage imageNamed:@"74172016103114541058969337.jpg"].size.width / [UIImage imageNamed:@"74172016103114541058969337.jpg"].size.height
+//        glUniform1f(_whRate, 1.0);
+//        //    NSLog(@"_rotateMatrix %u", _rotateMatrix);
+//        //    NSLog(@"_rotateAngle %f", _rotateAngle);
+//
+//        //通过一个单位矩阵来返回一个定义了坐标系的新矩阵
+//        //    GLKMatrix4MakeTranslation(float tx, float ty, float tz)
+//
+//
+//        glBindBuffer(GL_ARRAY_BUFFER, _buffer1);
+//        glVertexAttribPointer([_program1 attributeIndex:@"position"], 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);
+//        glEnableVertexAttribArray([_program1 attributeIndex:@"position"]);
+//        glVertexAttribPointer([_program1 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
+//        glEnableVertexAttribArray([_program1 attributeIndex:@"textureCoordinate"]);
+//        glDrawArrays(GL_TRIANGLES, 0, 6);
+//
+//
+//        //通知OpenGL 在哪里设置近平面和远平面
+//        //glDepthRangef(GLclampf zNear, GLclampf zFar) /// [0, 1]
+//
+//
+//    }
 
-        glUniform1f(_scale, _zoomLevel);// scale
-        glUniform1f(_yOffset, _yOffsetValue);
-        glUniform1f(_xOffset, _xOffsetValue);
-        glUniform2f(_anchorPoint, 0.0, 0.0);//计算这个锚点
-        //    [UIImage imageNamed:@"74172016103114541058969337.jpg"].size.width / [UIImage imageNamed:@"74172016103114541058969337.jpg"].size.height
-        glUniform1f(_whRate, 1.0);
-        //    NSLog(@"_rotateMatrix %u", _rotateMatrix);
-        //    NSLog(@"_rotateAngle %f", _rotateAngle);
-
-        //通过一个单位矩阵来返回一个定义了坐标系的新矩阵
-        //    GLKMatrix4MakeTranslation(float tx, float ty, float tz)
-
-
-        glBindBuffer(GL_ARRAY_BUFFER, _buffer1);
-        glVertexAttribPointer([_program1 attributeIndex:@"position"], 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, NULL);
-        glEnableVertexAttribArray([_program1 attributeIndex:@"position"]);
-        glVertexAttribPointer([_program1 attributeIndex:@"textureCoordinate"], 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (float *)NULL + 3);
-        glEnableVertexAttribArray([_program1 attributeIndex:@"textureCoordinate"]);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-        
-        //通知OpenGL 在哪里设置近平面和远平面
-        //glDepthRangef(GLclampf zNear, GLclampf zFar) /// [0, 1]
-        
-        
-    }
-
-    
-        [_context presentRenderbuffer:GL_RENDERBUFFER];
-    
-//    [self use2];
+    [self use2];
+    [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 - (void)changeData {
     
-    NSUInteger sizeOfArr = xCount * yCount * numberOfPoint;
+    const int sizeOfArr = xCount * yCount * numberOfPoint;
    
     if (arrBuffer == NULL) {///重复使用数据缓存
-         GLfloat tmpArr[xCount * yCount * numberOfPoint];//size临时缓存
+         GLfloat tmpArr[sizeOfArr];//size临时缓存
         arrBuffer = (float *)tmpArr;
     }
     float *arr = (float *)arrBuffer;
@@ -711,7 +709,13 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     }
     
     glBindBuffer(GL_ARRAY_BUFFER, _buffer2);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(CGFloat), arrBuffer, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * sizeOfArr, arrBuffer, GL_DYNAMIC_DRAW);
+    
+//    printf("\n--------------\n");
+//    for(int i = 0 ; i < sizeOfArr ; i++) {if (i % 4 == 0) {printf("\n"); }
+//        printf("%f ", arrBuffer[i]);
+//    }
+//    printf("\n--------------\n");
 }
 
 - (void)use2 {
@@ -727,7 +731,6 @@ typedef NS_ENUM(NSUInteger, vertorOriention) {
     
     [self changeData];
     glDrawArrays(GL_TRIANGLES, 0, xCount * yCount * numberOfPoint / 4);
-    [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 

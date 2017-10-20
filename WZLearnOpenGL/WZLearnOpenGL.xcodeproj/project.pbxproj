@@ -82,6 +82,7 @@
 		845FB88A1F4C245100672938 /* WZLearnOpenGLUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8891F4C245100672938 /* WZLearnOpenGLUITests.m */; };
 		846704E71F7B429600EDE946 /* KViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846704E61F7B429600EDE946 /* KViewController.m */; };
 		846704EA1F7B42A200EDE946 /* KView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846704E91F7B42A200EDE946 /* KView.m */; };
+		84832E591F988AA70001B0BD /* 代码备份 in Resources */ = {isa = PBXBuildFile; fileRef = 84832E581F988AA70001B0BD /* 代码备份 */; };
 		849AA3EE1F6F618F00F6E5AE /* WZOpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AA3ED1F6F618F00F6E5AE /* WZOpenGLContext.m */; };
 		849AA3F11F6F648D00F6E5AE /* WZOpenGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AA3F01F6F648D00F6E5AE /* WZOpenGLProgram.m */; };
 		849AB3E71F6BA25000FB7A84 /* shaderv1.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 849AB3E61F6BA25000FB7A84 /* shaderv1.vsh */; };
@@ -228,6 +229,7 @@
 		846704E61F7B429600EDE946 /* KViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KViewController.m; sourceTree = "<group>"; };
 		846704E81F7B42A200EDE946 /* KView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KView.h; sourceTree = "<group>"; };
 		846704E91F7B42A200EDE946 /* KView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KView.m; sourceTree = "<group>"; };
+		84832E581F988AA70001B0BD /* 代码备份 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "代码备份"; sourceTree = "<group>"; };
 		849AA3EC1F6F618F00F6E5AE /* WZOpenGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZOpenGLContext.h; sourceTree = "<group>"; };
 		849AA3ED1F6F618F00F6E5AE /* WZOpenGLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZOpenGLContext.m; sourceTree = "<group>"; };
 		849AA3EF1F6F648D00F6E5AE /* WZOpenGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZOpenGLProgram.h; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				845EBB561F975640005633A4 /* NViewController.m */,
 				845EBB581F97564E005633A4 /* NView.h */,
 				845EBB591F97564E005633A4 /* NView.m */,
+				84832E581F988AA70001B0BD /* 代码备份 */,
 			);
 			path = NViewController;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				84071B641F5F989F004F9CA8 /* grid.png in Resources */,
 				4014FD9A1F923C0900903278 /* shaderLPerspectiveF.fsh in Resources */,
 				8457464E1F67EBD500E8BBD2 /* custom.fsh in Resources */,
+				84832E591F988AA70001B0BD /* 代码备份 in Resources */,
 				84570CF01F8B406B00675428 /* 15952016071513373913911529.png in Resources */,
 				400768361F8670C50047DB07 /* shaderDefaultF.fsh in Resources */,
 				845FB8711F4C245100672938 /* Assets.xcassets in Resources */,
