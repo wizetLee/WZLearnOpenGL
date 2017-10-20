@@ -198,7 +198,7 @@ typedef NS_ENUM(NSUInteger, VertorOriention) {
     GLuint texture0Uniform = [_program0 uniformIndex:@"texture"];
     //加载纹理
     [self setupTexture:@"74172016103114541058969337.jpg" textures:&_texture0 textureUnit:GL_TEXTURE0];
-    glUnifotexture2D(rm1i(texture0Uniform, 0);
+    glUniform1i(texture0Uniform, 0);///配置纹理
 }
 
 - (void)render {
