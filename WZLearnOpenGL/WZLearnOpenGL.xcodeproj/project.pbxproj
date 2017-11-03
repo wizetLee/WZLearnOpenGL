@@ -295,8 +295,8 @@
 				400768311F85FF930047DB07 /* MView.m */,
 				400768331F8670B40047DB07 /* shaderDefaultV.vsh */,
 				400768351F8670C50047DB07 /* shaderDefaultF.fsh */,
-				400768371F86750C0047DB07 /* shaderTransformF.fsh */,
 				400768391F86752C0047DB07 /* shaderTransformV.vsh */,
+				400768371F86750C0047DB07 /* shaderTransformF.fsh */,
 				84570CF41F8B869E00675428 /* shaderAnomalyV.vsh */,
 				84570CF61F8B86AF00675428 /* shaderAnomalyF.fsh */,
 				400BD1181F84D2590049C75C /* MshaderV.vsh */,
@@ -593,7 +593,7 @@
 				TargetAttributes = {
 					845FB8601F4C245100672938 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 7MUPB6659U;
+						DevelopmentTeam = G583SJY324;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -892,7 +892,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7MUPB6659U;
+				DEVELOPMENT_TEAM = G583SJY324;
 				INFOPLIST_FILE = WZLearnOpenGL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -911,7 +911,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7MUPB6659U;
+				DEVELOPMENT_TEAM = G583SJY324;
 				INFOPLIST_FILE = WZLearnOpenGL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
